@@ -24,13 +24,13 @@ const Footer = () => {
                     </ul>
 
                     <div className="footer__social">
-                        <a href="https://www.linkedin.com/in/fatih-ay1661/" className="footer__social-link" target="_blank">
+                        <a href="https://www.linkedin.com/in/fatih-ay1661/" className="footer__social-link" target="_blank" rel="noopener noreferrer">
                             <i class="bx bxl-linkedin"></i>
                         </a>
-                        <a href="https://github.com/iamfatihay" className="footer__social-link" target="_blank">
+                        <a href="https://github.com/iamfatihay" className="footer__social-link" target="_blank" rel="noopener noreferrer">
                             <i class="bx bxl-github"></i>
                         </a>
-                        <a href="https://twitter.com/Fatih__AY" className="footer__social-link" target="_blank">
+                        <a href="https://twitter.com/Fatih__AY" className="footer__social-link" target="_blank" rel="noopener noreferrer">
                             <i class="bx bxl-twitter"></i>
                         </a>
                     </div>
