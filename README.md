@@ -55,7 +55,7 @@ This is my Portfolio Page. Thanks for being here! 🙂
 
 ## Example Outcomes
 <div >
-<img width="650px" src="./portfolio.gif"/>
+<img width="630px" src="./portfolio.gif"/>
 <img width="177px" src="./portfolio1.gif"/>
 </div>
 
