@@ -1,4 +1,4 @@
-# Blog App
+# Portfolio Page
 ## Live Link: https://portfolio-fay-react.netlify.app/
 ## Description
 This is my Portfolio Page. Thanks for being here! 🙂
