@@ -55,8 +55,8 @@ This is my Portfolio Page. Thanks for being here! 🙂
 
 ## Example Outcomes
 <div >
-<img width="660px" src="./blog-app.gif"/>
-<img width="160px" src="./blog-app1.gif"/>
+<img width="660px" src="./portfolio.gif"/>
+<img width="180px" src="./portfolio1.gif"/>
 </div>
 
 ## Getting Started
