@@ -33,10 +33,16 @@
     border: 1px solid rgba(0, 0, 0, 0.1);
     padding: 1.25rem;
     border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-
+.links{
+    display: flex;
+    gap: 1rem;
+}
 .work__img {
-    width: 295px;
+    width: 350px;
     border-radius: 1rem;
     margin-bottom: var(--mb-1);
     transform: scale(1);
@@ -59,16 +65,16 @@
     font-size: var(--small-font-size);
     display: flex;
     align-items: center;
-    column-gap: 0.25rem;
+    column-gap: 0.05rem;
 }
 
 .work__button-icon {
-    font-size: 1rem;
+    font-size: 1.1rem;
     transition: 0.4s;
 }
 
 .work__button:hover .work__button-icon {
-    transform: translateX(0.8rem);
+    transform: translateX(0.6rem);
 }
 
 /*! active work */
