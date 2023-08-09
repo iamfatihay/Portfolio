@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import emailjs from '@emailjs/browser';
 import "./contact.css";
+import {toastSuccessNotify} from "../../helper/ToastNotify";
 
 const Contact = () => {
 
@@ -8,9 +9,9 @@ const Contact = () => {
 
     const sendEmail = (e) => {
         e.preventDefault();
-
         emailjs.sendForm('service_03kqmzc', 'template_vecbmho', form.current, 'oTmcAct8ejieDwCqy')
         e.target.reset()
+        toastSuccessNotify("Thanks for contacting me!")
     };
 
 
