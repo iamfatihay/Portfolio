@@ -16,7 +16,7 @@ export const projectsData = [
       title: "Blog App",
       link: "https://fatihay-blog-app.vercel.app/",
       link2:"https://github.com/iamfatihay/Blog-App",
-      category: "Upper-Intermediate",
+      category: "Upper Intermediate",
     },
     {
       id: 2,
@@ -24,7 +24,7 @@ export const projectsData = [
       title: "Stock App",
       link: "https://stock-app-fay.vercel.app/",
       link2:"https://github.com/iamfatihay/Stock-app",
-      category: "Upper-Intermediate",
+      category: "Upper Intermediate",
     },
     {
       id: 3,
@@ -32,7 +32,7 @@ export const projectsData = [
       title: "Movie App",
       link: "https://movie-app-react-fay.netlify.app/",
       link2:"https://github.com/iamfatihay/Movie-app",
-      category: "Upper-Intermediate",
+      category: "Upper Intermediate",
     },
     {
       id: 4,
@@ -81,7 +81,7 @@ export const projectsNav = [
         name:"all",
     },
     {
-        name:"Upper-Intermediate",
+        name:"Upper Intermediate",
     },
     {
         name:"Intermediate",
