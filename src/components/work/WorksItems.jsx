@@ -7,7 +7,7 @@ const WorksItems = ({ item }) => {
 
     return (
         <div className="work__card" key={item.id} >
-            <a href={item.link}>
+            <a href={item.link} target='_blank' rel="noreferrer">
                 <img src={item.image} alt="" className='work__img'/>
             </a>
 
