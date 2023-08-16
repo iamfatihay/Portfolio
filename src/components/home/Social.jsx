@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { LiaXing } from 'react-icons/lia';
 
 const Social = () => {
   return (
@@ -12,7 +13,10 @@ const Social = () => {
       <a href="https://twitter.com/Fatih__AY" className="home__social-icon" target="_blank" rel="noopener noreferrer">
         <i class="uil uil-twitter-alt"></i>
       </a>
-
+      <a href="https://www.xing.com/profile/Fatih_AY033127/cv" className="home__social-icon" target="_blank" rel="noopener noreferrer">
+        < LiaXing />
+      </a>
+      
 
     </div>
   )
