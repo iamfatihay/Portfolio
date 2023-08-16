@@ -81,7 +81,7 @@ export const projectsNav = [
     name: "all",
   },
   {
-    name: "Upper Inter.",
+    name: "Upper Intermediate",
   },
   {
     name: "Intermediate",
