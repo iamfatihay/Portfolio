@@ -1,6 +1,7 @@
 import React from 'react';
 import "./footer.css";
 import logo from "../../assets/logo.gif";
+import { LiaXing } from 'react-icons/lia';
 
 const Footer = () => {
     return (
@@ -32,6 +33,9 @@ const Footer = () => {
                         </a>
                         <a href="https://twitter.com/Fatih__AY" className="footer__social-link" target="_blank" rel="noopener noreferrer">
                             <i class="bx bxl-twitter"></i>
+                        </a>
+                        <a href="https://www.xing.com/profile/Fatih_AY033127/cv" className="footer__social-link" target="_blank" rel="noopener noreferrer">
+                            < LiaXing />
                         </a>
                     </div>
 
