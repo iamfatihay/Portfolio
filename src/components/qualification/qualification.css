@@ -61,7 +61,7 @@
     font-weight: var(--font-medium);
 }
 
-.qualification__subtitle {
+.qualification__subtitle, .qualification__link {
     display: inline-block;
     font-size: var(--small-font-size);
     margin-bottom: var(--mb-1);
@@ -85,6 +85,17 @@
     height: 100%;
     background-color: var(--text-color);
     transform: translate(6px, -7px);
+}
+.work__button-icon {
+    font-size: 1.1rem;   
+    transition: 0.4s;
+}
+.qualification__link{
+    display: flex;
+    align-items: center;
+}
+.qualification__link:hover .work__button-icon {
+    transform: translateX(0.6rem);
 }
 
 /*=============== BREAKPOINTS ===============*/
