@@ -125,8 +125,12 @@
     .work__item {
         font-size: var(--small-font-size);
     }
-
-    .work__filters {
-        column-gap: 0.25rem;
+    .work__filters{
+        flex-direction: column;
+        gap: 2px;
     }
+
+    /* .work__filters {
+        column-gap: 0.25rem;
+    } */
 }
