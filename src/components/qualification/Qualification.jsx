@@ -32,7 +32,7 @@ const Qualification = () => {
                         : "qualification__button button--flex"}
                         onClick={() => toggleTab(3)}
                     >
-                        <i className="uil uil-briefcase-alt qualification__icon"></i>Certificates
+                        <i className="uil uil-award qualification__icon"></i>Certificates
                     </div>
                 </div>
 
