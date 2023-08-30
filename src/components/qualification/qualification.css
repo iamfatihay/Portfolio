@@ -14,7 +14,7 @@
     padding: 0.1rem 0.5rem;
     border-radius: 0.7rem;
     color: var(--title-color);
-    margin: 0 var(--mb-1);
+    margin: 0 2px;
     cursor: pointer;
     transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out;
 }
@@ -129,5 +129,12 @@
 @media screen and (max-width: 350px) {
     .qualification__data {
         gap: 0.5rem;
+    }
+    .qualification__tabs{
+        flex-direction: column;
+        gap: 2px;
+    }
+    .qualification__button{
+        justify-content: center;
     }
 }
