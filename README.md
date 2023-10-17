@@ -65,7 +65,7 @@ This is my Portfolio Page. Thanks for being here! 🙂
 
 To run the application on your local machine, follow these steps;
 
-1. Clone the project to your computer:
+1. Clone the project to your computer;
 
    ```
    git clone https://github.com/iamfatihay/Portfolio.git
