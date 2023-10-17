@@ -63,7 +63,7 @@ This is my Portfolio Page. Thanks for being here! 🙂
 
 ## Getting Started
 
-To run the application on your local machine, follow these steps:
+To run the application on your local machine, follow these steps;
 
 1. Clone the project to your computer:
 
