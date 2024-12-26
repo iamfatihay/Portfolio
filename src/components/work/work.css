@@ -11,6 +11,7 @@
     color: var(--title-color);
     padding: 0.25rem 0.65rem;
     font-weight: var(--font-medium);
+    font-size: calc(12px + 0.5vw);
     border-radius: 0.7rem;
     text-transform: capitalize;
     transition: color 0.8s ease-in-out, background-color 0.8s ease-in-out;

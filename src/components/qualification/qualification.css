@@ -59,6 +59,7 @@
 .qualification__title {
     font-size: var(--normal-font-size);
     font-weight: var(--font-medium);
+    max-width: 101.75px;
 }
 
 .qualification__subtitle, .qualification__link {
@@ -122,6 +123,11 @@
 
     .qualification__button {
         margin: 0 var(--mb-0-75);
+        padding: 0.4rem;
+    }
+
+    .qualification__icon {
+        display: none;
     }
 }
 

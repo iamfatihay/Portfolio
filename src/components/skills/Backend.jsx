@@ -8,7 +8,7 @@ const Backend = () => {
         <div className="skills__box">
             <div className="skills__group">
                 <div className="skills__data">
-                <i class='bx bx-badge-check' ></i>
+                <i className='bx bx-badge-check' ></i>
 
                 <div>
                     <h3 className="skills__name">Python</h3>
@@ -16,7 +16,7 @@ const Backend = () => {
                 </div>
                 </div>
                 <div className="skills__data">
-                <i class='bx bx-badge-check' ></i>
+                <i className='bx bx-badge-check' ></i>
 
                 <div>
                     <h3 className="skills__name">Django</h3>
@@ -24,7 +24,7 @@ const Backend = () => {
                 </div>
                 </div>
                 <div className="skills__data">
-                <i class='bx bx-badge-check' ></i>
+                <i className='bx bx-badge-check' ></i>
 
                 <div>
                     <h3 className="skills__name">SQLite</h3>
@@ -35,7 +35,7 @@ const Backend = () => {
 
             <div className="skills__group">
                 <div className="skills__data">
-                <i class='bx bx-badge-check' ></i>
+                <i className='bx bx-badge-check' ></i>
 
                 <div>
                     <h3 className="skills__name">Firebase</h3>
@@ -43,7 +43,7 @@ const Backend = () => {
                 </div>
                 </div>
                 <div className="skills__data">
-                <i class='bx bx-badge-check' ></i>
+                <i className='bx bx-badge-check' ></i>
 
                 <div>
                     <h3 className="skills__name">REST Framework</h3>
@@ -51,7 +51,7 @@ const Backend = () => {
                 </div>
                 </div>
                 <div className="skills__data">
-                      <i class='bx bx-badge-check' ></i>
+                      <i className='bx bx-badge-check' ></i>
 
                       <div>
                           <h3 className="skills__name">PostgreSQL</h3>
