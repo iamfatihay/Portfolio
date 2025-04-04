@@ -172,7 +172,7 @@ const Qualification = () => {
                             <div>
                                 <h3 className="qualification__title">Frontend Developer</h3>
                                 {/* <span className="qualification__subtitle">Clarusway</span> */}
-                                <a className='qualification__link' href="https://c11n.clarusway.com/en/verify/12825043385694?ref=email" target='_blank' rel="noreferrer">
+                                <a className='qualification__link' href="https://c11n.clarusway.com/en/verify/12825043385694?ref=email" target='_blank' rel="noopener noreferrer">
                                     Credential
                                     <i className="bx bx-right-arrow-alt work__button-icon"></i>
                                 </a>
@@ -197,7 +197,7 @@ const Qualification = () => {
                             <div>
                                 <h3 className="qualification__title">JavaScript</h3>
                                 {/* <span className="qualification__subtitle">Clarusway</span> */}
-                                <a className='qualification__link' href="https://c11n.clarusway.com/en/verify/46897143464598?ref=email" target='_blank' rel="noreferrer">
+                                <a className='qualification__link' href="https://c11n.clarusway.com/en/verify/46897143464598?ref=email" target='_blank' rel="noopener noreferrer">
                                     Credential
                                     <i className="bx bx-right-arrow-alt work__button-icon"></i>
                                 </a>
@@ -213,7 +213,7 @@ const Qualification = () => {
                             <div>
                                 <h3 className="qualification__title">React</h3>
                                 {/* <span className="qualification__subtitle">Clarusway</span> */}
-                                <a className='qualification__link' href="https://c11n.clarusway.com/en/verify/33670067149733?ref=email" target='_blank' rel="noreferrer">
+                                <a className='qualification__link' href="https://c11n.clarusway.com/en/verify/33670067149733?ref=email" target='_blank' rel="noopener noreferrer">
                                     Credential
                                     <i className="bx bx-right-arrow-alt work__button-icon"></i>
                                 </a>
@@ -237,7 +237,7 @@ const Qualification = () => {
                             <div>
                                 <h3 className="qualification__title">HTML & CSS</h3>
                                 {/* <span className="qualification__subtitle">Clarusway</span> */}
-                                <a className='qualification__link' href="https://c11n.clarusway.com/en/verify/30228568874076?ref=email" target='_blank' rel="noreferrer">
+                                <a className='qualification__link' href="https://c11n.clarusway.com/en/verify/30228568874076?ref=email" target='_blank' rel="noopener noreferrer">
                                     Credential
                                     <i className="bx bx-right-arrow-alt work__button-icon"></i>
                                 </a>
@@ -252,7 +252,7 @@ const Qualification = () => {
                             <div>
                                 <h3 className="qualification__title">Python Data Structures</h3>
                                 {/* <span className="qualification__subtitle">Clarusway</span> */}
-                                <a className='qualification__link' href="https://www.sololearn.com/certificates/CT-9PVLYMVL" target='_blank' rel="noreferrer">
+                                <a className='qualification__link' href="https://www.sololearn.com/certificates/CT-9PVLYMVL" target='_blank' rel="noopener noreferrer">
                                     Credential
                                     <i className="bx bx-right-arrow-alt work__button-icon"></i>
                                 </a>

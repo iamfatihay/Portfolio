@@ -1,20 +1,33 @@
-import React, { useRef } from 'react';
-import emailjs from '@emailjs/browser';
+import React, { useRef } from "react";
+import emailjs from "@emailjs/browser";
 import "./contact.css";
-import {toastSuccessNotify} from "../../helper/ToastNotify";
-import { ToastContainer } from 'react-toastify';
+import { toastSuccessNotify, toastErrorNotify } from "../../helper/ToastNotify";
+import { ToastContainer, Flip } from "react-toastify";
 
 const Contact = () => {
-
     const form = useRef();
 
-    const sendEmail = (e) => {
-        e.preventDefault();
-        emailjs.sendForm('service_03kqmzc', 'template_vecbmho', form.current, 'oTmcAct8ejieDwCqy');
-        e.target.reset();
-        toastSuccessNotify("Thanks for contacting me!");
-    };
+  const sendEmail = (e) => {
+    e.preventDefault();
 
+    emailjs
+      .sendForm(
+        process.env.REACT_APP_EMAILJS_SERVICE_ID,
+        process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
+        form.current,
+        process.env.REACT_APP_EMAILJS_PUBLIC_KEY
+      )
+      .then(
+        (result) => {
+          toastSuccessNotify("Your mail is sent!");
+          e.target.reset();
+        },
+        (error) => {
+          toastErrorNotify("Oops... " + error.text);
+        }
+      );
+  };
+    
 
     return (
         <section className="contact section" id="contact">
@@ -30,45 +43,80 @@ const Contact = () => {
                             <i className="bx bx-mail-send contact__card-icon"></i>
 
                             <h3 className="contact__card-title">Email</h3>
-                            <span className="contact__card-data">de.fatih.ay@gmail.com</span>
+                            <span className="contact__card-data">
+                                de.fatih.ay@gmail.com
+                            </span>
 
-                            <a href="mailto:de.fatih.ay@gmail.com" className="contact__button">Write me <i className="bx bx-right-arrow-alt contact__button-icon"></i></a>
-
+                            <a
+                                href="mailto:de.fatih.ay@gmail.com"
+                                className="contact__button"
+                            >
+                                Write me{" "}
+                                <i className="bx bx-right-arrow-alt contact__button-icon"></i>
+                            </a>
                         </div>
 
                         <div className="contact__card">
                             <i className="bx bxl-whatsapp contact__card-icon"></i>
 
                             <h3 className="contact__card-title">Whatsapp</h3>
-                            <span className="contact__card-data">+49 163 419 35 72</span>
+                            <span className="contact__card-data">
+                                +49 163 419 35 72
+                            </span>
 
-                            <a href="https://api.whatsapp.com/send?phone=491634193572&text=Hello, more information!" className="contact__button" target='blank'>Write me <i className="bx bx-right-arrow-alt contact__button-icon"></i></a>
-
+                            <a
+                                href="https://api.whatsapp.com/send?phone=491634193572&text=Hello, more information!"
+                                className="contact__button"
+                                target="blank"
+                                rel="noopener noreferrer"
+                            >
+                                Write me{" "}
+                                <i className="bx bx-right-arrow-alt contact__button-icon"></i>
+                            </a>
                         </div>
-
                     </div>
                 </div>
 
                 <div className="contact__content">
                     <h3 className="contact__title">Write me your project</h3>
 
-                    <form ref={form} onSubmit={sendEmail} className="contact__form">
+                    <form
+                        ref={form}
+                        onSubmit={sendEmail}
+                        className="contact__form"
+                    >
                         <div className="contact__form-div">
                             <label className="contact__form-tag">Name</label>
-                            <input type="text" name='name' className='contact__form-input' placeholder='Your name' />
+                            <input
+                                type="text"
+                                name="name"
+                                className="contact__form-input"
+                                placeholder="Your name"
+                            />
                         </div>
 
                         <div className="contact__form-div">
                             <label className="contact__form-tag">Email</label>
-                            <input type="email" name='email' className='contact__form-input' placeholder='Your email' />
+                            <input
+                                type="email"
+                                name="email"
+                                className="contact__form-input"
+                                placeholder="Your email"
+                            />
                         </div>
 
                         <div className="contact__form-div contact__form-area">
                             <label className="contact__form-tag">Project</label>
-                            <textarea name="project" cols="30" rows="10" className='contact__form-input' placeholder='Write your project'></textarea>
+                            <textarea
+                                name="project"
+                                cols="30"
+                                rows="10"
+                                className="contact__form-input"
+                                placeholder="Write your project"
+                            ></textarea>
                         </div>
 
-                        <div className='form__button'>
+                        <div className="form__button">
                             <button className="button button--flex">
                                 Send
                                 <svg
@@ -90,13 +138,24 @@ const Contact = () => {
                                 </svg>
                             </button>
                         </div>
-
                     </form>
                 </div>
             </div>
-            <ToastContainer />
+            <ToastContainer
+            position="top-right"
+            autoClose={3500}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="colored"
+            transition={Flip}
+            />
         </section>
-    )
-}
+    );
+};
 
-export default Contact
+export default Contact;
