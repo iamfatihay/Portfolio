@@ -78,4 +78,4 @@ To run the application on your local machine, follow these steps:
 4. Start the application:
     ```
     npm start
-5. Open your web browser and visit  **http://localhost:3000**  to explore the Blog Application.
+5. Open your web browser and visit  **http://localhost:3000**  to explore the Application.
