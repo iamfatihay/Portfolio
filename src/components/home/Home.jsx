@@ -1,24 +1,32 @@
-import React from 'react';
+import React from "react";
 import "./home.css";
 import Social from "./Social";
-import Data from './Data';
-import ScrollDown from './ScrollDown';
+import Data from "./Data";
+import ScrollDown from "./ScrollDown";
+import portfolioImage from "../../assets/portfolio.jpg";
 
 const Home = () => {
-  return (
-    <section className="home section" id="home">
-        <div className="home__container container grid">
-            <div className="home__content grid">
-                <Social/>
+    return (
+        <section className="home section" id="home">
+            <div className="home__container container grid">
+                <div className="home__content grid">
+                    <Social />
 
-                <div className="home__img"></div>
+                    <div className="home__img">
+                        <img
+                            src={portfolioImage}
+                            alt="Fatih AY - Full Stack Developer Portfolio"
+                            className="lazy-image"
+                            loading="lazy"
+                        />
+                    </div>
 
-                <Data />
+                    <Data />
+                </div>
+                <ScrollDown />
             </div>
-            <ScrollDown />
-        </div>
-    </section>
-  )
-}
+        </section>
+    );
+};
 
-export default Home
+export default Home;

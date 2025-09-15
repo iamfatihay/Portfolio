@@ -1,32 +1,43 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import "./App.css";
 import Header from "./components/header/Header";
-import Home from "./components/home/Home";
-import About from "./components/about/About";
-import Skills from "./components/skills/Skills";
-import Qualification from "./components/qualification/Qualification";
-import Work from "./components/work/Work";
-import Contact from "./components/contact/Contact";
-import Footer from "./components/footer/Footer";
 import ScrollUp from "./components/scrollup/ScrollUp";
+import ErrorBoundary from "./components/ErrorBoundary";
+import LoadingSpinner from "./components/LoadingSpinner";
 
+// Lazy load components for better performance and code splitting
+const Home = lazy(() => import("./components/home/Home"));
+const About = lazy(() => import("./components/about/About"));
+const Skills = lazy(() => import("./components/skills/Skills"));
+const Qualification = lazy(() =>
+    import("./components/qualification/Qualification")
+);
+const Work = lazy(() => import("./components/work/Work"));
+const Contact = lazy(() => import("./components/contact/Contact"));
+const Footer = lazy(() => import("./components/footer/Footer"));
 
 function App() {
-  return (
-    <>
-      <Header />
-      <main className="main">
-        <Home /> 
-        <About/>
-        <Skills/>
-        <Qualification/>
-        <Work/>
-        <Contact/>
-      </main>
-      <Footer />
-      <ScrollUp />
-    </>
-  );
+    return (
+        <ErrorBoundary>
+            <Header />
+            <main className="main">
+                <Suspense
+                    fallback={<LoadingSpinner message="Loading portfolio..." />}
+                >
+                    <Home />
+                    <About />
+                    <Skills />
+                    <Qualification />
+                    <Work />
+                    <Contact />
+                </Suspense>
+            </main>
+            <Suspense fallback={<LoadingSpinner message="Loading footer..." />}>
+                <Footer />
+            </Suspense>
+            <ScrollUp />
+        </ErrorBoundary>
+    );
 }
 
 export default App;
