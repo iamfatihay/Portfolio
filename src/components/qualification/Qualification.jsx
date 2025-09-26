@@ -152,7 +152,7 @@ const Qualification = () => {
                             </div>
                             <div>
                                 <h3 className="qualification__title">
-                                    Frontend Developer
+                                    Web Developer
                                 </h3>
                                 <span className="qualification__subtitle">
                                     Stuttgart - Hyfindr GmbH{" "}
