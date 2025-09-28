@@ -8,6 +8,9 @@ import LoadingSpinner from "./components/LoadingSpinner";
 // Lazy load components for better performance and code splitting
 const Home = lazy(() => import("./components/home/Home"));
 const About = lazy(() => import("./components/about/About"));
+const Achievements = lazy(() =>
+    import("./components/achievements/Achievements")
+);
 const Skills = lazy(() => import("./components/skills/Skills"));
 const Qualification = lazy(() =>
     import("./components/qualification/Qualification")
@@ -26,6 +29,7 @@ function App() {
                 >
                     <Home />
                     <About />
+                    <Achievements />
                     <Skills />
                     <Qualification />
                     <Work />

@@ -1,0 +1,209 @@
+/*==================== ACHIEVEMENTS ====================*/
+.achievements {
+    padding: 4rem 0;
+    background: var(--body-color);
+}
+
+.achievements__container {
+    max-width: 768px;
+}
+
+.achievements__content {
+    display: grid;
+    gap: 2rem;
+}
+
+.achievements__header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.achievements__title {
+    font-size: var(--h2-font-size);
+    color: var(--title-color);
+    margin-bottom: 1rem;
+    font-weight: var(--font-semi-bold);
+}
+
+.achievements__description {
+    font-size: var(--normal-font-size);
+    color: var(--text-color);
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.achievements__carousel {
+    margin: 2rem 0;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    background: var(--container-color);
+}
+
+.hackathon__carousel {
+    border-radius: 1rem;
+}
+
+.carousel__slide {
+    position: relative;
+}
+
+.carousel__image {
+    width: 100%;
+    height: auto;
+    min-height: 400px;
+    max-height: 600px;
+    object-fit: contain;
+    object-position: center;
+    border-radius: 1rem;
+    background: var(--container-color);
+}
+
+.carousel__legend {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    color: white;
+    padding: 2rem 1rem 1rem;
+    text-align: center;
+    border-radius: 0 0 1rem 1rem;
+}
+
+.carousel__legend h4 {
+    font-size: var(--h3-font-size);
+    font-weight: var(--font-semi-bold);
+    margin-bottom: 0.5rem;
+    color: white;
+}
+
+.carousel__legend p {
+    font-size: var(--small-font-size);
+    opacity: 0.9;
+    margin: 0;
+}
+
+.achievements__details {
+    margin-top: 2rem;
+}
+
+.achievements__info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1.5rem;
+}
+
+.achievements__box {
+    background: var(--container-color);
+    border: 1px solid var(--border-color);
+    border-radius: 0.75rem;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.achievements__box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    border-color: var(--first-color);
+}
+
+.achievements__icon {
+    font-size: 2rem;
+    color: var(--first-color);
+    margin-bottom: 1rem;
+}
+
+.achievements__box-title {
+    font-size: var(--small-font-size);
+    font-weight: var(--font-medium);
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+}
+
+.achievements__box-subtitle {
+    font-size: var(--normal-font-size);
+    font-weight: var(--font-semi-bold);
+    color: var(--title-color);
+}
+
+/* Carousel Custom Styles */
+.hackathon__carousel .carousel .control-dots {
+    bottom: 10px;
+}
+
+.hackathon__carousel .carousel .control-dots .dot {
+    background: rgba(255, 255, 255, 0.5);
+    border: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin: 0 4px;
+    transition: all 0.3s ease;
+}
+
+.hackathon__carousel .carousel .control-dots .dot.selected {
+    background: var(--first-color);
+    transform: scale(1.2);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 992px) {
+    .achievements__container {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .achievements__info {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .carousel__image {
+        min-height: 300px;
+        max-height: 450px;
+    }
+
+    .achievements__box {
+        padding: 1rem 0.5rem;
+    }
+
+    .achievements__icon {
+        font-size: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .achievements__info {
+        grid-template-columns: 1fr;
+    }
+
+    .carousel__image {
+        min-height: 250px;
+        max-height: 350px;
+    }
+
+    .carousel__legend {
+        padding: 1.5rem 0.5rem 0.5rem;
+    }
+
+    .carousel__legend h4 {
+        font-size: var(--normal-font-size);
+    }
+
+    .carousel__legend p {
+        font-size: var(--smaller-font-size);
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .achievements__container {
+        margin-left: var(--mb-1);
+        margin-right: var(--mb-1);
+    }
+}
