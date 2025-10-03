@@ -17,7 +17,7 @@ const Home = () => {
                             src={portfolioImage}
                             alt="Fatih AY - Full Stack Developer Portfolio"
                             className="lazy-image"
-                            loading="lazy"
+                            loading="eager"
                         />
                     </div>
 
