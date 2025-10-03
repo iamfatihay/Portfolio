@@ -1,9 +1,11 @@
-import React, { Suspense, lazy } from "react";
+import React, { Suspense, lazy, useEffect } from "react";
 import "./App.css";
 import Header from "./components/header/Header";
 import ScrollUp from "./components/scrollup/ScrollUp";
 import ErrorBoundary from "./components/ErrorBoundary";
 import LoadingSpinner from "./components/LoadingSpinner";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 // Lazy load components for better performance and code splitting
 const Home = lazy(() => import("./components/home/Home"));
@@ -20,6 +22,15 @@ const Contact = lazy(() => import("./components/contact/Contact"));
 const Footer = lazy(() => import("./components/footer/Footer"));
 
 function App() {
+    useEffect(() => {
+        AOS.init({
+            duration: 1000,
+            easing: "ease-in-out",
+            once: true,
+            mirror: false,
+        });
+    }, []);
+
     return (
         <ErrorBoundary>
             <Header />

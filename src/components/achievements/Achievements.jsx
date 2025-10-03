@@ -12,12 +12,24 @@ import hackathon4 from "../../assets/hackathon4.jpg";
 const Achievements = () => {
     return (
         <section className="achievements section" id="achievements">
-            <h2 className="section__title">Achievements</h2>
-            <span className="section__subtitle">My Success Stories</span>
+            <h2 className="section__title" data-aos="fade-up">
+                Achievements
+            </h2>
+            <span
+                className="section__subtitle"
+                data-aos="fade-up"
+                data-aos-delay="100"
+            >
+                My Success Stories
+            </span>
 
             <div className="achievements__container container">
                 <div className="achievements__content">
-                    <div className="achievements__header">
+                    <div
+                        className="achievements__header"
+                        data-aos="fade-up"
+                        data-aos-delay="200"
+                    >
                         <h3 className="achievements__title">
                             🏆 Black Forest Hackathon Winner
                         </h3>
@@ -31,7 +43,11 @@ const Achievements = () => {
                         </p>
                     </div>
 
-                    <div className="achievements__carousel">
+                    <div
+                        className="achievements__carousel"
+                        data-aos="fade-up"
+                        data-aos-delay="300"
+                    >
                         <Carousel
                             autoPlay
                             interval={4000}
@@ -104,7 +120,45 @@ const Achievements = () => {
                         </Carousel>
                     </div>
 
-                    <div className="achievements__details">
+                    <div
+                        className="achievements__current-work"
+                        data-aos="fade-up"
+                        data-aos-delay="350"
+                    >
+                        <div className="current-work__card">
+                            <div className="current-work__header">
+                                <i className="bx bx-buildings current-work__icon"></i>
+                                <h3 className="current-work__title">
+                                    Currently Building Innovation At
+                                </h3>
+                            </div>
+                            <a
+                                href="https://hyfindr.com"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="current-work__link"
+                            >
+                                <span className="current-work__company">
+                                    Hyfindr GmbH
+                                </span>
+                                <i className="bx bx-link-external"></i>
+                            </a>
+                            <span className="current-work__role">
+                                Lead Web Developer
+                            </span>
+                            <p className="current-work__description">
+                                Leading the development of B2B hydrogen economy
+                                platform, transforming how businesses connect in
+                                the green industry sector.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div
+                        className="achievements__details"
+                        data-aos="fade-up"
+                        data-aos-delay="450"
+                    >
                         <div className="achievements__info">
                             <div className="achievements__box">
                                 <i className="bx bx-trophy achievements__icon"></i>

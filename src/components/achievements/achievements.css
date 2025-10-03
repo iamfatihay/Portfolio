@@ -6,6 +6,8 @@
 
 .achievements__container {
     max-width: 768px;
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
 
 .achievements__content {
@@ -83,6 +85,93 @@
     font-size: var(--small-font-size);
     opacity: 0.9;
     margin: 0;
+}
+
+.achievements__current-work {
+    margin: 2rem 0;
+}
+
+.current-work__card {
+    background: linear-gradient(
+        135deg,
+        rgba(44, 90, 160, 0.05),
+        rgba(78, 205, 196, 0.05)
+    );
+    border: 2px solid var(--first-color);
+    border-radius: 1rem;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(44, 90, 160, 0.1);
+}
+
+.current-work__card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(44, 90, 160, 0.2);
+}
+
+.current-work__header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.current-work__icon {
+    font-size: 1.5rem;
+    color: var(--first-color);
+}
+
+.current-work__title {
+    font-size: var(--normal-font-size);
+    color: var(--text-color);
+    font-weight: var(--font-medium);
+}
+
+.current-work__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--first-color);
+    font-size: var(--h3-font-size);
+    font-weight: var(--font-semi-bold);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    margin: 0.5rem 0;
+}
+
+.current-work__link:hover {
+    gap: 0.75rem;
+    transform: translateX(3px);
+}
+
+.current-work__link .bx-link-external {
+    font-size: 1.2rem;
+}
+
+.current-work__company {
+    background: linear-gradient(135deg, var(--first-color), #4ecdc4);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.current-work__role {
+    display: block;
+    font-size: var(--small-font-size);
+    color: var(--text-color);
+    font-weight: var(--font-medium);
+    margin: 0.5rem 0;
+    font-style: italic;
+}
+
+.current-work__description {
+    font-size: var(--small-font-size);
+    color: var(--text-color);
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 1rem auto 0;
 }
 
 .achievements__details {
