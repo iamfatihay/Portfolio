@@ -7,6 +7,7 @@ import Work6 from "../../assets/countries.gif";
 import Work7 from "../../assets/nba.gif";
 import Work8 from "../../assets/anazon-store.gif";
 import Work9 from "../../assets/guess-number.gif";
+import Work10 from "../../assets/freelancer.gif";
 
 export const projectsData = [
     {
@@ -79,6 +80,14 @@ export const projectsData = [
         title: "Guess My Number",
         link: "https://guess-number-xzmp.vercel.app/",
         link2: "https://github.com/iamfatihay/guess-number",
+        category: "Elementary",
+    },
+    {
+        id: 10,
+        image: Work10,
+        title: "Freelance Web Design",
+        link: "https://iamfatihay.github.io/freelance-web-design/",
+        link2: "https://github.com/iamfatihay/freelance-web-design",
         category: "Elementary",
     },
 ];
