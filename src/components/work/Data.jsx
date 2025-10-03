@@ -86,7 +86,7 @@ export const projectsData = [
         id: 10,
         image: Work10,
         title: "Freelance Web Design",
-        link: "https://iamfatihay.github.io/freelance-web-design/",
+        link: "https://freelance-web-design-kappa.vercel.app/",
         link2: "https://github.com/iamfatihay/freelance-web-design",
         category: "Elementary",
     },
