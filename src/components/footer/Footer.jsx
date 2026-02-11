@@ -39,7 +39,7 @@ const Footer = () => {
                         </a>
                     </div>
 
-                    <span className='footer__copy' >&#169; All rigths reserved</span>
+                    <span className='footer__copy' >&#169; All rights reserved</span>
                 </div>
 
                 <div className="footer__sponsor">
