@@ -10,12 +10,26 @@ const Contact = () => {
   const sendEmail = (e) => {
     e.preventDefault();
 
+    // Check if EmailJS credentials are configured
+    const serviceId = process.env.REACT_APP_EMAILJS_SERVICE_ID;
+    const templateId = process.env.REACT_APP_EMAILJS_TEMPLATE_ID;
+    const publicKey = process.env.REACT_APP_EMAILJS_PUBLIC_KEY;
+
+    if (!serviceId || !templateId || !publicKey || 
+        serviceId === 'your_service_id' || 
+        templateId === 'your_template_id' || 
+        publicKey === 'your_public_key') {
+      toastErrorNotify("Contact form is not configured. Please reach out via email or WhatsApp.");
+      console.warn("EmailJS credentials are not configured. Please set up environment variables.");
+      return;
+    }
+
     emailjs
       .sendForm(
-        process.env.REACT_APP_EMAILJS_SERVICE_ID,
-        process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
+        serviceId,
+        templateId,
         form.current,
-        process.env.REACT_APP_EMAILJS_PUBLIC_KEY
+        publicKey
       )
       .then(
         (result) => {
