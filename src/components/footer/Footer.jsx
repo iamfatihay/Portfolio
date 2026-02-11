@@ -42,6 +42,28 @@ const Footer = () => {
                     <span className='footer__copy' >&#169; All rigths reserved</span>
                 </div>
 
+                <div className="footer__sponsor">
+                    <p className="footer__sponsor-text">Support My Work</p>
+                    <div className="footer__sponsor-buttons">
+                        <a href="https://github.com/sponsors/iamfatihay" 
+                           className="footer__sponsor-button" 
+                           target="_blank" 
+                           rel="noopener noreferrer"
+                           title="Sponsor on GitHub">
+                            <i className="bx bxl-github"></i>
+                            <span>Sponsor</span>
+                        </a>
+                        <a href="https://www.buymeacoffee.com/iamfatihay" 
+                           className="footer__sponsor-button footer__sponsor-button--coffee" 
+                           target="_blank" 
+                           rel="noopener noreferrer"
+                           title="Buy me a coffee">
+                            <i className="bx bx-coffee"></i>
+                            <span>Buy me a coffee</span>
+                        </a>
+                    </div>
+                </div>
+
             </div>
         </footer>
     )
