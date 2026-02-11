@@ -4,6 +4,13 @@ import "./contact.css";
 import { toastSuccessNotify, toastErrorNotify } from "../../helper/ToastNotify";
 import { ToastContainer, Flip } from "react-toastify";
 
+// EmailJS placeholder values that indicate unconfigured credentials
+const EMAILJS_PLACEHOLDERS = {
+    SERVICE_ID: 'your_service_id',
+    TEMPLATE_ID: 'your_template_id',
+    PUBLIC_KEY: 'your_public_key',
+};
+
 const Contact = () => {
     const form = useRef();
 
@@ -16,9 +23,9 @@ const Contact = () => {
     const publicKey = process.env.REACT_APP_EMAILJS_PUBLIC_KEY;
 
     if (!serviceId || !templateId || !publicKey || 
-        serviceId === 'your_service_id' || 
-        templateId === 'your_template_id' || 
-        publicKey === 'your_public_key') {
+        serviceId === EMAILJS_PLACEHOLDERS.SERVICE_ID || 
+        templateId === EMAILJS_PLACEHOLDERS.TEMPLATE_ID || 
+        publicKey === EMAILJS_PLACEHOLDERS.PUBLIC_KEY) {
       toastErrorNotify("Contact form is not configured. Please reach out via email or WhatsApp.");
       console.warn("EmailJS credentials are not configured. Please set up environment variables.");
       return;
