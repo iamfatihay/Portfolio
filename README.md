@@ -75,7 +75,22 @@ To run the application on your local machine, follow these steps:
 3. Install the dependencies:
     ```
     npm install
-4. Start the application:
+4. **Configure EmailJS (Optional):** To enable the contact form functionality:
+    - Sign up for a free account at [EmailJS](https://www.emailjs.com/)
+    - Create an email service and template
+    - Copy `.env.example` to `.env`:
+      ```
+      cp .env.example .env
+      ```
+    - Update the `.env` file with your EmailJS credentials:
+      ```
+      REACT_APP_EMAILJS_SERVICE_ID=your_actual_service_id
+      REACT_APP_EMAILJS_TEMPLATE_ID=your_actual_template_id
+      REACT_APP_EMAILJS_PUBLIC_KEY=your_actual_public_key
+      ```
+    - **Note:** The contact form will still display without EmailJS configuration, but will show a friendly message directing users to use email or WhatsApp instead.
+
+5. Start the application:
     ```
     npm start
-5. Open your web browser and visit  **http://localhost:3000**  to explore the Application.
+6. Open your web browser and visit  **http://localhost:3000**  to explore the Application.
