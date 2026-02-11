@@ -26,7 +26,7 @@ const Contact = () => {
         serviceId === EMAILJS_PLACEHOLDERS.SERVICE_ID || 
         templateId === EMAILJS_PLACEHOLDERS.TEMPLATE_ID || 
         publicKey === EMAILJS_PLACEHOLDERS.PUBLIC_KEY) {
-      toastErrorNotify("Contact form is not configured. Please reach out via email or WhatsApp.");
+      toastErrorNotify("Contact form is currently unavailable. Please use the email or WhatsApp options above.");
       console.warn("EmailJS credentials are not configured. Please set up environment variables.");
       return;
     }
