@@ -56,7 +56,6 @@
 
 /*=============== SPONSOR SECTION ===============*/
 .footer__sponsor {
-    margin-top: 2rem;
     text-align: center;
 }
 
@@ -64,7 +63,8 @@
     color: var(--title-color);
     font-weight: var(--font-medium);
     margin-bottom: 1rem;
-    font-size: var(--normal-font-size);
+    font-size: var(--small-font-size);
+    font-family: var(--body-font);
 }
 
 .footer__sponsor-buttons {
@@ -84,14 +84,13 @@
     border-radius: 0.5rem;
     font-size: var(--small-font-size);
     font-weight: var(--font-medium);
-    transition: all 0.3s ease;
+    font-family: var(--body-font);
+    transition: background-color 0.3s ease;
     text-decoration: none;
 }
 
 .footer__sponsor-button:hover {
     background-color: var(--title-color-dark);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .footer__sponsor-button--coffee {
@@ -117,18 +116,58 @@
     }
     .footer__container{
         width: 100%;
-        column-gap: 1rem;
+        column-gap: 2rem;
+        row-gap: 2rem;
     }
     .footer__sponsor-button {
         padding: 0.6rem 1.2rem;
         font-size: var(--smaller-font-size);
     }
-  }
+    .logo{
+        width: 200px;
+    }
+}
+
+/* For medium devices */
+@media screen and (max-width: 768px) {
+    .footer__container{
+        flex-direction: column;
+        column-gap: 0;
+        row-gap: 2rem;
+    }
+    .logo{
+        width: 180px;
+    }
+    .footer__sponsor {
+        margin-top: 0;
+    }
+    .footer__list{
+        column-gap: 1rem;
+    }
+}
+
+/* For tablets and small screens */
+@media screen and (max-width: 576px) {
+    .footer__sponsor-buttons {
+        gap: 0.75rem;
+    }
+    .footer__sponsor-button {
+        padding: 0.5rem 1rem;
+        font-size: var(--smaller-font-size);
+    }
+    .footer__sponsor-button i {
+        font-size: 1rem;
+    }
+}
  
 /* For small devices */
 @media screen and (max-width: 350px) {
     .footer__container{
         flex-direction: column;
+        row-gap: 1.5rem;
+    }
+    .logo{
+        width: 150px;
     }
     .footer__sponsor-buttons {
         flex-direction: column;
