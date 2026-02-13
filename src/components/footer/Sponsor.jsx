@@ -11,7 +11,6 @@ const Sponsor = () => {
                     target="_blank" 
                     rel="noopener noreferrer"
                     title="Sponsor on GitHub"
-                    aria-label="Sponsor on GitHub"
                 >
                     <i className="bx bxl-github" aria-hidden="true"></i>
                     <span>Sponsor</span>
@@ -22,7 +21,6 @@ const Sponsor = () => {
                     target="_blank" 
                     rel="noopener noreferrer"
                     title="Buy me a coffee"
-                    aria-label="Buy me a coffee"
                 >
                     <i className="bx bx-coffee" aria-hidden="true"></i>
                     <span>Buy me a coffee</span>
