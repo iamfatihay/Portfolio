@@ -54,6 +54,58 @@
     width: 280px;
 }
 
+/*=============== SPONSOR SECTION ===============*/
+.footer__sponsor {
+    text-align: center;
+}
+
+.footer__sponsor-text {
+    color: var(--title-color);
+    font-weight: var(--font-medium);
+    margin-bottom: 1rem;
+    font-size: var(--small-font-size);
+    font-family: var(--body-font);
+}
+
+.footer__sponsor-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.footer__sponsor-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--title-color);
+    color: var(--container-color);
+    border-radius: 0.5rem;
+    font-size: var(--small-font-size);
+    font-weight: var(--font-medium);
+    font-family: var(--body-font);
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+}
+
+.footer__sponsor-button:hover {
+    background-color: var(--title-color-dark);
+}
+
+.footer__sponsor-button--coffee {
+    background-color: #FFDD00;
+    color: #000;
+}
+
+.footer__sponsor-button--coffee:hover {
+    background-color: #FFCC00;
+}
+
+.footer__sponsor-button i {
+    font-size: 1.25rem;
+}
+
 /*=============== BREAKPOINTS ===============*/
 /* For large devices */
 @media screen and (max-width: 992px) {
@@ -64,13 +116,65 @@
     }
     .footer__container{
         width: 100%;
+        column-gap: 2rem;
+        row-gap: 2rem;
+    }
+    .footer__sponsor-button {
+        padding: 0.6rem 1.2rem;
+        font-size: var(--smaller-font-size);
+    }
+    .logo{
+        width: 200px;
+    }
+}
+
+/* For medium devices */
+@media screen and (max-width: 768px) {
+    .footer__container{
+        flex-direction: column;
+        column-gap: 0;
+        row-gap: 2rem;
+    }
+    .logo{
+        width: 180px;
+    }
+    .footer__sponsor {
+        margin-top: 0;
+    }
+    .footer__list{
         column-gap: 1rem;
     }
-  }
+}
+
+/* For tablets and small screens */
+@media screen and (max-width: 576px) {
+    .footer__sponsor-buttons {
+        gap: 0.75rem;
+    }
+    .footer__sponsor-button {
+        padding: 0.5rem 1rem;
+        font-size: var(--smaller-font-size);
+    }
+    .footer__sponsor-button i {
+        font-size: 1rem;
+    }
+}
  
 /* For small devices */
 @media screen and (max-width: 350px) {
     .footer__container{
         flex-direction: column;
+        row-gap: 1.5rem;
+    }
+    .logo{
+        width: 150px;
+    }
+    .footer__sponsor-buttons {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    .footer__sponsor-button {
+        width: 100%;
+        justify-content: center;
     }
 }

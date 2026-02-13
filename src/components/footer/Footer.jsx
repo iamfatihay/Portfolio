@@ -2,6 +2,7 @@ import React from 'react';
 import "./footer.css";
 import logo from "../../assets/logo.gif";
 import { LiaXing } from 'react-icons/lia';
+import Sponsor from './Sponsor';
 
 const Footer = () => {
     return (
@@ -39,8 +40,10 @@ const Footer = () => {
                         </a>
                     </div>
 
-                    <span className='footer__copy' >&#169; All rigths reserved</span>
+                    <span className='footer__copy'>&#169; All rights reserved</span>
                 </div>
+
+                <Sponsor />
 
             </div>
         </footer>
