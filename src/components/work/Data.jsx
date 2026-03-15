@@ -10,7 +10,7 @@ export const heroProject = {
     period: "Oct 2023 – Present",
     description:
         "Production B2B hydrogen technology marketplace for the global hydrogen economy. Full stack development with Symfony, PHP 8, Sylius, MySQL, Elasticsearch, Docker and CI/CD. Responsible for all frontend (HTML, CSS, JS, jQuery), backend features, performance, SEO and sprint management.",
-    tags: ["Symfony", "PHP 8", "Sylius", "MySQL", "Elasticsearch", "Docker", "React", "CI/CD"],
+    tags: ["PHP", "Symfony", "Sylius", "MySQL", "Elasticsearch", "Docker", "Twig", "JS", "CI/CD"],
     link: "https://hyfindr.com",
     linkedIn: "https://www.linkedin.com/in/fatih-ay1661/",
 };
@@ -36,7 +36,7 @@ export const secondaryProjects = [
         period: "May 2025 · Freiburg",
         description:
             "Developed an AI-powered platform addressing a real-world challenge for Liebherr Mining. 48 hours of coding, collaboration, and innovation — brought home 1st place.",
-        tags: ["React", "React Bootstrap", "AI/ML"],
+        tags: ["Vite + React", "React Bootstrap", "AI/ML"],
         badge: "1st Place",
         linkedIn: "https://www.linkedin.com/in/fatih-ay1661/",
     },
