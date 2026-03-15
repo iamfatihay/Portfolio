@@ -40,10 +40,10 @@ function App() {
                 >
                     <Home />
                     <About />
-                    <Achievements />
                     <Skills />
                     <Qualification />
                     <Work />
+                    <Achievements />
                     <Contact />
                 </Suspense>
             </main>

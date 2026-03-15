@@ -21,7 +21,7 @@ const About = () => {
             <div className="about__container container grid">
                 <img
                     src={AboutImg}
-                    alt=""
+                    alt="Fatih AY - Full Stack Developer"
                     className="about__img"
                     data-aos="fade-right"
                     data-aos-delay="200"

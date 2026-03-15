@@ -1,39 +1,18 @@
-// Custom hook for project filtering
-import { useState, useEffect, useCallback } from "react";
-import { projectsData } from "../components/work/Data";
+// Custom hook for project filtering (legacy — not currently in use)
+import { useState, useCallback } from "react";
+import { featuredProjects, archiveProjects } from "../components/work/Data";
 
 export const useProjectFilter = () => {
-    const [item, setItem] = useState({ name: "all" });
-    const [projects, setProjects] = useState([]);
-    const [active, setActive] = useState(0);
+    const [showArchive, setShowArchive] = useState(false);
 
-    const filterProjects = useCallback(() => {
-        if (item.name === "all") {
-            setProjects(projectsData);
-        } else {
-            const newProjects = projectsData.filter((project) => {
-                return project.category.toLowerCase() === item.name;
-            });
-            setProjects(newProjects);
-        }
-    }, [item]);
-
-    useEffect(() => {
-        filterProjects();
-    }, [filterProjects]);
-
-    const handleClick = useCallback((e, index) => {
-        try {
-            setItem({ name: e.target.textContent.toLowerCase() });
-            setActive(index);
-        } catch (error) {
-            console.error("Error handling filter click:", error);
-        }
+    const toggleArchive = useCallback(() => {
+        setShowArchive((prev) => !prev);
     }, []);
 
     return {
-        projects,
-        active,
-        handleClick,
+        featuredProjects,
+        archiveProjects,
+        showArchive,
+        toggleArchive,
     };
 };

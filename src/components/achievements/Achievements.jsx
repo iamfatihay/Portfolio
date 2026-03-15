@@ -121,40 +121,6 @@ const Achievements = () => {
                     </div>
 
                     <div
-                        className="achievements__current-work"
-                        data-aos="fade-up"
-                        data-aos-delay="350"
-                    >
-                        <div className="current-work__card">
-                            <div className="current-work__header">
-                                <i className="bx bx-buildings current-work__icon"></i>
-                                <h3 className="current-work__title">
-                                    Currently Building Innovation At
-                                </h3>
-                            </div>
-                            <a
-                                href="https://hyfindr.com"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="current-work__link"
-                            >
-                                <span className="current-work__company">
-                                    Hyfindr GmbH
-                                </span>
-                                <i className="bx bx-link-external"></i>
-                            </a>
-                            <span className="current-work__role">
-                                Lead Web Developer
-                            </span>
-                            <p className="current-work__description">
-                                Leading the development of B2B hydrogen economy
-                                platform, transforming how businesses connect in
-                                the green industry sector.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div
                         className="achievements__details"
                         data-aos="fade-up"
                         data-aos-delay="450"
