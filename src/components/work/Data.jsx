@@ -1,44 +1,118 @@
-import Work1 from "../../assets/blog-app.gif";
-import Work2 from "../../assets/stockApp.gif";
-import Work3 from "../../assets/movieapp.gif";
-import Work4 from "../../assets/youtube.gif";
-import Hackathon from "../../assets/hackathon1.jpg";
+import Work1 from "../../assets/blog-app-preview.webp";
+import Work2 from "../../assets/stockApp-preview.webp";
+import Work3 from "../../assets/movieapp-preview.webp";
+import Work4 from "../../assets/youtube-preview.webp";
+import Hackathon from "../../assets/hackathon1.webp";
+import HiddenChampionsMark from "../../assets/hidden-champions-mark.svg";
 
-export const heroProject = {
-    title: "hyfindr.com",
-    role: "Lead Web Developer",
-    period: "Oct 2023 – Present",
-    description:
-        "Production B2B hydrogen technology marketplace for the global hydrogen economy. Full stack development with Symfony, PHP 8, Sylius, MySQL, Elasticsearch, Docker and CI/CD. Responsible for all frontend (HTML, CSS, JS, jQuery), backend features, performance, SEO and sprint management.",
-    tags: ["PHP", "Symfony", "Sylius", "MySQL", "Elasticsearch", "Docker", "Twig", "JS", "CI/CD"],
-    link: "https://hyfindr.com",
-    linkedIn: "https://www.linkedin.com/in/fatih-ay1661/",
-};
-
-export const secondaryProjects = [
+/*
+ * Ordered by how much of it a visitor can verify: two live products, a mobile
+ * app mid-build, an internal tool, then an awarded 48-hour build. Each carries
+ * the strongest proof it has, so the ones without a public URL still stand up.
+ */
+export const leadProjects = [
     {
-        id: "ai",
+        id: "hyfindr",
+        status: "live",
+        title: "hyfindr.com",
+        role: "Lead Web Developer",
+        period: "Oct 2023 – Present",
+        description:
+            "A production B2B hydrogen marketplace serving a global industry. I lead full stack delivery across commerce, search, performance and release workflows.",
+        tags: ["Symfony", "Sylius", "PHP", "Elasticsearch", "Docker"],
+        proof: "In production and trading today.",
+        actions: [
+            { label: "Visit site", href: "https://hyfindr.com", icon: "bx-right-arrow-alt" },
+            {
+                label: "LinkedIn",
+                href: "https://www.linkedin.com/in/fatih-ay1661/",
+                icon: "bxl-linkedin",
+            },
+        ],
+    },
+    {
+        id: "hidden-champions",
+        status: "live",
+        title: "hidden-champions.ai",
+        role: "Design & development",
+        period: "2026",
+        description:
+            "A conversion-focused German site for secure AI agents in the Mittelstand, built around interactive process comparisons and clear service storytelling.",
+        tags: ["JavaScript", "CSS", "Interaction Design", "SEO"],
+        media: HiddenChampionsMark,
+        mediaFit: "contain",
+        proof: "Live, and shipped end to end by me.",
+        actions: [
+            {
+                label: "Visit site",
+                href: "https://hidden-champions.ai",
+                icon: "bx-right-arrow-alt",
+            },
+        ],
+    },
+    {
+        id: "volo",
+        status: "building",
+        title: "Volo",
+        role: "Podcast recording & editing app",
+        period: "2026 · In build",
+        description:
+            "Two people in two places record a conversation and publish a finished episode from one app. Recording runs on the server with a track per speaker, so a dropped connection never costs the take.",
+        tags: ["React Native", "Expo", "FastAPI", "PostgreSQL", "100ms"],
+        proof: "Full flow recorded, edited and published on a real device.",
+        actions: [
+            {
+                label: "Request a product tour",
+                href: "#contact",
+                icon: "bx-down-arrow-alt",
+            },
+        ],
+    },
+];
+
+export const supportingProjects = [
+    {
+        id: "prototype",
+        status: "internal",
         title: "prototype.hyfindr.ai",
-        role: "AI Prototype · Internal Tool",
+        role: "AI prototype · internal tool",
         period: "2024",
         description:
-            "AI-powered internal platform developed at Hyfindr GmbH, built before AI integration into the main site. React + React Bootstrap frontend with a Python backend (AI/API layer), communicating with the main PHP 8 application via API calls.",
-        tags: ["React", "React Bootstrap", "Python", "AI/ML", "REST API"],
-        badge: "Internal",
-        note: "Login-restricted · Demo available on request",
-        linkedIn: "https://www.linkedin.com/in/fatih-ay1661/",
+            "An internal AI product joining a React interface and a Python AI/API layer to Hyfindr's main PHP application.",
+        tags: ["React", "Python", "AI/ML", "REST API"],
+        proof: "Login-restricted · walkthrough available on request.",
+        actions: [
+            {
+                label: "Request a walkthrough",
+                href: "#contact",
+                icon: "bx-down-arrow-alt",
+            },
+        ],
     },
     {
         id: "hackathon",
-        image: Hackathon,
-        title: "Black Forest Hackathon 2025",
-        role: "BadenCampus × Black Forest Innovation GmbH",
+        status: "award",
+        media: Hackathon,
+        title: "Black Forest Hackathon",
+        role: "Liebherr Mining challenge · BadenCampus",
         period: "May 2025 · Freiburg",
         description:
-            "Developed an AI-powered platform addressing a real-world challenge for Liebherr Mining. 48 hours of coding, collaboration, and innovation — brought home 1st place.",
-        tags: ["Vite + React", "React Bootstrap", "AI/ML"],
-        badge: "1st Place",
-        linkedIn: "https://www.linkedin.com/in/fatih-ay1661/",
+            "An AI-powered platform built for a real Liebherr Mining challenge in 48 hours, judged first place against competing teams.",
+        tags: ["Vite + React", "AI/ML", "48 hours"],
+        proof: "Judged first place — photos and the story below.",
+        actions: [
+            { label: "See the result", href: "#achievements", icon: "bx-down-arrow-alt" },
+            {
+                /*
+                 * The post itself, not the profile: this card trades a live URL
+                 * for evidence, and a profile is a destination rather than
+                 * evidence — it would leave the visitor hunting for a 2025 post.
+                 */
+                label: "Read the post",
+                href: "https://www.linkedin.com/posts/fatih-ay1661_hackathon-hackathonwinner-liebherr-ugcPost-7327664859356028929-aasy/",
+                icon: "bxl-linkedin",
+            },
+        ],
     },
 ];
 
@@ -70,7 +144,7 @@ export const featuredProjects = [
     {
         id: 4,
         image: Work4,
-        title: "Youtube Clone",
+        title: "YouTube Clone",
         tags: ["React", "YouTube API"],
         link: "https://youtube-clone-app-fay.vercel.app/",
         link2: "https://github.com/iamfatihay/youtube-clone-app",
@@ -101,7 +175,7 @@ export const archiveProjects = [
     },
     {
         id: 8,
-        title: "Anazon Store",
+        title: "E-commerce Store",
         tags: ["React", "Context API"],
         link: "https://anazon-store-app.vercel.app",
         link2: "https://github.com/iamfatihay/Anazon-storeApp",
