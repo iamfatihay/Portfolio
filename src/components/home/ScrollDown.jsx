@@ -3,7 +3,7 @@ import React from 'react'
 const ScrollDown = () => {
     return (
         <div className="home__scroll">
-            <a href="#about" className="home__scroll-button button--flex">
+            <a href="#about" className="home__scroll-button button--flex" aria-label="Scroll to the about section">
                 <svg
                     width="32px"
                     height="32px"
