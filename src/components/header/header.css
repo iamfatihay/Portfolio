@@ -4,7 +4,43 @@
     top: 0;
     left: 0;
     z-index: var(--z-fixed);
-    background-color: var(--body-color);
+    /*
+     * Transparent at rest so the hero's aurora and dot grid run under the nav.
+     * The glass only appears once content starts passing beneath it.
+     */
+    background: transparent;
+    border-bottom: 1px solid transparent;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease,
+        border-color 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+/*=============== READING PROGRESS ===============*/
+.header__progress {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--accent-gradient);
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+}
+
+@keyframes scrollProgress {
+    from {
+        transform: scaleX(0);
+    }
+    to {
+        transform: scaleX(1);
+    }
+}
+
+/* Scroll-driven, so it costs no scroll listener where supported */
+@supports (animation-timeline: scroll()) {
+    .header__progress {
+        animation: scrollProgress linear both;
+        animation-timeline: scroll(root block);
+    }
 }
 
 .nav {
@@ -21,6 +57,21 @@
     font-weight: var(--font-medium);
 }
 
+.nav__logo {
+    display: inline-flex;
+    align-items: center;
+    transition: color 0.25s ease;
+}
+
+.nav__logo:hover {
+    color: var(--first-color);
+}
+
+.nav__logo-text {
+    font-weight: var(--font-semi-bold);
+    letter-spacing: -0.01em;
+}
+
 .nav__list {
     display: flex;
     column-gap: 2rem;
@@ -33,19 +84,40 @@
     font-size: var(--small-font-size);
     color: var(--title-color);
     font-weight: var(--font-medium);
-    transition: .3s;
+    position: relative;
+    transition: color 0.25s ease;
 }
 
 .nav__icon,
 .nav__close,
-.nav__toogle {
+.nav__toggle {
     display: none;
 }
 
 /* Active link */
 .active-link,
 .nav__link:hover {
-    color: var(--title-color-dark);
+    color: var(--first-color);
+}
+
+@media screen and (min-width: 769px) {
+    .nav__link::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        bottom: -0.45rem;
+        left: 0;
+        height: 2px;
+        border-radius: 999px;
+        background: var(--first-color);
+        transform: scaleX(0);
+        transition: transform 0.25s ease;
+    }
+
+    .nav__link:hover::after,
+    .nav__link.active-link::after {
+        transform: scaleX(1);
+    }
 }
 
 /* .header__logo{
@@ -56,37 +128,77 @@
 
 /*! Change Background Header */
 .scroll-header {
-    box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.25);
+    background: rgba(250, 250, 250, 0.84);
+    border-bottom-color: rgba(15, 23, 42, 0.07);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7),
+        0 10px 34px rgba(15, 23, 42, 0.08);
+    -webkit-backdrop-filter: blur(34px) saturate(210%);
+    backdrop-filter: blur(34px) saturate(210%);
+}
+
+/* The bar tracks scroll position, so it is redundant without motion */
+@media (prefers-reduced-motion: reduce) {
+    .header__progress {
+        display: none;
+    }
 }
 
 /*! ***********  BREAKPOINTS  *************** */
 
 /** For medium devices */
 @media screen and (max-width: 768px) {
+    /* Docked to the bottom over live content, so it always needs its own ground */
     .header {
         top: initial;
         bottom: 0;
+        background: rgba(250, 250, 250, 0.84);
+        -webkit-backdrop-filter: blur(26px) saturate(190%);
+        backdrop-filter: blur(26px) saturate(190%);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    }
+
+    /* Header docks to the bottom, so the bar moves to its top edge */
+    .header__progress {
+        top: 0;
+        bottom: auto;
     }
 
     .nav {
         height: var(--header-height);
     }
 
+    /*
+     * Hidden by its own height rather than `bottom: -100%`: the header carries a
+     * backdrop-filter, which makes it the containing block for fixed children,
+     * so a percentage offset would resolve against the 3rem bar and leave the
+     * menu on screen.
+     */
+    /*
+     * Hidden with visibility as well as transform: sliding it off screen alone
+     * leaves its links in the tab order, so keyboard users land on controls
+     * they cannot see. Visibility is transitioned so it holds through the
+     * closing slide instead of cutting out at the start.
+     */
     .nav__menu {
+        visibility: hidden;
         position: fixed;
-        bottom: -100%;
+        bottom: 0;
         left: 0;
         width: 100%;
-        background-color: var(--body-color);
+        background: rgba(250, 250, 250, 0.95);
+        -webkit-backdrop-filter: blur(30px) saturate(190%);
+        backdrop-filter: blur(30px) saturate(190%);
         padding: 2rem 1.5rem 4rem;
-        box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 -8px 34px rgba(15, 23, 42, 0.12);
         border-radius: 1.5rem 1.5rem 0 0;
-        transition: .3s;
+        transform: translateY(100%);
+        transition: transform 0.35s var(--ease-out-expo), visibility 0.35s;
     }
 
     /*? Show Menu */
     .show-menu {
-        bottom: 0;
+        visibility: visible;
+        transform: translateY(0);
     }
 
     .nav__list {
@@ -106,20 +218,29 @@
         font-size: 1.5rem;
         cursor: pointer;
         color: var(--title-color);
+        background: transparent;
+        line-height: 1;
+        transition: color 0.25s ease;
     }
 
     .nav__close:hover {
-        color: var(--title-color-dark);
+        color: var(--first-color);
     }
 
     .nav__toggle {
         font-size: 1.1rem;
         cursor: pointer;
+        background: transparent;
+        transition: color 0.25s ease;
+    }
+
+    .nav__toggle:hover {
+        color: var(--first-color);
     }
 
     .nav__icon,
     .nav__close,
-    .nav__toogle {
+    .nav__toggle {
         display: block;
     }
 }

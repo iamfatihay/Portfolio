@@ -1,0 +1,351 @@
+/*
+ * Project cards run dark against a light page. Two reasons: the iridescent
+ * sheen is built from screen/colour-dodge blending, which needs a dark ground
+ * to read at all, and the inversion makes this section the visual centre of
+ * the page without needing extra size or noise.
+ */
+.pcard {
+    --mx: 50%;
+    --my: 50%;
+    --rx: 0deg;
+    --ry: 0deg;
+    --accent: var(--third-color);
+
+    position: relative;
+    perspective: 1000px;
+}
+
+.pcard--live { --accent: #4ecdc4; }
+.pcard--building { --accent: #f0b429; }
+.pcard--internal { --accent: #7e8cf0; }
+.pcard--award { --accent: #f5c451; }
+
+.pcard__inner {
+    position: relative;
+    height: 100%;
+    display: flex;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(148, 176, 220, 0.16);
+    background: linear-gradient(158deg, #16233a 0%, #0d1524 55%, #0a0f1a 100%);
+    box-shadow: 0 20px 45px -28px rgba(9, 16, 30, 0.9);
+    transform: rotateX(var(--rx)) rotateY(var(--ry));
+    transition: transform 0.6s var(--ease-out-expo), box-shadow 0.4s ease,
+        border-color 0.4s ease;
+    will-change: transform;
+}
+
+.pcard:hover .pcard__inner {
+    /* Snappier while tracking, slow and eased on the way back out */
+    transition-duration: 0.12s, 0.4s, 0.4s;
+    border-color: rgba(var(--third-color-rgb), 0.4);
+    box-shadow: 0 30px 60px -30px rgba(9, 16, 30, 0.95);
+}
+
+/*
+ * Optional watermark — a product mark or a photo — sunk into the top-right and
+ * faded out before it reaches the text, so cards differ from one another
+ * without any of them growing an image block.
+ */
+.pcard__media {
+    position: absolute;
+    top: -12%;
+    right: -12%;
+    width: 68%;
+    height: 68%;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.1;
+    filter: grayscale(1) contrast(1.1);
+    -webkit-mask-image: radial-gradient(circle at 70% 30%, #000 20%, transparent 72%);
+    mask-image: radial-gradient(circle at 70% 30%, #000 20%, transparent 72%);
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+.pcard:hover .pcard__media {
+    opacity: 0.2;
+}
+
+/*=============== LIGHT LAYERS ===============*/
+.pcard__sheen,
+.pcard__foil {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.45s ease;
+}
+
+/* A soft highlight that sits under the cursor */
+.pcard__sheen {
+    background: radial-gradient(
+        circle at var(--mx) var(--my),
+        rgba(255, 255, 255, 0.5) 0%,
+        rgba(255, 255, 255, 0.12) 28%,
+        transparent 62%
+    );
+    mix-blend-mode: soft-light;
+}
+
+/*
+ * The iridescence is the brand ramp — blue, teal, a violet to close the loop —
+ * rather than a full spectrum: it should read as anodised metal, not foil
+ * trading card, on a page that sells engineering work.
+ */
+.pcard__foil {
+    background: repeating-linear-gradient(
+        108deg,
+        rgba(58, 116, 204, 0.95) 0%,
+        rgba(96, 232, 220, 0.95) 6%,
+        rgba(150, 140, 255, 0.95) 12%,
+        rgba(58, 116, 204, 0.95) 18%
+    );
+    background-size: 240% 240%;
+    background-position: var(--mx) var(--my);
+    mix-blend-mode: color-dodge;
+    -webkit-mask-image: radial-gradient(
+        circle at var(--mx) var(--my),
+        #000 0%,
+        rgba(0, 0, 0, 0.55) 45%,
+        transparent 85%
+    );
+    mask-image: radial-gradient(
+        circle at var(--mx) var(--my),
+        #000 0%,
+        rgba(0, 0, 0, 0.55) 45%,
+        transparent 85%
+    );
+}
+
+.pcard:hover .pcard__sheen { opacity: 1; }
+.pcard:hover .pcard__foil { opacity: 0.62; }
+
+/* Keyboard users get the same reveal, minus the pointer-driven tilt */
+.pcard:focus-within .pcard__sheen { opacity: 0.8; }
+.pcard:focus-within .pcard__foil { opacity: 0.45; }
+
+/*=============== CONTENT ===============*/
+.pcard__body {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 1.6rem 1.5rem 1.4rem;
+}
+
+/*
+ * The foil is bright enough to eat into text contrast where a band crosses the
+ * copy. Rather than dimming the effect, the text carries its own scrim, which
+ * fades in with the sheen — the card stays bold and the words stay legible.
+ */
+.pcard__body::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(
+        180deg,
+        rgba(9, 15, 26, 0.3) 0%,
+        rgba(9, 15, 26, 0.6) 100%
+    );
+    opacity: 0;
+    transition: opacity 0.45s ease;
+}
+
+.pcard:hover .pcard__body::before,
+.pcard:focus-within .pcard__body::before {
+    opacity: 1;
+}
+
+.pcard__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 1.1rem;
+}
+
+.pcard__status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.7rem;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: var(--radius-pill);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--accent);
+    font-size: 0.7rem;
+    font-weight: var(--font-semi-bold);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.pcard__status i { font-size: 0.9rem; }
+
+/*
+ * Icon and label are different fonts at different sizes, so each one's line box
+ * carries a different amount of leading and `align-items: center` ends up
+ * centring two mismatched boxes rather than the glyphs inside them. Collapsing
+ * both to their glyph height makes the centres agree.
+ */
+.pcard__status i,
+.pcard__status span,
+.pcard__action i,
+.pcard__action span {
+    display: block;
+    line-height: 1;
+}
+
+.pcard__period {
+    color: rgba(226, 234, 247, 0.5);
+    font-size: var(--smaller-font-size);
+    text-align: right;
+}
+
+.pcard__title {
+    margin-bottom: 0.3rem;
+    color: #f4f7fc;
+    font-size: 1.2rem;
+    font-weight: var(--font-semi-bold);
+    letter-spacing: -0.01em;
+    overflow-wrap: anywhere;
+}
+
+.pcard__role {
+    margin-bottom: 0.8rem;
+    color: var(--accent);
+    font-size: var(--smaller-font-size);
+    font-weight: var(--font-medium);
+}
+
+.pcard__desc {
+    margin-bottom: 1.1rem;
+    color: rgba(214, 226, 242, 0.78);
+    font-size: var(--small-font-size);
+    line-height: 1.6;
+    text-wrap: pretty;
+}
+
+.pcard__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-bottom: 1.2rem;
+}
+
+.pcard__tags li {
+    padding: 0.24rem 0.55rem;
+    border: 1px solid rgba(148, 176, 220, 0.2);
+    border-radius: var(--radius-pill);
+    background: rgba(148, 176, 220, 0.08);
+    color: rgba(223, 233, 247, 0.85);
+    font-size: 0.68rem;
+    font-weight: var(--font-medium);
+    white-space: nowrap;
+}
+
+/* Pinned to the bottom so cards in a row line their actions up */
+.pcard__foot {
+    margin-top: auto;
+}
+
+/* Stands in for a live URL: says what evidence exists instead of apologising */
+.pcard__proof {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.4rem;
+    margin-bottom: 0.9rem;
+    padding-top: 0.9rem;
+    border-top: 1px solid rgba(148, 176, 220, 0.14);
+    color: rgba(198, 212, 233, 0.62);
+    font-size: var(--smaller-font-size);
+    line-height: 1.5;
+}
+
+.pcard__proof i {
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+    color: var(--accent);
+    font-size: 0.95rem;
+}
+
+.pcard__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.pcard__action {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 0.85rem;
+    border: 1px solid rgba(148, 176, 220, 0.28);
+    border-radius: var(--radius-pill);
+    color: #eef3fa;
+    font-size: var(--smaller-font-size);
+    font-weight: var(--font-medium);
+    white-space: nowrap;
+    transition: background-color 0.25s ease, border-color 0.25s ease,
+        color 0.25s ease, transform 0.18s ease;
+}
+
+.pcard__action i { font-size: 1rem; }
+
+.pcard__action:hover {
+    border-color: var(--accent);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.pcard__action:active { transform: scale(0.98); }
+
+.pcard__action--primary {
+    border-color: transparent;
+    background: var(--accent);
+    color: #0b1220;
+    font-weight: var(--font-semi-bold);
+}
+
+.pcard__action--primary:hover {
+    border-color: transparent;
+    background: var(--accent);
+    filter: brightness(1.08);
+}
+
+.pcard__action:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+
+/*=============== BREAKPOINTS & PREFERENCES ===============*/
+/* Tilting a card you are touching just fights the scroll */
+@media (hover: none) {
+    .pcard__inner {
+        transform: none;
+    }
+
+    .pcard__sheen,
+    .pcard__foil {
+        display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .pcard__inner {
+        transform: none;
+        transition: border-color 0.4s ease;
+    }
+
+    .pcard__foil {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .pcard__body {
+        padding: 1.35rem 1.2rem 1.2rem;
+    }
+}

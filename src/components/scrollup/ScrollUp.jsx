@@ -1,21 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
 import "./scrollup.css";
 
 const ScrollUp = () => {
-    window.addEventListener("scroll",function(){
-        const scrollup = document.querySelector(".scrollup");
-        if (this.scrollY >= 560) {
-            scrollup.classList.add("show-scroll")
-        }else{
-            scrollup.classList.remove("show-scroll");
-        }
-    });
+    const [isVisible, setIsVisible] = useState(false);
 
-  return (
-    <a href="#home" className="scrollup">
-        <i className="uil uil-arrow-up scrollup__icon"></i>
-    </a>
-  )
-}
+    useEffect(() => {
+        const handleScroll = () => setIsVisible(window.scrollY >= 560);
+        handleScroll();
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
 
-export default ScrollUp
+    return (
+        <a
+            href="#home"
+            className={isVisible ? "scrollup show-scroll" : "scrollup"}
+            aria-label="Back to top"
+        >
+            <i className="uil uil-arrow-up scrollup__icon" aria-hidden="true"></i>
+        </a>
+    );
+};
+
+export default ScrollUp;

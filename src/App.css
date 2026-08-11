@@ -1,6 +1,3 @@
-/*=============== GOOGLE FONTS ===============*/
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
-
 /*=============== VARIABLES CSS ===============*/
 :root {
     --header-height: 3rem;
@@ -14,12 +11,46 @@
     --text-color: hsl(var(--hue), var(--sat), 46%);
     --body-color: hsl(var(--hue), var(--sat), 98%);
     --container-color: #fff;
+    --border-color: rgba(15, 23, 42, 0.1);
+    --focus-color: #2563eb;
+    --shadow-sm: 0 8px 24px rgba(15, 23, 42, 0.08);
+    --shadow-md: 0 14px 34px rgba(15, 23, 42, 0.14);
+    --shadow-lg: 0 30px 60px -24px rgba(15, 23, 42, 0.3);
 
     /*========== Accent Colors ==========*/
     --first-color: #2c5aa0;
     --first-color-alt: #1e3a66;
+    --first-color-rgb: 44, 90, 160;
     --second-color: #ff6b6b;
+    --second-color-rgb: 255, 107, 107;
     --third-color: #4ecdc4;
+    --third-color-rgb: 78, 205, 196;
+    --accent-gradient: linear-gradient(
+        120deg,
+        var(--first-color) 0%,
+        #5c7fd0 45%,
+        var(--third-color) 100%
+    );
+
+    /*========== Radii & motion ==========*/
+    --radius-sm: 0.5rem;
+    --radius-md: 0.9rem;
+    --radius-lg: 1.25rem;
+    --radius-pill: 999px;
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
+
+    /*
+     * Shared hover language. Surfaces respond with light and colour rather than
+     * by moving — a page where every card jumps on hover is tiring to scan.
+     * Only pressed states move, and only inward.
+     */
+    --hover-border: rgba(44, 90, 160, 0.45);
+    --hover-glow: 0 0 0 1px rgba(44, 90, 160, 0.22),
+        0 14px 32px -12px rgba(44, 90, 160, 0.4);
+    --hover-tint: rgba(44, 90, 160, 0.08);
+    --hover-transition: border-color 0.3s ease, box-shadow 0.4s ease,
+        background-color 0.3s ease, color 0.3s ease;
 
     /*========== Font and typography ==========*/
     --body-font: "Poppins", sans-serif;
@@ -38,6 +69,18 @@
     --font-normal: 400;
     --font-medium: 500;
     --font-semi-bold: 600;
+    --font-bold: 700;
+
+    /*========== Section rhythm ==========*/
+    /*
+     * The gap between two sections is bottom + top, so these two values are
+     * what actually sets the page's breathing room. The hero is kept separate:
+     * it opens the page rather than following another section, so it should
+     * not inherit the between-sections gap and start further down the fold.
+     */
+    --section-space-top: 7.5rem;
+    --section-space-bottom: 3.5rem;
+    --hero-space-top: 6rem;
 
     /*========== Margenes Bottom ==========*/
     /*.5rem = 8px | 1rem = 16px ...*/
@@ -69,6 +112,15 @@
     }
 }
 
+/* Tighter rhythm on phones, where generous gaps only add scrolling */
+@media screen and (max-width: 768px) {
+    :root {
+        --section-space-top: 4rem;
+        --section-space-bottom: 3.5rem;
+        --hero-space-top: 2rem;
+    }
+}
+
 /*=============== BASE ===============*/
 * {
     margin: 0;
@@ -79,6 +131,7 @@
 html {
     scroll-behavior: smooth;
     overflow-x: hidden;
+    scroll-padding-top: calc(var(--header-height) + 2rem);
 }
 
 body,
@@ -93,6 +146,7 @@ body {
     background-color: var(--body-color);
     color: var(--text-color);
     overflow-x: hidden;
+    line-height: 1.6;
 }
 
 h1,
@@ -116,19 +170,68 @@ button {
     outline: none;
 }
 
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+:focus-visible {
+    outline: 3px solid rgba(37, 99, 235, 0.55);
+    outline-offset: 3px;
+}
+
 img {
     max-width: 100%;
     height: auto;
 }
 
+.skip-link {
+    position: fixed;
+    top: 0.75rem;
+    left: 0.75rem;
+    z-index: calc(var(--z-modal) + 1);
+    padding: 0.7rem 1rem;
+    border-radius: 0.65rem;
+    background: var(--title-color-dark);
+    color: var(--container-color);
+    transform: translateY(-160%);
+    transition: transform 0.2s ease;
+}
+
+.skip-link:focus {
+    transform: translateY(0);
+}
+
 /*=============== REUSABLE CSS CLASSES ===============*/
 .section {
-    padding: 6rem 0 2rem;
+    padding-block: var(--section-space-top) var(--section-space-bottom);
+    scroll-margin-top: calc(var(--header-height) + 1rem);
+}
+
+.home.section {
+    padding-top: var(--hero-space-top);
 }
 
 .section__title {
     font-size: var(--h1-font-size);
     color: var(--title-color);
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+}
+
+.section__title::after {
+    content: "";
+    display: block;
+    width: 44px;
+    height: 3px;
+    /*
+     * The rule separates title from subtitle, so it needs air on both sides —
+     * with no bottom margin it sat flush against the subtitle and read as that
+     * line's underline rather than the title's flourish.
+     */
+    margin: 0.9rem auto 1rem;
+    border-radius: var(--radius-pill);
+    background: var(--accent-gradient);
 }
 
 .section__subtitle {
@@ -156,16 +259,68 @@ img {
 
 /*=============== BUTTONS ===============*/
 .button {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
     display: inline-block;
     background-color: var(--title-color);
     color: var(--container-color);
     padding: 1.25rem 2rem;
     border-radius: 1rem;
     font-weight: var(--font-medium);
+    border: 1px solid var(--title-color);
+    transition: var(--hover-transition), transform 0.18s ease;
+}
+
+/* Light sweeps across the button on hover */
+.button::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(
+        115deg,
+        transparent 25%,
+        rgba(255, 255, 255, 0.22) 50%,
+        transparent 75%
+    );
+    transform: translateX(-130%);
+    transition: transform 0.75s var(--ease-out-expo);
+}
+
+.button:hover::after {
+    transform: translateX(130%);
 }
 
 .button:hover {
     background-color: var(--title-color-dark);
+    border-color: var(--title-color-dark);
+    box-shadow: var(--hover-glow);
+}
+
+/* The one place movement earns its keep: a press reads as inward, not upward */
+.button:active {
+    transform: scale(0.985);
+}
+
+.button--ghost {
+    background: transparent;
+    color: var(--title-color);
+    border-color: rgba(15, 23, 42, 0.18);
+}
+
+.button--ghost:hover {
+    background: var(--hover-tint);
+    color: var(--first-color);
+    border-color: var(--hover-border);
+}
+
+.button__icon {
+    transition: transform 0.3s var(--ease-out-expo);
+}
+
+.button:hover .button__icon {
+    transform: translateX(0.3rem);
 }
 
 .button__icon {
@@ -243,11 +398,38 @@ img {
     border-radius: 0.5rem;
     cursor: pointer;
     font-size: var(--normal-font-size);
-    transition: background-color 0.3s ease;
+    transition: var(--hover-transition);
 }
 
 .error-boundary button:hover {
     background-color: var(--title-color-dark);
+    box-shadow: var(--hover-glow);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    /*
+     * AOS.init({ disable: true }) bails out before attaching its mutation
+     * observer, and every section here mounts later via React.lazy — so nothing
+     * ever strips their data-aos attributes or adds .aos-animate, and aos.css
+     * leaves the whole page stuck at opacity: 0. Reveal them unconditionally.
+     */
+    [data-aos] {
+        opacity: 1 !important;
+        transform: none !important;
+    }
 }
 
 /*=============== BREAKPOINTS ===============*/
@@ -272,10 +454,6 @@ img {
 @media screen and (max-width: 768px) {
     body {
         margin: 0 0 var(--header-height) 0;
-    }
-
-    .section {
-        padding: 2rem 0 4rem;
     }
 
     .section__subtitle {

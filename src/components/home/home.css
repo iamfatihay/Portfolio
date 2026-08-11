@@ -1,57 +1,248 @@
-.home__container {
-    row-gap: 7rem;
+/*=============== HOME ===============*/
+.home {
     position: relative;
+    isolation: isolate;
+    overflow: hidden;
+}
+
+/* Aurora backdrop — two slow-drifting colour fields behind the hero */
+.home::before,
+.home::after {
+    content: "";
+    position: absolute;
+    z-index: -2;
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+/*
+ * The section clips these, so each blob's centre sits far enough inside that
+ * the gradient has already reached zero at the clip edge — otherwise the cut
+ * shows up as a hard horizontal seam against the next section.
+ */
+.home::before {
+    width: 48rem;
+    height: 48rem;
+    top: -20rem;
+    right: -14rem;
+    background: radial-gradient(
+        circle,
+        rgba(var(--first-color-rgb), 0.24) 0%,
+        rgba(var(--first-color-rgb), 0.09) 40%,
+        transparent 64%
+    );
+    animation: auroraDriftA 24s ease-in-out infinite alternate;
+}
+
+.home::after {
+    width: 42rem;
+    height: 42rem;
+    bottom: -4rem;
+    left: -15rem;
+    background: radial-gradient(
+        circle,
+        rgba(var(--third-color-rgb), 0.22) 0%,
+        rgba(var(--second-color-rgb), 0.08) 40%,
+        transparent 62%
+    );
+    animation: auroraDriftB 30s ease-in-out infinite alternate;
+}
+
+@keyframes auroraDriftA {
+    from {
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+    to {
+        transform: translate3d(-4rem, 3rem, 0) scale(1.12);
+    }
+}
+
+@keyframes auroraDriftB {
+    from {
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+    to {
+        transform: translate3d(5rem, -2.5rem, 0) scale(1.1);
+    }
+}
+
+.home__container {
+    row-gap: 5rem;
+    position: relative;
+}
+
+/*
+ * Two dot layers share one geometry so their patterns stay in register: a faint
+ * resting texture, and a brighter copy revealed only around the cursor.
+ */
+.home__container::before,
+.home__dots {
+    position: absolute;
+    /* Reaches past the section padding so the grid also runs under the header */
+    top: -6rem;
+    left: calc(-50vw + 50%);
+    right: calc(-50vw + 50%);
+    bottom: -3rem;
+    background-size: 26px 26px;
+    pointer-events: none;
+    z-index: -1;
 }
 
 .home__container::before {
     content: "";
-    position: absolute;
-    top: -2rem;
-    left: calc(-50vw + 50%);
-    right: calc(-50vw + 50%);
-    bottom: -2rem;
-    background: linear-gradient(
-        135deg,
-        rgba(79, 172, 254, 0.06) 0%,
-        rgba(255, 107, 107, 0.04) 50%,
-        rgba(78, 205, 196, 0.06) 100%
+    background-image: radial-gradient(
+        circle,
+        rgba(15, 23, 42, 0.08) 1px,
+        transparent 1px
     );
-    pointer-events: none;
-    z-index: -1;
+    -webkit-mask-image: radial-gradient(
+        ellipse 68% 64% at 50% 32%,
+        #000 15%,
+        transparent 72%
+    );
+    mask-image: radial-gradient(
+        ellipse 68% 64% at 50% 32%,
+        #000 15%,
+        transparent 72%
+    );
 }
+
+.home__dots {
+    background-image: radial-gradient(
+        circle,
+        rgba(var(--first-color-rgb), 0.42) 1.15px,
+        transparent 1.15px
+    );
+    -webkit-mask-image: radial-gradient(
+        circle 175px at var(--spot-x, -999px) var(--spot-y, -999px),
+        #000 0%,
+        rgba(0, 0, 0, 0.42) 48%,
+        transparent 75%
+    );
+    mask-image: radial-gradient(
+        circle 175px at var(--spot-x, -999px) var(--spot-y, -999px),
+        #000 0%,
+        rgba(0, 0, 0, 0.42) 48%,
+        transparent 75%
+    );
+    opacity: var(--spot-opacity, 0);
+    transition: opacity 0.45s ease;
+}
+
 .home__content {
-    grid-template-columns: 116px repeat(2, 1fr);
+    grid-template-columns: 116px minmax(0, 1fr) 320px;
     padding-top: 5.5rem;
     column-gap: 2rem;
     justify-content: center;
     align-items: center;
 }
+
+/*=============== SOCIAL RAIL ===============*/
 .home__social {
     display: grid;
     grid-template-columns: max-content;
     row-gap: 1rem;
-}
-.home__social-icon {
-    font-size: 1.75rem;
-    color: var(--title-color);
-}
-.home__social-icon:hover {
-    color: var(--title-color-dark);
-    transform: scale(1.015);
-}
-.home__title {
-    font-size: calc(var(--big-font-size) * 1.2);
-    margin-bottom: var(--mb-0-25);
-    font-weight: var(--font-bold);
+    align-content: center;
 }
 
+.home__social-icon {
+    position: relative;
+    font-size: 1.6rem;
+    color: var(--title-color);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 50%;
+    transition: var(--hover-transition);
+}
+
+.home__social-icon:hover {
+    color: var(--first-color);
+    background: var(--hover-tint);
+    box-shadow: 0 0 0 1px var(--hover-border);
+}
+
+/*=============== COPY ===============*/
+.home__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 1.15rem;
+    padding: 0.4rem 0.9rem 0.4rem 0.75rem;
+    border: 1px solid rgba(var(--first-color-rgb), 0.2);
+    border-radius: var(--radius-pill);
+    background: rgba(255, 255, 255, 0.65);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    color: var(--first-color-alt);
+    font-size: var(--smaller-font-size);
+    font-weight: var(--font-medium);
+}
+
+.home__eyebrow span {
+    position: relative;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: #2ea66f;
+    flex-shrink: 0;
+}
+
+/* Radar ping on the availability dot */
+.home__eyebrow span::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: #2ea66f;
+    animation: statusPing 2.4s ease-out infinite;
+}
+
+@keyframes statusPing {
+    0% {
+        transform: scale(1);
+        opacity: 0.55;
+    }
+    70%,
+    100% {
+        transform: scale(3);
+        opacity: 0;
+    }
+}
+
+.home__title {
+    font-size: var(--big-font-size);
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    margin-bottom: var(--mb-0-75);
+    font-weight: var(--font-bold);
+    text-wrap: balance;
+}
+
+/* Keeps the name and the waving hand on one line */
+.home__title-wrap {
+    display: inline-block;
+    white-space: nowrap;
+}
+
+/*
+ * Stop order matters: salmon and teal are near-complements and blend through
+ * a dead grey, so blue sits between them to keep every point of the sweep vivid.
+ */
 .home__title-name {
-    background: linear-gradient(135deg, var(--first-color), #ff6b6b, #4ecdc4);
+    background: linear-gradient(
+        120deg,
+        var(--third-color) 0%,
+        var(--first-color) 45%,
+        var(--second-color) 100%
+    );
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    background-size: 200% 200%;
-    animation: gradientShift 3s ease-in-out infinite;
+    background-size: 200% 100%;
+    animation: gradientShift 9s ease-in-out infinite;
 }
 
 @keyframes gradientShift {
@@ -63,69 +254,195 @@
         background-position: 100% 50%;
     }
 }
+
 .home__hand {
     width: 38px;
     height: 38px;
     margin-left: 0.5rem;
+    vertical-align: -0.2rem;
+    transform-origin: 70% 75%;
+    animation: wave 3.4s ease-in-out infinite;
 }
+
+@keyframes wave {
+    0%,
+    55%,
+    100% {
+        transform: rotate(0deg);
+    }
+    10%,
+    30% {
+        transform: rotate(15deg);
+    }
+    20%,
+    40% {
+        transform: rotate(-9deg);
+    }
+}
+
 .home__subtitle {
     position: relative;
     font-size: var(--h3-font-size);
     padding-left: 4.4rem;
     font-weight: var(--font-normal);
     margin-bottom: var(--mb-1);
+    color: var(--text-color);
 }
+
 .home__subtitle::before {
     content: "";
     position: absolute;
     width: 50px;
-    height: 1px;
-    background-color: var(--text-color);
+    height: 2px;
+    border-radius: var(--radius-pill);
+    background: var(--accent-gradient);
     left: 0;
-    top: 1rem;
+    top: 0.95rem;
 }
+
 .home__description {
-    max-width: 400px;
-    margin-bottom: var(--mb-3);
+    max-width: 460px;
+    margin-bottom: var(--mb-2);
+    font-size: 1.05rem;
+    line-height: 1.75;
+    text-wrap: pretty;
 }
+
+.home__actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+/*=============== PORTRAIT ===============*/
 .home__img {
     order: 1;
     justify-self: center;
-    width: 300px;
-    height: 500px;
-    animation: profile__animate 6s ease-in-out infinite 1s;
     position: relative;
-    overflow: hidden;
-    border-radius: 1rem;
+    width: 320px;
+    aspect-ratio: 16 / 25;
 }
 
-.lazy-image {
+/*
+ * The signature shape: sharp on the top-left/bottom-right diagonal, deeply
+ * cut on the other two corners, breathing between a tight and a wide cut.
+ */
+@keyframes blobMorph {
+    0%,
+    100% {
+        border-radius: 1% 12% 1% 12% / 1% 12% 1% 12%;
+    }
+    50% {
+        border-radius: 1% 42% 1% 42% / 1% 42% 1% 42%;
+    }
+}
+
+/* Gradient echo of the portrait, offset along the cut diagonal */
+.home__img-echo {
+    position: absolute;
+    inset: -1rem -1rem 1rem 1rem;
+    background: linear-gradient(
+        140deg,
+        rgba(var(--first-color-rgb), 0.75),
+        rgba(var(--third-color-rgb), 0.6) 55%,
+        rgba(var(--second-color-rgb), 0.5)
+    );
+    opacity: 0.28;
+    border-radius: 1% 12% 1% 12% / 1% 12% 1% 12%;
+    animation: blobMorph 9s ease-in-out infinite -1.8s;
+    pointer-events: none;
+}
+
+.home__img-frame {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+    background: #151515;
+    border-radius: 1% 12% 1% 12% / 1% 12% 1% 12%;
+    box-shadow: 0 30px 60px -26px rgba(15, 23, 42, 0.55);
+    animation: blobMorph 9s ease-in-out infinite;
+    transition: box-shadow 0.5s ease;
+}
+
+.home__img:hover .home__img-frame {
+    box-shadow: 0 34px 70px -26px rgba(var(--first-color-rgb), 0.55);
+}
+
+.home__img:hover .home__img-echo {
+    opacity: 0.42;
+}
+
+.home__img-echo {
+    transition: opacity 0.5s ease;
+}
+
+.home__img-frame::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.22);
+    pointer-events: none;
+}
+
+/* Light passes over the portrait every few seconds */
+.home__img-sheen {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        115deg,
+        transparent 38%,
+        rgba(255, 255, 255, 0.28) 50%,
+        transparent 62%
+    );
+    transform: translateX(-135%);
+    animation: sheenSweep 8s ease-in-out infinite 2.5s;
+    pointer-events: none;
+}
+
+@keyframes sheenSweep {
+    0%,
+    70%,
+    100% {
+        transform: translateX(-135%);
+    }
+    88% {
+        transform: translateX(135%);
+    }
+}
+
+.home__portrait {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center top;
-    border-radius: 1rem;
-    box-shadow: inset 1px 5px 0 5px rgb(255 255 255 / 30%);
+    object-position: 50% 18%;
+    display: block;
+    filter: contrast(1.025) saturate(1.025);
 }
 
-@keyframes profile__animate {
-    0% {
-        border-radius: 1% 10% 1% 10%/1% 10% 1% 10%;
-    }
-    50% {
-        border-radius: 1% 40% 1% 40%/1% 40% 1% 40%;
-    }
-    100% {
-        border-radius: 1% 10% 1% 10%/1% 10% 1% 10%;
-    }
-}
-
+/*=============== SCROLL CUE ===============*/
 .home__scroll {
     margin-left: 9.25rem;
 }
+
+.home__scroll-button {
+    transition: transform 0.25s ease;
+}
+
+.home__scroll-button:hover {
+    transform: translateY(3px);
+}
+
+.home__scroll-button:hover .home__scroll-name,
+.home__scroll-button:hover .home__scroll-arrow {
+    color: var(--first-color);
+}
+
 .wheel {
     animation: scroll 2s ease infinite;
 }
+
 @keyframes scroll {
     0% {
         transform: translateY(0);
@@ -134,23 +451,41 @@
         transform: translateY(3.75rem);
     }
 }
+
 .home__scroll-name {
     color: var(--title-color);
     font-weight: var(--font-medium);
     margin-right: var(--mb-0-25);
     margin-left: 2px;
+    transition: color 0.25s ease;
 }
 
 .home__scroll-arrow {
     font-size: 1.25rem;
     color: var(--title-color);
+    transition: color 0.25s ease;
 }
+
+/* Hold the signature cut when motion is switched off */
+@media (prefers-reduced-motion: reduce) {
+    .home__img-frame,
+    .home__img-echo {
+        border-radius: 1% 40% 1% 40% / 1% 40% 1% 40%;
+    }
+
+    .home__img-sheen {
+        display: none;
+    }
+}
+
 /*=============== BREAKPOINTS ===============*/
 /* For large devices */
 @media screen and (max-width: 992px) {
     .home__content {
-        grid-template-columns: 100px repeat(2, 1fr);
-        column-gap: 1.25rem;
+        /* The container loses its max-width here, so the portrait column has to
+           shrink or its offset echo runs into the viewport edge */
+        grid-template-columns: 88px minmax(0, 1fr) 235px;
+        column-gap: 1.5rem;
     }
     .home__hand {
         width: 26px;
@@ -169,33 +504,40 @@
         margin-bottom: var(--mb-2-5);
     }
     .home__img {
-        width: 270px;
-        height: 450px;
-        box-shadow: inset 1px 5px 0 3px rgb(255 255 255 / 30%);
+        width: 235px;
     }
-    .hpme__scroll {
-        margin-left: 7.5rem;
+    .home__img-echo {
+        inset: -0.7rem -0.7rem 0.7rem 0.7rem;
+    }
+    .home__scroll {
+        margin-left: 7rem;
     }
 }
 
-/* For medium devices */
+/* For medium devices — a single centred column reads better than a squeezed
+   two-column grid, so the rail becomes a horizontal row under the copy */
 @media screen and (max-width: 768px) {
+    .home__container {
+        row-gap: 2.5rem;
+    }
     .home__content {
-        grid-template-columns: 1.4fr 3fr;
-        padding-top: 3.5rem;
+        grid-template-columns: minmax(0, 1fr);
+        justify-items: center;
+        padding-top: 3rem;
+        row-gap: 1.75rem;
     }
     .home__img {
-        order: initial;
-        justify-self: initial;
+        order: 1;
+        width: 230px;
     }
     .home__data {
-        grid-column: 1/3;
+        order: 2;
         text-align: center;
     }
-    .home__img {
-        box-shadow: inset 1px 5px 0 3px rgb(255 255 255 / 30%);
-        width: 240px;
-        height: 400px;
+    .home__social {
+        order: 3;
+        grid-template-columns: repeat(4, max-content);
+        column-gap: 1.5rem;
     }
     .home__scroll {
         display: none;
@@ -203,16 +545,47 @@
     .home__subtitle {
         display: none;
     }
+    .home__actions {
+        justify-content: center;
+    }
+    .home__description {
+        /* Centred copy needs a measure cap or the line length runs long */
+        max-width: 46ch;
+        margin: 0 auto var(--mb-1-5);
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .home__img {
+        width: 210px;
+    }
+    .home__title {
+        font-size: 2.45rem;
+    }
+    .home__description {
+        font-size: var(--normal-font-size);
+    }
+    .home__actions {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .home__actions .button {
+        text-align: center;
+        justify-content: center;
+    }
 }
 
 /* For small devices */
 @media screen and (max-width: 350px) {
     .home__img {
-        width: 220px;
-        height: 370px;
+        width: 200px;
     }
     .home__hand {
         width: 22px;
         height: 22px;
+    }
+    .home__eyebrow {
+        font-size: 0.72rem;
     }
 }

@@ -1,180 +1,150 @@
-.footer{
+.footer {
     background-color: var(--container-color);
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    display: flex;
-    
+    border-top: 1px solid var(--border-color);
 }
-.footer__container{
-    padding: 2rem ;
+
+.footer__container {
+    display: grid;
+    justify-items: center;
+    row-gap: 1.75rem;
+    padding-block: 3rem 2.5rem;
+}
+
+/*=============== SIGNATURE LINE ===============*/
+/*
+ * A rule broken by the seal: the page is signed rather than indexed, which is
+ * why nothing here repeats the header's navigation.
+ */
+/*
+ * The logo's arcs break at due east and west, so a rule at mid-height reads as
+ * threading straight through the openings — the rules sit tight to the mark's
+ * box to keep that reading, and the mark's own padding supplies the gap.
+ */
+.footer__sign {
     display: flex;
-    justify-content: center;
     align-items: center;
-    column-gap: 7rem;
+    gap: 2rem;
+    width: 100%;
+    max-width: 34rem;
 }
-.footer__title, .footer__link{
-    color: var(--title-color);
+
+.footer__rule {
+    flex: 1;
+    height: 1px;
+    /* Reaches past the mark's own transparent padding into the arc opening */
+    margin-inline: 0 -0.85rem;
+    background: linear-gradient(90deg, transparent, rgba(var(--first-color-rgb), 0.45));
 }
-.footer__title{
-    text-align: center;
-    margin-bottom: var(--mb-2);
+
+.footer__sign .footer__rule:last-child {
+    margin-inline: -0.85rem 0;
 }
-.footer__link:hover{
-    color: var(--title-color-dark);
+
+.footer__sign .footer__rule:last-child {
+    background: linear-gradient(90deg, rgba(var(--third-color-rgb), 0.6), transparent);
 }
-.footer__list{
-    display: flex;
-    justify-content: center;
-    column-gap: 1.5rem;
-    margin-bottom: var(--mb-2);
-}
-.footer__social{
-    display: flex;
-    justify-content: center;
-    column-gap: 0.8rem;
-}
-.footer__social-link{
-    background-color: var(--title-color);
-    color: var(--container-color);
-    font-size: 1.125rem;
-    padding: 0.4rem;
-    border-radius: 0.5rem;
+
+.footer__seal {
     display: inline-flex;
+    flex-shrink: 0;
 }
-.footer__social-link:hover{
-    background-color: var(--title-color-dark);
-}
-.footer__copy{
+
+/* Reserves the seal's box before it loads, so the rule never jumps */
+.footer__seal-slot {
     display: block;
-    margin-top: 2.5rem;
-    color: var(--title-color);
-    text-align: center;
-    font-size: var(--smaller-font-size);
-}
-.logo{
-    width: 280px;
+    width: clamp(112px, 20vw, 150px);
+    aspect-ratio: 1;
 }
 
-/*=============== SPONSOR SECTION ===============*/
-.footer__sponsor {
-    text-align: center;
+.footer__seal-img {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.7s var(--ease-out-expo);
 }
 
-.footer__sponsor-text {
-    color: var(--title-color);
-    font-weight: var(--font-medium);
-    margin-bottom: 1rem;
-    font-size: var(--small-font-size);
-    font-family: var(--body-font);
+.footer__seal:hover .footer__seal-img {
+    transform: rotate(-4deg) scale(1.05);
 }
 
-.footer__sponsor-buttons {
+/*=============== META ROW ===============*/
+.footer__meta {
     display: flex;
+    align-items: center;
     justify-content: center;
-    gap: 1rem;
     flex-wrap: wrap;
+    gap: 0.75rem 1.5rem;
 }
 
-.footer__sponsor-button {
+.footer__social {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.footer__social-link {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1.5rem;
-    background-color: var(--title-color);
-    color: var(--container-color);
-    border-radius: 0.5rem;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 50%;
+    color: var(--title-color);
+    font-size: 1.35rem;
+    transition: var(--hover-transition);
+}
+
+.footer__social-link:hover {
+    color: var(--first-color);
+    background: var(--hover-tint);
+    box-shadow: 0 0 0 1px var(--hover-border);
+}
+
+.footer__divider {
+    width: 1px;
+    height: 1.25rem;
+    background: var(--border-color);
+}
+
+.footer__support {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+.footer__support-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    white-space: nowrap;
+    color: var(--text-color);
     font-size: var(--small-font-size);
-    font-weight: var(--font-medium);
-    font-family: var(--body-font);
-    transition: background-color 0.3s ease;
-    text-decoration: none;
+    transition: color 0.25s ease;
 }
 
-.footer__sponsor-button:hover {
-    background-color: var(--title-color-dark);
+.footer__support-link i {
+    font-size: 1.1rem;
 }
 
-.footer__sponsor-button--coffee {
-    background-color: #FFDD00;
-    color: #000;
+.footer__support-link:hover {
+    color: var(--first-color);
 }
 
-.footer__sponsor-button--coffee:hover {
-    background-color: #FFCC00;
-}
-
-.footer__sponsor-button i {
-    font-size: 1.25rem;
+/*=============== COPY ===============*/
+.footer__copy {
+    color: var(--text-color);
+    font-size: var(--smaller-font-size);
+    text-align: center;
 }
 
 /*=============== BREAKPOINTS ===============*/
-/* For large devices */
-@media screen and (max-width: 992px) {
-    .footer__social-link{
-        padding: 0.25rem;
-        border-radius: 0.25rem;
-        font-size: 1rem;
-    }
-    .footer__container{
-        width: 100%;
-        column-gap: 2rem;
-        row-gap: 2rem;
-    }
-    .footer__sponsor-button {
-        padding: 0.6rem 1.2rem;
-        font-size: var(--smaller-font-size);
-    }
-    .logo{
-        width: 200px;
-    }
-}
-
-/* For medium devices */
-@media screen and (max-width: 768px) {
-    .footer__container{
-        flex-direction: column;
-        column-gap: 0;
-        row-gap: 2rem;
-    }
-    .logo{
-        width: 180px;
-    }
-    .footer__sponsor {
-        margin-top: 0;
-    }
-    .footer__list{
-        column-gap: 1rem;
-    }
-}
-
-/* For tablets and small screens */
 @media screen and (max-width: 576px) {
-    .footer__sponsor-buttons {
-        gap: 0.75rem;
-    }
-    .footer__sponsor-button {
-        padding: 0.5rem 1rem;
-        font-size: var(--smaller-font-size);
-    }
-    .footer__sponsor-button i {
-        font-size: 1rem;
-    }
-}
- 
-/* For small devices */
-@media screen and (max-width: 350px) {
-    .footer__container{
-        flex-direction: column;
+    .footer__container {
         row-gap: 1.5rem;
+        padding-block: 2.5rem 2rem;
     }
-    .logo{
-        width: 150px;
-    }
-    .footer__sponsor-buttons {
-        flex-direction: column;
-        gap: 0.75rem;
-    }
-    .footer__sponsor-button {
-        width: 100%;
-        justify-content: center;
+
+    /* The row wraps here, so the upright divider would sit on its own line */
+    .footer__divider {
+        display: none;
     }
 }

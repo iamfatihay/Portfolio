@@ -21,7 +21,7 @@ class ErrorBoundary extends React.Component {
                 <div className="error-boundary">
                     <h2>Something went wrong.</h2>
                     <p>Please refresh the page or try again later.</p>
-                    <button onClick={() => window.location.reload()}>
+                    <button type="button" onClick={() => window.location.reload()}>
                         Refresh Page
                     </button>
                 </div>

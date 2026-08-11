@@ -1,0 +1,249 @@
+/*=============== BEAMS WITH COLLISION ===============*/
+/*
+ * Backs the section it is placed in, edge to edge. That section's bottom edge
+ * is the footer's top border, so drops break on the border itself.
+ *
+ * z-index: -1 puts the layer behind the section's content without needing a
+ * z-index on every element in it; the parent carries `isolation: isolate` so
+ * the negative index cannot escape the section.
+ */
+.beams {
+    --beam-rgb: var(--first-color-rgb);
+
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+
+    /*
+     * Rain fades out toward the top of the section: the heading sits on clean
+     * ground, and the drops gather weight as they approach the border they
+     * land on — which is where the effect is actually about something.
+     */
+    -webkit-mask-image: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(0, 0, 0, 0.25) 45%,
+        #000 100%
+    );
+    mask-image: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(0, 0, 0, 0.25) 45%,
+        #000 100%
+    );
+}
+
+/*
+ * Per-lane opacity lives here rather than in the keyframes, so the fall and
+ * the burst can animate 0 -> 1 freely and still land at the lane's own weight.
+ * The spread of weights is what makes the band read as depth — as rain at
+ * different distances — instead of one flat row of lines.
+ */
+.beams__lane {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: var(--lane-x);
+    width: 0;
+    opacity: var(--beam-opacity);
+}
+
+/*
+ * The carrier is as tall as the section, with the drop stuck to its bottom
+ * edge. That makes a percentage translate resolve against the section's own
+ * height, so the fall ends exactly on the bottom border at translateY(0) no
+ * matter how tall the section grows — no measuring, no ResizeObserver.
+ *
+ * Fall and impact share --lane-duration and --lane-delay, so the burst below
+ * always fires on the frame the drop reaches the border. The 0-90% / 90-100%
+ * split leaves the drop gone while its splash plays out.
+ */
+.beams__beam {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 1px;
+    animation: beam-fall var(--lane-duration) linear var(--lane-delay) infinite;
+    animation-play-state: paused;
+}
+
+/*
+ * One pixel wide with no shadow: a drop is a hairline, and any glow on the
+ * trail itself immediately reads as a laser instead.
+ */
+.beams__beam::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 1px;
+    height: var(--beam-length);
+    border-radius: var(--radius-pill);
+    background: linear-gradient(
+        to bottom,
+        rgba(var(--beam-rgb), 0) 0%,
+        rgba(var(--beam-rgb), 0.5) 65%,
+        rgba(var(--beam-rgb), 0.9) 100%
+    );
+}
+
+/* The extra 3rem keeps the drop off screen at rest rather than parked on the top edge */
+@keyframes beam-fall {
+    0% {
+        transform: translate(-50%, calc(-100% - 3rem));
+        opacity: 0;
+    }
+
+    8% {
+        opacity: 1;
+    }
+
+    87% {
+        opacity: 1;
+    }
+
+    90% {
+        transform: translate(-50%, 0);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translate(-50%, 0);
+        opacity: 0;
+    }
+}
+
+/*=============== IMPACT ===============*/
+.beams__impact {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+}
+
+/*
+ * A short blurred bar lying along the border line, not a bloom around the
+ * point — the light should look like it is spreading through the surface it
+ * hit, and a radial glow this close to the footer just looks like a smudge.
+ */
+.beams__flash {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 2.5rem;
+    height: 2px;
+    transform: translateX(-50%);
+    border-radius: var(--radius-pill);
+    background: linear-gradient(
+        to right,
+        rgba(var(--beam-rgb), 0) 0%,
+        rgba(var(--beam-rgb), 0.85) 50%,
+        rgba(var(--beam-rgb), 0) 100%
+    );
+    filter: blur(2px);
+    animation: beam-flash var(--lane-duration) ease-out var(--lane-delay)
+        infinite;
+    animation-play-state: paused;
+}
+
+@keyframes beam-flash {
+    0%,
+    88% {
+        opacity: 0;
+        transform: translateX(-50%) scaleX(0.3);
+    }
+
+    91% {
+        opacity: 1;
+        transform: translateX(-50%) scaleX(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateX(-50%) scaleX(1.4);
+    }
+}
+
+/* Droplets thrown off the point of impact */
+.beams__spark {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    background-color: rgba(var(--beam-rgb), 0.75);
+    animation: beam-spark var(--lane-duration) cubic-bezier(0.15, 0.75, 0.35, 1)
+        var(--lane-delay) infinite;
+    animation-play-state: paused;
+}
+
+/*
+ * Up and out first, then gravity takes the droplet back down to the line —
+ * hence the arc between 95% and 100% rather than a straight throw.
+ */
+@keyframes beam-spark {
+    0%,
+    89% {
+        opacity: 0;
+        transform: translate(-50%, 0) scale(0.3);
+    }
+
+    91% {
+        opacity: 1;
+        transform: translate(-50%, -2px) scale(var(--spark-scale));
+    }
+
+    95% {
+        opacity: 0.7;
+        transform: translate(
+                calc(-50% + var(--spark-x) * 0.72),
+                var(--spark-y)
+            )
+            scale(var(--spark-scale));
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(
+                calc(-50% + var(--spark-x)),
+                calc(var(--spark-y) * 0.45)
+            )
+            scale(calc(var(--spark-scale) * 0.4));
+    }
+}
+
+/*=============== PLAYBACK ===============*/
+.beams--live .beams__beam,
+.beams--live .beams__flash,
+.beams--live .beams__spark {
+    animation-play-state: running;
+}
+
+/*=============== BREAKPOINTS ===============*/
+@media screen and (max-width: 768px) {
+    .beams__flash {
+        width: 1.75rem;
+    }
+}
+
+/* Fewer lanes on narrow screens, or they read as a fence rather than rain */
+@media screen and (max-width: 576px) {
+    .beams__lane:nth-child(even) {
+        display: none;
+    }
+}
+
+/*
+ * The global reduce block caps every animation at one iteration, which would
+ * strand drops mid-fall. Nothing here carries meaning, so drop it entirely.
+ */
+@media (prefers-reduced-motion: reduce) {
+    .beams {
+        display: none;
+    }
+}
