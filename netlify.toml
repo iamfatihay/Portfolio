@@ -5,3 +5,16 @@
 [build.environment]
   # EmailJS keys are public keys used in client-side code and are safe to expose
   SECRETS_SCAN_OMIT_KEYS = "REACT_APP_EMAILJS_PUBLIC_KEY,REACT_APP_EMAILJS_SERVICE_ID,REACT_APP_EMAILJS_TEMPLATE_ID,REVIEW_ID"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+[[headers]]
+  for = "/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
