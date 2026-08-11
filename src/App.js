@@ -23,27 +23,35 @@ const Footer = lazy(() => import("./components/footer/Footer"));
 
 function App() {
     useEffect(() => {
+        const prefersReducedMotion = window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+        ).matches;
+
         AOS.init({
-            duration: 1000,
+            duration: 650,
             easing: "ease-in-out",
             once: true,
             mirror: false,
+            disable: prefersReducedMotion,
         });
     }, []);
 
     return (
         <ErrorBoundary>
+            <a className="skip-link" href="#main-content">
+                Skip to main content
+            </a>
             <Header />
-            <main className="main">
+            <main className="main" id="main-content">
                 <Suspense
                     fallback={<LoadingSpinner message="Loading portfolio..." />}
                 >
                     <Home />
                     <About />
-                    <Skills />
-                    <Qualification />
                     <Work />
                     <Achievements />
+                    <Skills />
+                    <Qualification />
                     <Contact />
                 </Suspense>
             </main>
