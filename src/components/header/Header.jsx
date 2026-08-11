@@ -1,96 +1,99 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./header.css";
 
+const navItems = [
+    { href: "#home", label: "Home", icon: "uil-estate" },
+    { href: "#about", label: "About", icon: "uil-user" },
+    { href: "#portfolio", label: "Work", icon: "uil-scenery" },
+    { href: "#achievements", label: "Award", icon: "uil-trophy" },
+    { href: "#skills", label: "Skills", icon: "uil-file-alt" },
+    { href: "#contact", label: "Contact", icon: "uil-message" },
+];
+
 const Header = () => {
-    const [Toggle, showMenu] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [activeNav, setActiveNav] = useState("#home");
+    const headerRef = useRef(null);
 
     useEffect(() => {
         const handleScroll = () => {
-            const header = document.querySelector(".header");
-            if (window.scrollY >= 80) {
-                header.classList.add("scroll-header");
-            } else {
-                header.classList.remove("scroll-header");
-            }
+            headerRef.current?.classList.toggle("scroll-header", window.scrollY >= 40);
         };
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
+
+        const sections = navItems
+            .map(({ href }) => document.querySelector(href))
+            .filter(Boolean);
+        const observer = new IntersectionObserver(
+            (entries) => {
+                const visible = entries.find((entry) => entry.isIntersecting);
+                if (visible) setActiveNav(`#${visible.target.id}`);
+            },
+            { rootMargin: "-35% 0px -55%", threshold: 0 }
+        );
+
+        sections.forEach((section) => observer.observe(section));
+        handleScroll();
+        window.addEventListener("scroll", handleScroll, { passive: true });
+
+        return () => {
+            observer.disconnect();
+            window.removeEventListener("scroll", handleScroll);
+        };
     }, []);
 
+    const handleNavClick = (href) => {
+        setActiveNav(href);
+        setIsMenuOpen(false);
+    };
+
     return (
-        <header className="header">
-            <nav className="nav container">
-                <a href="#home" className="nav__logo">
-                    Fatih AY
+        <header className="header" ref={headerRef}>
+            <nav className="nav container" aria-label="Primary navigation">
+                <a
+                    href="#home"
+                    className="nav__logo"
+                    onClick={() => handleNavClick("#home")}
+                    aria-label="Fatih Ay — back to top"
+                >
+                    <span className="nav__logo-text">Fatih AY</span>
                 </a>
 
-                <div className={Toggle ? "nav__menu show-menu" : "nav__menu"}>
+                <div className={isMenuOpen ? "nav__menu show-menu" : "nav__menu"}>
                     <ul className="nav__list grid">
-                        <li className="nav__item">
-                            <a
-                                href="#home"
-                                onClick={() => setActiveNav("#home")}
-                                className={activeNav === "#home" ? "nav__link active-link" : "nav__link"}
-                            >
-                                <i className="uil uil-estate nav__icon"></i>Home
-                            </a>
-                        </li>
-                        <li className="nav__item">
-                            <a
-                                href="#about"
-                                onClick={() => setActiveNav("#about")}
-                                className={activeNav === "#about" ? "nav__link active-link" : "nav__link"}
-                            >
-                                <i className="uil uil-user nav__icon"></i>About
-                            </a>
-                        </li>
-                        <li className="nav__item">
-                            <a
-                                href="#skills"
-                                onClick={() => setActiveNav("#skills")}
-                                className={activeNav === "#skills" ? "nav__link active-link" : "nav__link"}
-                            >
-                                <i className="uil uil-file-alt nav__icon"></i>Skills
-                            </a>
-                        </li>
-                        <li className="nav__item">
-                            <a
-                                href="#portfolio"
-                                onClick={() => setActiveNav("#portfolio")}
-                                className={activeNav === "#portfolio" ? "nav__link active-link" : "nav__link"}
-                            >
-                                <i className="uil uil-scenery nav__icon"></i>Portfolio
-                            </a>
-                        </li>
-                        <li className="nav__item">
-                            <a
-                                href="#achievements"
-                                onClick={() => setActiveNav("#achievements")}
-                                className={activeNav === "#achievements" ? "nav__link active-link" : "nav__link"}
-                            >
-                                <i className="uil uil-trophy nav__icon"></i>Achievements
-                            </a>
-                        </li>
-                        <li className="nav__item">
-                            <a
-                                href="#contact"
-                                onClick={() => setActiveNav("#contact")}
-                                className={activeNav === "#contact" ? "nav__link active-link" : "nav__link"}
-                            >
-                                <i className="uil uil-message nav__icon"></i>Contact
-                            </a>
-                        </li>
+                        {navItems.map((item) => (
+                            <li className="nav__item" key={item.href}>
+                                <a
+                                    href={item.href}
+                                    onClick={() => handleNavClick(item.href)}
+                                    className={activeNav === item.href ? "nav__link active-link" : "nav__link"}
+                                    aria-current={activeNav === item.href ? "location" : undefined}
+                                >
+                                    <i className={`uil ${item.icon} nav__icon`} aria-hidden="true"></i>
+                                    {item.label}
+                                </a>
+                            </li>
+                        ))}
                     </ul>
-                    <i
-                        className="uil uil-times nav__close"
-                        onClick={() => showMenu(!Toggle)}
-                    ></i>
+                    <button
+                        type="button"
+                        className="nav__close"
+                        onClick={() => setIsMenuOpen(false)}
+                        aria-label="Close navigation"
+                    >
+                        <i className="uil uil-times" aria-hidden="true"></i>
+                    </button>
                 </div>
-                <div className="nav__toggle" onClick={() => showMenu(!Toggle)}>
-                    <i className="uil uil-apps"></i>
-                </div>
+                <button
+                    type="button"
+                    className="nav__toggle"
+                    onClick={() => setIsMenuOpen(true)}
+                    aria-expanded={isMenuOpen}
+                    aria-label="Open navigation"
+                >
+                    <i className="uil uil-apps" aria-hidden="true"></i>
+                </button>
             </nav>
+            <span className="header__progress" aria-hidden="true"></span>
         </header>
     );
 };
