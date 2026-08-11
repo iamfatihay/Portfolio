@@ -7,24 +7,28 @@ import "./beams.css";
  * than random: the impact is phase-locked to the fall by sharing one animation
  * duration and delay, so a random value would have to be threaded through both.
  *
- * Delays are spread so no two lanes land on the same beat.
+ * Delays are negative on purpose. A positive delay makes a lane wait before its
+ * first fall, and with waits of up to fifteen seconds the section opened onto a
+ * row of drops sitting on the border doing nothing. Starting each lane part-way
+ * through its own cycle means the rain is already falling, at fifteen different
+ * heights, on the first frame it is seen.
  */
 const LANES = [
-    { x: "2%", delay: "0s", duration: "10.4s", length: "2.5rem", opacity: 0.5 },
-    { x: "9%", delay: "5.1s", duration: "8.2s", length: "1.6rem", opacity: 0.35 },
-    { x: "16%", delay: "11.3s", duration: "13.1s", length: "3.4rem", opacity: 0.6 },
-    { x: "23%", delay: "2.4s", duration: "9.3s", length: "2rem", opacity: 0.4 },
-    { x: "30%", delay: "7.8s", duration: "6.7s", length: "4rem", opacity: 0.65 },
-    { x: "37%", delay: "13.6s", duration: "11.8s", length: "1.8rem", opacity: 0.3 },
-    { x: "45%", delay: "3.9s", duration: "7.4s", length: "3rem", opacity: 0.55 },
-    { x: "52%", delay: "9.2s", duration: "12.6s", length: "2.2rem", opacity: 0.4 },
-    { x: "59%", delay: "15.1s", duration: "8.8s", length: "4.4rem", opacity: 0.6 },
-    { x: "66%", delay: "1.2s", duration: "10.9s", length: "1.5rem", opacity: 0.3 },
-    { x: "73%", delay: "6.4s", duration: "7.1s", length: "2.8rem", opacity: 0.5 },
-    { x: "80%", delay: "12.7s", duration: "13.8s", length: "2rem", opacity: 0.35 },
-    { x: "86%", delay: "4.6s", duration: "9.7s", length: "3.6rem", opacity: 0.6 },
-    { x: "92%", delay: "10.3s", duration: "6.2s", length: "1.7rem", opacity: 0.45 },
-    { x: "98%", delay: "14.4s", duration: "11.2s", length: "3rem", opacity: 0.5 },
+    { x: "2%", delay: "-3.7s", duration: "10.4s", length: "2.5rem", opacity: 0.62 },
+    { x: "9%", delay: "-5.1s", duration: "8.2s", length: "1.6rem", opacity: 0.48 },
+    { x: "16%", delay: "-11.3s", duration: "13.1s", length: "3.4rem", opacity: 0.72 },
+    { x: "23%", delay: "-2.4s", duration: "9.3s", length: "2rem", opacity: 0.52 },
+    { x: "30%", delay: "-7.8s", duration: "6.7s", length: "4rem", opacity: 0.78 },
+    { x: "37%", delay: "-13.6s", duration: "11.8s", length: "1.8rem", opacity: 0.42 },
+    { x: "45%", delay: "-3.9s", duration: "7.4s", length: "3rem", opacity: 0.68 },
+    { x: "52%", delay: "-9.2s", duration: "12.6s", length: "2.2rem", opacity: 0.52 },
+    { x: "59%", delay: "-15.1s", duration: "8.8s", length: "4.4rem", opacity: 0.72 },
+    { x: "66%", delay: "-1.2s", duration: "10.9s", length: "1.5rem", opacity: 0.42 },
+    { x: "73%", delay: "-6.4s", duration: "7.1s", length: "2.8rem", opacity: 0.62 },
+    { x: "80%", delay: "-12.7s", duration: "13.8s", length: "2rem", opacity: 0.48 },
+    { x: "86%", delay: "-4.6s", duration: "9.7s", length: "3.6rem", opacity: 0.72 },
+    { x: "92%", delay: "-10.3s", duration: "6.2s", length: "1.7rem", opacity: 0.57 },
+    { x: "98%", delay: "-14.4s", duration: "11.2s", length: "3rem", opacity: 0.62 },
 ];
 
 /*
