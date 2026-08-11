@@ -173,7 +173,14 @@
      * so a percentage offset would resolve against the 3rem bar and leave the
      * menu on screen.
      */
+    /*
+     * Hidden with visibility as well as transform: sliding it off screen alone
+     * leaves its links in the tab order, so keyboard users land on controls
+     * they cannot see. Visibility is transitioned so it holds through the
+     * closing slide instead of cutting out at the start.
+     */
     .nav__menu {
+        visibility: hidden;
         position: fixed;
         bottom: 0;
         left: 0;
@@ -185,11 +192,12 @@
         box-shadow: 0 -8px 34px rgba(15, 23, 42, 0.12);
         border-radius: 1.5rem 1.5rem 0 0;
         transform: translateY(100%);
-        transition: transform 0.35s var(--ease-out-expo);
+        transition: transform 0.35s var(--ease-out-expo), visibility 0.35s;
     }
 
     /*? Show Menu */
     .show-menu {
+        visibility: visible;
         transform: translateY(0);
     }
 
