@@ -1,60 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8" />
-  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-  <meta name="msapplication-TileColor" content="#ffffff">
-  <meta name="theme-color" content="#ffffff">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#101827" media="(prefers-color-scheme: dark)" />
 
-  <!-- Preconnect for faster icon loading -->
-  <link rel="preconnect" href="https://unpkg.com" crossorigin>
-  <link rel="preconnect" href="https://unicons.iconscout.com" crossorigin>
-  <link rel="dns-prefetch" href="https://unpkg.com">
-  <link rel="dns-prefetch" href="https://unicons.iconscout.com">
-
-  <!-- SEO Meta Tags -->
-  <meta name="description"
-    content="Fatih AY — Lead Web Developer at Hyfindr GmbH & Black Forest Hackathon 2025 Winner 🏆. Full Stack specialist in PHP Symfony, Sylius, React and AI-powered solutions. Stuttgart, Germany." />
-  <meta name="keywords"
-    content="Fatih AY, Lead Web Developer, Hyfindr, PHP Symfony, Sylius, React Developer, Python Django, JavaScript, Portfolio, Hackathon Winner, Black Forest Hackathon 2025, B2B Marketplace, Hydrogen Economy, Stuttgart, Germany, Softwareentwickler, Docker, Elasticsearch, MySQL, REST API, Git, CI/CD" />
-  <meta name="author" content="Fatih AY" />
-  <meta name="robots" content="index, follow" />
-  <meta name="language" content="English" />
-  <meta name="revisit-after" content="7 days" />
-  <meta name="rating" content="general" />
+  <title>Fatih Ay | Lead Web Developer in Stuttgart</title>
+  <meta name="description" content="Lead Web Developer building production marketplaces, AI products and responsive websites with Symfony, Sylius, React and Python in Stuttgart, Germany." />
+  <meta name="author" content="Fatih Ay" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
   <meta name="geo.region" content="DE-BW" />
   <meta name="geo.placename" content="Stuttgart" />
+  <link rel="canonical" href="https://portfolio-fay-react.netlify.app/" />
 
-  <!-- Open Graph Meta Tags -->
-  <meta property="og:title" content="Fatih AY — Lead Web Developer | Hackathon Winner 🏆 | Stuttgart" />
-  <meta property="og:description"
-    content="Lead Web Developer at Hyfindr GmbH & Black Forest Hackathon 2025 1st Place Winner. Full Stack: PHP Symfony, Sylius, React, Python, Docker. Stuttgart, Germany." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://portfolio-fay-react.netlify.app" />
-  <meta property="og:image" content="https://portfolio-fay-react.netlify.app/portfolio.jpg" />
+  <meta property="og:site_name" content="Fatih Ay Portfolio" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:url" content="https://portfolio-fay-react.netlify.app/" />
+  <meta property="og:title" content="Fatih Ay | Lead Web Developer" />
+  <meta property="og:description" content="Production marketplaces, AI products and responsive websites—from architecture to release." />
+  <meta property="og:image" content="https://portfolio-fay-react.netlify.app/og-card.jpg" />
+  <meta property="og:image:secure_url" content="https://portfolio-fay-react.netlify.app/og-card.jpg" />
+  <meta property="og:image:type" content="image/jpeg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:site_name" content="Fatih AY Portfolio" />
-  <meta property="og:locale" content="en_US" />
+  <meta property="og:image:alt" content="Fatih Ay, Lead Web Developer" />
 
-  <!-- Twitter Card Meta Tags -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Fatih AY — Lead Web Developer | Hackathon Winner 🏆" />
-  <meta name="twitter:description"
-    content="Lead Web Developer at Hyfindr GmbH & Black Forest Hackathon 2025 1st Place Winner. Full Stack: PHP Symfony, React, Python. Stuttgart, Germany." />
-  <meta name="twitter:image" content="https://portfolio-fay-react.netlify.app/portfolio.jpg" />
-  <meta name="twitter:creator" content="@fatihay" />
+  <meta name="twitter:creator" content="@Fatih__AY" />
+  <meta name="twitter:title" content="Fatih Ay | Lead Web Developer" />
+  <meta name="twitter:description" content="Production marketplaces, AI products and responsive websites—from architecture to release." />
+  <meta name="twitter:image" content="https://portfolio-fay-react.netlify.app/og-card.jpg" />
+  <meta name="twitter:image:alt" content="Fatih Ay, Lead Web Developer" />
 
-  <!-- Canonical URL -->
-  <link rel="canonical" href="https://portfolio-fay-react.netlify.app" />
-
-  <link rel="apple-touch-icon" href="%PUBLIC_URL%/favicon-16x16.png" />
+  <!-- The mark is raster artwork, so an SVG wrapper would only add weight -->
+  <link rel="icon" type="image/png" sizes="48x48" href="%PUBLIC_URL%/favicon-48x48.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%/favicon-16x16.png" />
+  <link rel="apple-touch-icon" href="%PUBLIC_URL%/apple-touch-icon.png" />
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
-  <!-- JSON-LD Structured Data (SEO + AEO) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://unpkg.com" crossorigin />
+  <link rel="preconnect" href="https://unicons.iconscout.com" crossorigin />
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link href="https://unicons.iconscout.com/release/v4.0.8/css/line.css" rel="stylesheet" />
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -62,38 +56,35 @@
       {
         "@type": "Person",
         "@id": "https://portfolio-fay-react.netlify.app/#person",
-        "name": "Fatih AY",
+        "name": "Fatih Ay",
         "jobTitle": "Lead Web Developer",
-        "description": "Lead Web Developer at Hyfindr GmbH and Black Forest Hackathon 2025 1st Place Winner. Full Stack Developer specializing in PHP Symfony, Sylius, React, Python Django, MySQL, Elasticsearch, Docker and CI/CD. Based in Stuttgart, Germany.",
-        "url": "https://portfolio-fay-react.netlify.app",
-        "image": "https://portfolio-fay-react.netlify.app/portfolio.jpg",
-        "email": "de.fatih.ay@gmail.com",
-        "telephone": "+49 163 419 35 72",
+        "description": "Lead Web Developer building production marketplaces, AI products and responsive websites with Symfony, Sylius, React and Python.",
+        "url": "https://portfolio-fay-react.netlify.app/",
+        "image": "https://portfolio-fay-react.netlify.app/fatih-ay.jpg",
+        "email": "mailto:de.fatih.ay@gmail.com",
         "sameAs": [
           "https://github.com/iamfatihay",
-          "https://www.linkedin.com/in/fatih-ay1661",
-          "https://twitter.com/fatihay"
+          "https://www.linkedin.com/in/fatih-ay1661/",
+          "https://twitter.com/Fatih__AY"
         ],
         "worksFor": {
           "@type": "Organization",
           "name": "Hyfindr GmbH",
-          "url": "https://hyfindr.com",
-          "description": "B2B Marketplace for the Hydrogen Economy"
+          "url": "https://hyfindr.com/"
         },
         "hasOccupation": {
           "@type": "Occupation",
           "name": "Lead Web Developer",
           "occupationLocation": {
             "@type": "City",
-            "name": "Stuttgart",
-            "containedInPlace": { "@type": "Country", "name": "Germany" }
+            "name": "Stuttgart"
           },
-          "skills": "PHP, Symfony, Sylius, Twig, React, JavaScript, Python, Django, MySQL, Elasticsearch, Docker, CI/CD, jQuery, REST API, Git, JIRA"
+          "skills": "PHP, Symfony, Sylius, React, TypeScript, Python, Django, MySQL, Elasticsearch, Docker, CI/CD"
         },
-        "award": "1st Place — Black Forest Hackathon 2025 (BadenCampus × Black Forest Innovation GmbH, Liebherr Mining Challenge)",
         "alumniOf": {
           "@type": "EducationalOrganization",
-          "name": "Clarusway"
+          "name": "Clarusway",
+          "description": "Full Stack Developer Program, 2022–2023"
         },
         "workLocation": {
           "@type": "Place",
@@ -105,35 +96,44 @@
           }
         },
         "knowsAbout": [
-          "PHP", "Symfony", "Sylius", "Twig",
-          "React", "JavaScript", "TypeScript", "jQuery",
-          "Python", "Django", "REST API",
-          "MySQL", "Elasticsearch",
-          "Docker", "CI/CD", "Git", "JIRA",
-          "Full Stack Development", "E-Commerce", "B2B Marketplace",
-          "AI-powered solutions", "Hydrogen Economy"
-        ]
+          "PHP", "Symfony", "Sylius", "React", "JavaScript", "TypeScript",
+          "Python", "Django", "MySQL", "Elasticsearch", "Docker", "CI/CD",
+          "Full Stack Development", "E-Commerce", "AI-powered products"
+        ],
+        "award": "1st Place — Black Forest Hackathon 2025"
       },
       {
         "@type": "WebSite",
         "@id": "https://portfolio-fay-react.netlify.app/#website",
-        "url": "https://portfolio-fay-react.netlify.app",
-        "name": "Fatih AY — Full Stack Developer Portfolio",
-        "description": "Portfolio of Fatih AY, Lead Web Developer at Hyfindr GmbH and Black Forest Hackathon 2025 1st Place Winner.",
+        "url": "https://portfolio-fay-react.netlify.app/",
+        "name": "Fatih Ay — Lead Web Developer Portfolio",
+        "description": "Selected production work, AI products and web projects by Fatih Ay.",
+        "inLanguage": "en",
         "author": { "@id": "https://portfolio-fay-react.netlify.app/#person" }
       },
       {
+        "@type": "ProfilePage",
+        "@id": "https://portfolio-fay-react.netlify.app/#profilepage",
+        "url": "https://portfolio-fay-react.netlify.app/",
+        "name": "Fatih Ay | Lead Web Developer in Stuttgart",
+        "isPartOf": { "@id": "https://portfolio-fay-react.netlify.app/#website" },
+        "inLanguage": "en",
+        "dateModified": "2026-08-10",
+        "mainEntity": { "@id": "https://portfolio-fay-react.netlify.app/#person" },
+        "primaryImageOfPage": "https://portfolio-fay-react.netlify.app/og-card.jpg"
+      },
+      {
         "@type": "ItemList",
-        "name": "Key Projects by Fatih AY",
+        "name": "Selected projects by Fatih Ay",
         "itemListElement": [
           {
             "@type": "ListItem",
             "position": 1,
             "item": {
               "@type": "WebSite",
-              "name": "hyfindr.com",
-              "url": "https://hyfindr.com",
-              "description": "Production B2B hydrogen technology marketplace. Lead development with Symfony, PHP 8, Sylius, MySQL, Elasticsearch, Docker and CI/CD.",
+              "name": "Hyfindr",
+              "url": "https://hyfindr.com/",
+              "description": "Production B2B marketplace for the hydrogen economy.",
               "author": { "@id": "https://portfolio-fay-react.netlify.app/#person" }
             }
           },
@@ -141,10 +141,10 @@
             "@type": "ListItem",
             "position": 2,
             "item": {
-              "@type": "SoftwareApplication",
-              "name": "prototype.hyfindr.ai",
-              "description": "AI-powered internal platform at Hyfindr GmbH. React + React Bootstrap frontend, Python backend AI/API layer.",
-              "applicationCategory": "BusinessApplication",
+              "@type": "WebSite",
+              "name": "Hidden Champions AI",
+              "url": "https://hidden-champions.ai/",
+              "description": "A conversion-focused website for secure AI agents in the German Mittelstand.",
               "author": { "@id": "https://portfolio-fay-react.netlify.app/#person" }
             }
           },
@@ -153,8 +153,9 @@
             "position": 3,
             "item": {
               "@type": "SoftwareApplication",
-              "name": "Black Forest Hackathon 2025 — AI Platform",
-              "description": "1st Place winning AI-powered solution for Liebherr Mining challenge at Black Forest Hackathon 2025. Built with React and React Bootstrap in 48 hours.",
+              "name": "Black Forest Hackathon 2025 AI Platform",
+              "applicationCategory": "BusinessApplication",
+              "description": "First-place AI solution built for the Liebherr Mining challenge in 48 hours.",
               "author": { "@id": "https://portfolio-fay-react.netlify.app/#person" }
             }
           }
@@ -163,18 +164,9 @@
     ]
   }
   </script>
-
-  <!-- Boxicons -->
-  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-
-  <!-- Unicons -->
-  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
-
-  <title>Fatih AY — Lead Web Developer | Hyfindr | Hackathon Winner 🏆</title>
 </head>
-
 <body>
+  <noscript>You need JavaScript enabled to view this portfolio.</noscript>
   <div id="root"></div>
 </body>
-
 </html>
