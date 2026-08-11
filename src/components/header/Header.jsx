@@ -20,9 +20,6 @@ const Header = () => {
             headerRef.current?.classList.toggle("scroll-header", window.scrollY >= 40);
         };
 
-        const sections = navItems
-            .map(({ href }) => document.querySelector(href))
-            .filter(Boolean);
         const observer = new IntersectionObserver(
             (entries) => {
                 const visible = entries.find((entry) => entry.isIntersecting);
@@ -31,12 +28,35 @@ const Header = () => {
             { rootMargin: "-35% 0px -55%", threshold: 0 }
         );
 
-        sections.forEach((section) => observer.observe(section));
+        /*
+         * The header renders outside Suspense, so on this first pass every
+         * section is still unmounted and there is nothing to observe. Watching
+         * main lets the sections be picked up as they arrive; once all of them
+         * are observed the watcher has nothing left to do.
+         */
+        const observed = new Set();
+        const syncTargets = () => {
+            navItems.forEach(({ href }) => {
+                const section = document.querySelector(href);
+                if (section && !observed.has(section)) {
+                    observer.observe(section);
+                    observed.add(section);
+                }
+            });
+            if (observed.size === navItems.length) mutations.disconnect();
+        };
+
+        const mutations = new MutationObserver(syncTargets);
+        const main = document.getElementById("main-content");
+        if (main) mutations.observe(main, { childList: true, subtree: true });
+        syncTargets();
+
         handleScroll();
         window.addEventListener("scroll", handleScroll, { passive: true });
 
         return () => {
             observer.disconnect();
+            mutations.disconnect();
             window.removeEventListener("scroll", handleScroll);
         };
     }, []);
