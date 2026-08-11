@@ -4,23 +4,26 @@ import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 // Importing hackathon images
-import hackathon1 from "../../assets/hackathon1.jpg";
-import hackathon2 from "../../assets/hackathon2.jpg";
-import hackathon3 from "../../assets/hackathon3.jpg";
-import hackathon4 from "../../assets/hackathon4.jpg";
+import hackathon1 from "../../assets/hackathon1.webp";
+import hackathon2 from "../../assets/hackathon2.webp";
+import hackathon3 from "../../assets/hackathon3.webp";
+import hackathon4 from "../../assets/hackathon4.webp";
 
 const Achievements = () => {
+    const prefersReducedMotion =
+        window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
+
     return (
         <section className="achievements section" id="achievements">
             <h2 className="section__title" data-aos="fade-up">
-                Achievements
+                Award
             </h2>
             <span
                 className="section__subtitle"
                 data-aos="fade-up"
                 data-aos-delay="100"
             >
-                My Success Stories
+                One result worth highlighting
             </span>
 
             <div className="achievements__container container">
@@ -31,15 +34,12 @@ const Achievements = () => {
                         data-aos-delay="200"
                     >
                         <h3 className="achievements__title">
-                            🏆 Black Forest Hackathon Winner
+                            Black Forest Hackathon · 1st Place
                         </h3>
                         <p className="achievements__description">
-                            From May 9-11, I participated in the Black Forest
-                            Hackathon, tackling a coding challenge presented by
-                            Liebherr Mining. After 48 hours of intense
-                            collaboration, my team secured
-                            <strong> 1st place</strong> with an AI-powered
-                            solution.
+                            In May 2025, our team designed and built an
+                            AI-powered solution for a Liebherr Mining challenge
+                            in 48 hours—and won first place.
                         </p>
                     </div>
 
@@ -49,15 +49,16 @@ const Achievements = () => {
                         data-aos-delay="300"
                     >
                         <Carousel
-                            autoPlay
+                            autoPlay={!prefersReducedMotion}
                             interval={4000}
                             transitionTime={800}
                             infiniteLoop
                             showThumbs={false}
                             showStatus={false}
                             showIndicators={true}
-                            showArrows={false}
+                            showArrows={true}
                             useKeyboardArrows={true}
+                            stopOnHover={true}
                             swipeScrollTolerance={50}
                             className="hackathon__carousel"
                         >
@@ -66,6 +67,7 @@ const Achievements = () => {
                                     src={hackathon1}
                                     alt="Hackathon Winner with Prize Check"
                                     className="carousel__image"
+                                    loading="lazy"
                                 />
                                 <div className="carousel__legend">
                                     <h4>1st Place Winner</h4>
@@ -78,6 +80,7 @@ const Achievements = () => {
                                     src={hackathon2}
                                     alt="Team collaboration during hackathon"
                                     className="carousel__image"
+                                    loading="lazy"
                                 />
                                 <div className="carousel__legend">
                                     <h4>Intense Collaboration</h4>
@@ -93,6 +96,7 @@ const Achievements = () => {
                                     src={hackathon3}
                                     alt="Winning team celebration"
                                     className="carousel__image"
+                                    loading="lazy"
                                 />
                                 <div className="carousel__legend">
                                     <h4>Victory Celebration</h4>
@@ -108,6 +112,7 @@ const Achievements = () => {
                                     src={hackathon4}
                                     alt="Hackathon venue and participants"
                                     className="carousel__image"
+                                    loading="lazy"
                                 />
                                 <div className="carousel__legend">
                                     <h4>Event Venue</h4>
@@ -120,53 +125,6 @@ const Achievements = () => {
                         </Carousel>
                     </div>
 
-                    <div
-                        className="achievements__details"
-                        data-aos="fade-up"
-                        data-aos-delay="450"
-                    >
-                        <div className="achievements__info">
-                            <div className="achievements__box">
-                                <i className="bx bx-trophy achievements__icon"></i>
-                                <h4 className="achievements__box-title">
-                                    Position
-                                </h4>
-                                <span className="achievements__box-subtitle">
-                                    1st Place
-                                </span>
-                            </div>
-
-                            <div className="achievements__box">
-                                <i className="bx bx-calendar achievements__icon"></i>
-                                <h4 className="achievements__box-title">
-                                    Date
-                                </h4>
-                                <span className="achievements__box-subtitle">
-                                    May 9-11, 2025
-                                </span>
-                            </div>
-
-                            <div className="achievements__box">
-                                <i className="bx bx-group achievements__icon"></i>
-                                <h4 className="achievements__box-title">
-                                    Team
-                                </h4>
-                                <span className="achievements__box-subtitle">
-                                    Hyfindr
-                                </span>
-                            </div>
-
-                            <div className="achievements__box">
-                                <i className="bx bx-cog achievements__icon"></i>
-                                <h4 className="achievements__box-title">
-                                    Solution
-                                </h4>
-                                <span className="achievements__box-subtitle">
-                                    AI-Powered
-                                </span>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
