@@ -1,3 +1,13 @@
+/*
+ * Containing block for the rain layer, which spans the whole section. The
+ * isolation keeps that layer's negative z-index from escaping behind the
+ * page — without it the drops would render underneath the body background.
+ */
+.contact {
+    position: relative;
+    isolation: isolate;
+}
+
 .contact__container {
     grid-template-columns: repeat(2, max-content);
     justify-content: center;
@@ -20,10 +30,16 @@
 
 .contact__card {
     background-color: var(--container-color);
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-color);
     padding: 1rem;
-    border-radius: 0.75rem;
+    border-radius: var(--radius-md);
     text-align: center;
+    transition: var(--hover-transition);
+}
+
+.contact__card:hover {
+    border-color: var(--hover-border);
+    box-shadow: var(--hover-glow);
 }
 
 .contact__card-icon {
@@ -53,6 +69,9 @@
     align-items: center;
     justify-content: center;
     column-gap: 0.25rem;
+    padding: 0.35rem 0.55rem;
+    border-radius: var(--radius-sm);
+    transition: var(--hover-transition);
 }
 
 .contact__button-icon {
@@ -64,14 +83,20 @@
     transform: translate(0.5rem);
 }
 
+.contact__button:hover {
+    color: var(--first-color);
+    background: var(--hover-tint);
+    box-shadow: 0 0 0 1px var(--hover-border);
+}
+
 .contact__form {
     width: 360px;
 }
 
 .contact__form-div {
     position: relative;
-    margin-bottom: var(--mb-2);
-    height: 4rem;
+    margin-bottom: var(--mb-2-5);
+    height: 3.75rem;
 }
 
 .contact__form-input {
@@ -80,23 +105,45 @@
     left: 0;
     width: 100%;
     height: 100%;
-    border: 2px solid rgba(0, 0, 0, 0.3);
-    background: none;
-    color: var(--text-color);
+    border: 1px solid rgba(15, 23, 42, 0.14);
+    background: var(--container-color);
+    color: var(--title-color);
     outline: none;
-    border-radius: 0.75rem;
-    padding: 1.5rem;
+    border-radius: var(--radius-md);
+    padding: 1.35rem 1.25rem;
     z-index: 1;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease,
+        background-color 0.25s ease;
 }
 
+.contact__form-input::placeholder {
+    color: rgba(15, 23, 42, 0.38);
+}
+
+.contact__form-input:hover {
+    border-color: rgba(15, 23, 42, 0.24);
+}
+
+.contact__form-input:focus {
+    border-color: var(--first-color);
+    box-shadow: 0 0 0 4px rgba(var(--first-color-rgb), 0.12);
+}
+
+/* Sits fully above the field rather than notching the border, so it needs no
+   background patch to hide the line behind it */
 .contact__form-tag {
     position: absolute;
-    top: -0.75rem;
-    left: 1.25rem;
+    top: -1.5rem;
+    left: 0.25rem;
     font-size: var(--smaller-font-size);
-    padding: 0.25rem;
-    background-color: var(--body-color);
+    font-weight: var(--font-medium);
+    color: var(--title-color);
     z-index: 10;
+    transition: color 0.25s ease;
+}
+
+.contact__form-div:focus-within .contact__form-tag {
+    color: var(--first-color);
 }
 
 .contact__form-area {
@@ -109,6 +156,13 @@
 .form__button{
     display: flex;
     justify-content: center;
+}
+
+.form__button .button:disabled {
+    cursor: wait;
+    opacity: 0.7;
+    transform: none;
+    box-shadow: none;
 }
 
 /*=============== BREAKPOINTS ===============*/
