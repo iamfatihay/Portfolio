@@ -25,7 +25,9 @@ const ProjectCard = ({ project, className = "", ...rest }) => {
 
     const handleMove = useCallback((event) => {
         const card = cardRef.current;
-        if (!card) return;
+        // Touch and pen get no tilt (see the `hover: none` rules), so doing the
+        // measuring and style writes for them only costs scroll performance.
+        if (!card || event.pointerType !== "mouse") return;
 
         const { clientX, clientY } = event;
         cancelAnimationFrame(frameRef.current);
