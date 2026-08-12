@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import ProjectCard from "./ProjectCard";
 import {
+    BiChevronDown,
+    BiChevronUp,
+    BiFolder,
+    BiLinkExternal,
+    BiLogoGithub,
+} from "react-icons/bi";
+import {
     leadProjects,
     supportingProjects,
     featuredProjects,
@@ -80,7 +87,7 @@ const Works = () => {
                                     rel="noopener noreferrer"
                                     aria-label={`${item.title} live demo`}
                                 >
-                                    <i className="bx bx-link-external" aria-hidden="true"></i>
+                                    <BiLinkExternal aria-hidden="true" focusable="false" />
                                 </a>
                                 <a
                                     href={item.link2}
@@ -88,7 +95,7 @@ const Works = () => {
                                     rel="noopener noreferrer"
                                     aria-label={`${item.title} GitHub`}
                                 >
-                                    <i className="bx bxl-github" aria-hidden="true"></i>
+                                    <BiLogoGithub aria-hidden="true" focusable="false" />
                                 </a>
                             </div>
                         </div>
@@ -104,10 +111,11 @@ const Works = () => {
                     aria-expanded={showArchive}
                 >
                     {showArchive ? "Hide Projects" : "More Projects"}
-                    <i
-                        className={`bx ${showArchive ? "bx-chevron-up" : "bx-chevron-down"} work__more-icon`}
-                        aria-hidden="true"
-                    ></i>
+                    {showArchive ? (
+                        <BiChevronUp className="work__more-icon" aria-hidden="true" focusable="false" />
+                    ) : (
+                        <BiChevronDown className="work__more-icon" aria-hidden="true" focusable="false" />
+                    )}
                 </button>
             </div>
 
@@ -116,7 +124,7 @@ const Works = () => {
                     {archiveProjects.map((item) => (
                         <div className="work__archive-card" key={item.id}>
                             <div className="work__archive-top">
-                                <i className="bx bx-folder work__archive-folder" aria-hidden="true"></i>
+                                <BiFolder className="work__archive-folder" aria-hidden="true" focusable="false" />
                                 <div className="work__archive-links">
                                     <a
                                         href={item.link2}
@@ -124,7 +132,7 @@ const Works = () => {
                                         rel="noopener noreferrer"
                                         aria-label={`${item.title} source code`}
                                     >
-                                        <i className="bx bxl-github" aria-hidden="true"></i>
+                                        <BiLogoGithub aria-hidden="true" focusable="false" />
                                     </a>
                                     <a
                                         href={item.link}
@@ -132,7 +140,7 @@ const Works = () => {
                                         rel="noopener noreferrer"
                                         aria-label={`${item.title} live demo`}
                                     >
-                                        <i className="bx bx-link-external" aria-hidden="true"></i>
+                                        <BiLinkExternal aria-hidden="true" focusable="false" />
                                     </a>
                                 </div>
                             </div>

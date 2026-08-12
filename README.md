@@ -8,7 +8,7 @@ Live site: [portfolio-fay-react.netlify.app](https://portfolio-fay-react.netlify
 
 - React 18 and Create React App
 - EmailJS contact form
-- AOS and React Responsive Carousel
+- AOS for scroll reveals, react-icons for inline SVG icons
 - Netlify deployment
 
 ## Local development

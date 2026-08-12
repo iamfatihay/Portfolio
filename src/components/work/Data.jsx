@@ -1,3 +1,8 @@
+import {
+    BiDownArrowAlt,
+    BiLogoLinkedin,
+    BiRightArrowAlt,
+} from "react-icons/bi";
 import Work1 from "../../assets/blog-app-preview.webp";
 import Work2 from "../../assets/stockApp-preview.webp";
 import Work3 from "../../assets/movieapp-preview.webp";
@@ -22,11 +27,11 @@ export const leadProjects = [
         tags: ["Symfony", "Sylius", "PHP", "Elasticsearch", "Docker"],
         proof: "In production and trading today.",
         actions: [
-            { label: "Visit site", href: "https://hyfindr.com", icon: "bx-right-arrow-alt" },
+            { label: "Visit site", href: "https://hyfindr.com", Icon: BiRightArrowAlt },
             {
                 label: "LinkedIn",
                 href: "https://www.linkedin.com/in/fatih-ay1661/",
-                icon: "bxl-linkedin",
+                Icon: BiLogoLinkedin,
             },
         ],
     },
@@ -46,7 +51,7 @@ export const leadProjects = [
             {
                 label: "Visit site",
                 href: "https://hidden-champions.ai",
-                icon: "bx-right-arrow-alt",
+                Icon: BiRightArrowAlt,
             },
         ],
     },
@@ -64,7 +69,7 @@ export const leadProjects = [
             {
                 label: "Request a product tour",
                 href: "#contact",
-                icon: "bx-down-arrow-alt",
+                Icon: BiDownArrowAlt,
             },
         ],
     },
@@ -85,7 +90,7 @@ export const supportingProjects = [
             {
                 label: "Request a walkthrough",
                 href: "#contact",
-                icon: "bx-down-arrow-alt",
+                Icon: BiDownArrowAlt,
             },
         ],
     },
@@ -101,7 +106,7 @@ export const supportingProjects = [
         tags: ["Vite + React", "AI/ML", "48 hours"],
         proof: "Judged first place — photos and the story below.",
         actions: [
-            { label: "See the result", href: "#achievements", icon: "bx-down-arrow-alt" },
+            { label: "See the result", href: "#achievements", Icon: BiDownArrowAlt },
             {
                 /*
                  * The post itself, not the profile: this card trades a live URL
@@ -110,7 +115,7 @@ export const supportingProjects = [
                  */
                 label: "Read the post",
                 href: "https://www.linkedin.com/posts/fatih-ay1661_hackathon-hackathonwinner-liebherr-ugcPost-7327664859356028929-aasy/",
-                icon: "bxl-linkedin",
+                Icon: BiLogoLinkedin,
             },
         ],
     },

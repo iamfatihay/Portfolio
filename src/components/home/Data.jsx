@@ -1,4 +1,5 @@
 import React from "react";
+import { BiRightArrowAlt } from "react-icons/bi";
 import handIcon from "../../assets/hand.svg";
 
 const Data = () => {
@@ -24,7 +25,7 @@ const Data = () => {
             <div className="home__actions">
                 <a href="#portfolio" className="button button--flex">
                     View selected work
-                    <i className="bx bx-right-arrow-alt button__icon" aria-hidden="true"></i>
+                    <BiRightArrowAlt className="button__icon" aria-hidden="true" focusable="false" />
                 </a>
                 <a href="#contact" className="button button--flex button--ghost">
                     Contact me

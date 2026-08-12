@@ -1,13 +1,23 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./header.css";
+import {
+    BiEnvelope,
+    BiFile,
+    BiGridAlt,
+    BiHomeAlt,
+    BiImageAlt,
+    BiTrophy,
+    BiUser,
+    BiX,
+} from "react-icons/bi";
 
 const navItems = [
-    { href: "#home", label: "Home", icon: "uil-estate" },
-    { href: "#about", label: "About", icon: "uil-user" },
-    { href: "#portfolio", label: "Work", icon: "uil-scenery" },
-    { href: "#achievements", label: "Award", icon: "uil-trophy" },
-    { href: "#skills", label: "Skills", icon: "uil-file-alt" },
-    { href: "#contact", label: "Contact", icon: "uil-message" },
+    { href: "#home", label: "Home", Icon: BiHomeAlt },
+    { href: "#about", label: "About", Icon: BiUser },
+    { href: "#portfolio", label: "Work", Icon: BiImageAlt },
+    { href: "#achievements", label: "Award", Icon: BiTrophy },
+    { href: "#skills", label: "Skills", Icon: BiFile },
+    { href: "#contact", label: "Contact", Icon: BiEnvelope },
 ];
 
 const Header = () => {
@@ -80,16 +90,16 @@ const Header = () => {
 
                 <div className={isMenuOpen ? "nav__menu show-menu" : "nav__menu"}>
                     <ul className="nav__list grid">
-                        {navItems.map((item) => (
-                            <li className="nav__item" key={item.href}>
+                        {navItems.map(({ href, label, Icon }) => (
+                            <li className="nav__item" key={href}>
                                 <a
-                                    href={item.href}
-                                    onClick={() => handleNavClick(item.href)}
-                                    className={activeNav === item.href ? "nav__link active-link" : "nav__link"}
-                                    aria-current={activeNav === item.href ? "location" : undefined}
+                                    href={href}
+                                    onClick={() => handleNavClick(href)}
+                                    className={activeNav === href ? "nav__link active-link" : "nav__link"}
+                                    aria-current={activeNav === href ? "location" : undefined}
                                 >
-                                    <i className={`uil ${item.icon} nav__icon`} aria-hidden="true"></i>
-                                    {item.label}
+                                    <Icon className="nav__icon" aria-hidden="true" focusable="false" />
+                                    {label}
                                 </a>
                             </li>
                         ))}
@@ -100,7 +110,7 @@ const Header = () => {
                         onClick={() => setIsMenuOpen(false)}
                         aria-label="Close navigation"
                     >
-                        <i className="uil uil-times" aria-hidden="true"></i>
+                        <BiX aria-hidden="true" focusable="false" />
                     </button>
                 </div>
                 <button
@@ -110,7 +120,7 @@ const Header = () => {
                     aria-expanded={isMenuOpen}
                     aria-label="Open navigation"
                 >
-                    <i className="uil uil-apps" aria-hidden="true"></i>
+                    <BiGridAlt aria-hidden="true" focusable="false" />
                 </button>
             </nav>
             <span className="header__progress" aria-hidden="true"></span>
