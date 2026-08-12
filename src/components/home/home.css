@@ -12,13 +12,22 @@
      * centred. Locking the section to the viewport and centring its single
      * child turns that leftover space into even breathing room above and
      * below, with the section's own padding still guaranteeing the minimum
-     * clearance under the fixed header. On tall viewports the content is
-     * already taller than 100dvh, so this has no effect there.
+     * clearance under the fixed header.
+     *
+     * The 56.25rem (900px) cap matters just as much as the floor: the hero's
+     * content — capped at a 968px measure by .container — tops out around
+     * 860px tall no matter how tall the screen is, so an uncapped 100dvh
+     * stretched it across every extra pixel of a large monitor and left it
+     * marooned in whitespace. Capping the target at the same 900px this file
+     * already treats as "regular desktop" (see the height-tier media queries
+     * below) means the fill only ever kicks in on the short viewports it was
+     * built for; above that, min-height settles back to the content's own
+     * height and the layout returns to plain top-down flow.
      */
     display: flex;
     align-items: center;
-    min-height: 100vh;
-    min-height: 100dvh;
+    min-height: min(100vh, 56.25rem);
+    min-height: min(100dvh, 56.25rem);
 }
 
 /* Aurora backdrop — two slow-drifting colour fields behind the hero */
