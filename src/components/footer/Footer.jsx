@@ -2,9 +2,11 @@ import React, { useEffect, useRef, useState } from "react";
 import "./footer.css";
 import Sponsor from "./Sponsor";
 import profileLinks from "../../data/profileLinks";
+import { useCopy } from "../../i18n";
 import logoSignature from "../../assets/logo-signature-animated.webp";
 
 const Footer = () => {
+    const { common, hero, footer } = useCopy();
     const sealSlotRef = useRef(null);
     const [showSeal, setShowSeal] = useState(false);
 
@@ -50,7 +52,7 @@ const Footer = () => {
                 {/* The mark is a seal, so the page closes the way a letter does */}
                 <div className="footer__sign">
                     <span className="footer__rule" aria-hidden="true"></span>
-                    <a href="#home" className="footer__seal" aria-label="Fatih Ay — back to top">
+                    <a href="#home" className="footer__seal" aria-label={common.backToTop}>
                         <span className="footer__seal-slot" ref={sealSlotRef}>
                             {showSeal && (
                                 <img
@@ -78,7 +80,7 @@ const Footer = () => {
                                     className="footer__profiles-link"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    aria-label={`Fatih Ay on ${label}`}
+                                    aria-label={hero.profileLink(label)}
                                 >
                                     <Icon aria-hidden="true" focusable="false" />
                                 </a>
@@ -92,7 +94,7 @@ const Footer = () => {
                 </div>
 
                 <p className="footer__copy">
-                    © {new Date().getFullYear()} Fatih Ay · Built with React
+                    © {new Date().getFullYear()} Fatih Ay · {footer.builtWith}
                 </p>
             </div>
         </footer>

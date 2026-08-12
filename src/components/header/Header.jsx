@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./header.css";
+import { localePath, useCopy, useLocale } from "../../i18n";
 import {
     BiEnvelope,
     BiFile,
@@ -12,15 +13,18 @@ import {
 } from "react-icons/bi";
 
 const navItems = [
-    { href: "#home", label: "Home", Icon: BiHomeAlt },
-    { href: "#about", label: "About", Icon: BiUser },
-    { href: "#portfolio", label: "Work", Icon: BiImageAlt },
-    { href: "#achievements", label: "Award", Icon: BiTrophy },
-    { href: "#skills", label: "Skills", Icon: BiFile },
-    { href: "#contact", label: "Contact", Icon: BiEnvelope },
+    { href: "#home", key: "home", Icon: BiHomeAlt },
+    { href: "#about", key: "about", Icon: BiUser },
+    { href: "#portfolio", key: "work", Icon: BiImageAlt },
+    { href: "#achievements", key: "award", Icon: BiTrophy },
+    { href: "#skills", key: "skills", Icon: BiFile },
+    { href: "#contact", key: "contact", Icon: BiEnvelope },
 ];
 
 const Header = () => {
+    const { nav, common } = useCopy();
+    const locale = useLocale();
+    const otherLocale = locale === "de" ? "en" : "de";
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [activeNav, setActiveNav] = useState("#home");
     const headerRef = useRef(null);
@@ -78,19 +82,19 @@ const Header = () => {
 
     return (
         <header className="header" ref={headerRef}>
-            <nav className="nav container" aria-label="Primary navigation">
+            <nav className="nav container" aria-label={nav.label}>
                 <a
                     href="#home"
                     className="nav__logo"
                     onClick={() => handleNavClick("#home")}
-                    aria-label="Fatih Ay — back to top"
+                    aria-label={common.backToTop}
                 >
                     <span className="nav__logo-text">Fatih AY</span>
                 </a>
 
                 <div className={isMenuOpen ? "nav__menu show-menu" : "nav__menu"}>
                     <ul className="nav__list grid">
-                        {navItems.map(({ href, label, Icon }) => (
+                        {navItems.map(({ href, key, Icon }) => (
                             <li className="nav__item" key={href}>
                                 <a
                                     href={href}
@@ -99,7 +103,7 @@ const Header = () => {
                                     aria-current={activeNav === href ? "location" : undefined}
                                 >
                                     <Icon className="nav__icon" aria-hidden="true" focusable="false" />
-                                    {label}
+                                    {nav[key]}
                                 </a>
                             </li>
                         ))}
@@ -108,17 +112,32 @@ const Header = () => {
                         type="button"
                         className="nav__close"
                         onClick={() => setIsMenuOpen(false)}
-                        aria-label="Close navigation"
+                        aria-label={nav.close}
                     >
                         <BiX aria-hidden="true" focusable="false" />
                     </button>
                 </div>
+                {/*
+                  * A link rather than a button, and it carries hreflang: each
+                  * language is its own document at its own address, so this has
+                  * to be a real navigation for both a visitor and a crawler.
+                  */}
+                <a
+                    className="nav__lang"
+                    href={localePath[otherLocale]}
+                    hrefLang={otherLocale}
+                    lang={otherLocale}
+                    aria-label={common.languageSwitch}
+                >
+                    {otherLocale.toUpperCase()}
+                </a>
+
                 <button
                     type="button"
                     className="nav__toggle"
                     onClick={() => setIsMenuOpen(true)}
                     aria-expanded={isMenuOpen}
-                    aria-label="Open navigation"
+                    aria-label={nav.open}
                 >
                     <BiGridAlt aria-hidden="true" focusable="false" />
                 </button>

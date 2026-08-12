@@ -94,6 +94,33 @@
     display: none;
 }
 
+/*
+ * The language switcher. A small, quiet pill rather than a labelled control:
+ * the two-letter code is understood everywhere, and the accessible name on the
+ * link spells the target language out *in* that language, so a screen reader
+ * announces "Sprache: Deutsch" rather than "D E".
+ */
+.nav__lang {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.4rem;
+    padding: 0.3rem 0.6rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-pill);
+    color: var(--text-color);
+    font-size: var(--smaller-font-size);
+    font-weight: var(--font-semi-bold);
+    letter-spacing: 0.06em;
+    transition: var(--hover-transition);
+}
+
+.nav__lang:hover {
+    border-color: var(--hover-border);
+    background: var(--hover-tint);
+    color: var(--first-color);
+}
+
 /* Active link */
 .active-link,
 .nav__link:hover {

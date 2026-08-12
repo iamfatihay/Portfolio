@@ -19,10 +19,10 @@ class ErrorBoundary extends React.Component {
         if (this.state.hasError) {
             return (
                 <div className="error-boundary">
-                    <h2>Something went wrong.</h2>
-                    <p>Please refresh the page or try again later.</p>
+                    <h2>{this.props.copy.errorTitle}</h2>
+                    <p>{this.props.copy.errorBody}</p>
                     <button type="button" onClick={() => window.location.reload()}>
-                        Refresh Page
+                        {this.props.copy.errorButton}
                     </button>
                 </div>
             );

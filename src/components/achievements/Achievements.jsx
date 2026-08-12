@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import "./achievements.css";
 import { FaTrophy } from "react-icons/fa";
+import { useCopy } from "../../i18n";
 
 // Importing hackathon images
 import hackathon1 from "../../assets/hackathon1.webp";
@@ -9,7 +10,10 @@ import hackathon3 from "../../assets/hackathon3.webp";
 import hackathon4 from "../../assets/hackathon4.webp";
 
 /*
- * `focus` is each photo's object-position — the point of the image the crop
+ * Images and their focal points only — titles and captions are translated, and
+ * are matched to these by position in src/i18n.
+ *
+ * `focus` is each photo's object-position: the point of the image the crop
  * keeps in view. It matters because the band is wide and short while two of
  * these photos are portrait, so `cover` throws away most of their height; left
  * at the default centre, the crop lands on the table and cuts the faces off.
@@ -17,40 +21,10 @@ import hackathon4 from "../../assets/hackathon4.webp";
  * more of the top of the frame.
  */
 const SLIDES = [
-    {
-        image: hackathon1,
-        alt: "Hackathon winners holding the prize check",
-        title: "1st Place Winner",
-        caption: "Prize check for 3,000 € — Team Hyfindr",
-        focus: "38% 22%",
-    },
-    {
-        image: hackathon2,
-        alt: "Team collaboration during the hackathon",
-        title: "Intense Collaboration",
-        caption: "48 hours of dedicated teamwork and innovation",
-        focus: "45% 15%",
-    },
-    {
-        image: hackathon3,
-        alt: "Winning team celebration",
-        title: "Victory Celebration",
-        caption: "Celebrating success with the winning team",
-        focus: "50% 42%",
-    },
-    {
-        image: hackathon4,
-        alt: "Black Forest Hackathon venue and participants",
-        title: "Event Venue",
-        caption: "Black Forest Hackathon — Liebherr Mining Challenge",
-        focus: "50% 45%",
-    },
-];
-
-const STATS = [
-    { value: "48h", label: "Non-stop build" },
-    { value: "3,000 €", label: "Prize awarded" },
-    { value: "Liebherr", label: "Mining challenge" },
+    { image: hackathon1, focus: "38% 22%" },
+    { image: hackathon2, focus: "45% 15%" },
+    { image: hackathon3, focus: "50% 42%" },
+    { image: hackathon4, focus: "50% 45%" },
 ];
 
 /* How long a photo holds the stage. The bar under the section fills over the
@@ -58,6 +32,7 @@ const STATS = [
 const SLIDE_DURATION = "6000ms";
 
 const Achievements = () => {
+    const { award } = useCopy();
     const [index, setIndex] = useState(0);
     const [hovered, setHovered] = useState(false);
     const [inView, setInView] = useState(false);
@@ -89,7 +64,7 @@ const Achievements = () => {
     }, []);
 
     const paused = hovered || !inView;
-    const active = SLIDES[index];
+    const active = award.slides[index];
 
     return (
         <section
@@ -106,7 +81,7 @@ const Achievements = () => {
                     <img
                         key={slide.image}
                         src={slide.image}
-                        alt={slide.alt}
+                        alt={award.slides[i].alt}
                         className={`award__frame${
                             i === index ? " is-active" : ""
                         }`}
@@ -120,19 +95,19 @@ const Achievements = () => {
 
             <div className="award__content container">
                 <h2 className="section__title" data-aos="fade-up">
-                    Award
+                    {award.title}
                 </h2>
                 <span
                     className="section__subtitle"
                     data-aos="fade-up"
                     data-aos-delay="100"
                 >
-                    One result worth highlighting
+                    {award.subtitle}
                 </span>
 
                 <p className="award__eyebrow" data-aos="fade-up">
                     <FaTrophy aria-hidden="true" />
-                    Black Forest Hackathon · May 2025
+                    {award.eyebrow}
                 </p>
 
                 <h3
@@ -140,8 +115,8 @@ const Achievements = () => {
                     data-aos="fade-up"
                     data-aos-delay="100"
                 >
-                    <em>1st Place</em>
-                    <span>out of every team in the room</span>
+                    <em>{award.headline}</em>
+                    <span>{award.headlineSub}</span>
                 </h3>
 
                 <p
@@ -149,12 +124,11 @@ const Achievements = () => {
                     data-aos="fade-up"
                     data-aos-delay="200"
                 >
-                    Our team designed and built an AI-powered solution for a
-                    Liebherr Mining challenge in 48 hours—and won first place.
+                    {award.description}
                 </p>
 
                 <ul className="award__stats" data-aos="fade-up" data-aos-delay="300">
-                    {STATS.map((stat) => (
+                    {award.stats.map((stat) => (
                         <li className="award__stat" key={stat.label}>
                             <span className="award__stat-value">
                                 {stat.value}
@@ -189,7 +163,7 @@ const Achievements = () => {
                     <div
                         className="award__ticks"
                         role="group"
-                        aria-label="Award photos"
+                        aria-label={award.photosLabel}
                     >
                         {SLIDES.map((slide, i) => (
                             <button
@@ -199,9 +173,11 @@ const Achievements = () => {
                                     i === index ? " is-active" : ""
                                 }`}
                                 onClick={() => setIndex(i)}
-                                aria-label={`Show photo ${i + 1} of ${
-                                    SLIDES.length
-                                }: ${slide.title}`}
+                                aria-label={award.showPhoto(
+                                    i + 1,
+                                    SLIDES.length,
+                                    award.slides[i].title
+                                )}
                                 aria-current={i === index}
                             >
                                 <span

@@ -1,12 +1,14 @@
 import React, { useEffect, useRef } from "react";
 import "./home.css";
 import Social from "./Social";
+import { useCopy } from "../../i18n";
 import Data from "./Data";
 import ScrollDown from "./ScrollDown";
 import portraitSmall from "../../assets/portrait-640.webp";
 import portraitLarge from "../../assets/portrait-1000.webp";
 
 const Home = () => {
+    const { hero } = useCopy();
     const dotsRef = useRef(null);
 
     useEffect(() => {
@@ -64,7 +66,7 @@ const Home = () => {
                                 src={portraitSmall}
                                 srcSet={`${portraitSmall} 640w, ${portraitLarge} 1000w`}
                                 sizes="(max-width: 768px) 250px, 320px"
-                                alt="Fatih Ay, Lead Web Developer based in Stuttgart"
+                                alt={hero.portraitAlt}
                                 className="home__portrait"
                                 width="640"
                                 height="960"

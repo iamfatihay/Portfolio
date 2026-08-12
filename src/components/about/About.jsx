@@ -3,19 +3,22 @@ import "./about.css";
 import AboutImg from "../../assets/about-700.webp";
 import CV from "../../assets/CV.pdf";
 import Info from "./Info";
+import { useCopy } from "../../i18n";
 
 const About = () => {
+    const { about } = useCopy();
+
     return (
         <section className="about section" id="about">
             <h2 className="section__title" data-aos="fade-up">
-                About Me
+                {about.title}
             </h2>
             <span
                 className="section__subtitle"
                 data-aos="fade-up"
                 data-aos-delay="100"
             >
-                The person behind the products
+                {about.subtitle}
             </span>
 
             <div className="about__container container grid">
@@ -26,7 +29,7 @@ const About = () => {
                 >
                     <img
                         src={AboutImg}
-                        alt="Fatih Ay, Full Stack Developer"
+                        alt={about.imageAlt}
                         className="about__img"
                         width="700"
                         height="916"
@@ -42,20 +45,14 @@ const About = () => {
                     <Info />
 
                     <p className="about__description">
-                        I&apos;m a full stack developer who enjoys owning the whole
-                        path from an ambiguous idea to a dependable production
-                        release. At Hyfindr, I work across frontend, backend,
-                        search, infrastructure and delivery for B2B and AI
-                        products.
+                        {about.paragraphs[0]}
                     </p>
                     <p className="about__description about__description--secondary">
-                        Outside software, teaching Wing Tsun has shaped how I
-                        lead: stay calm, adapt quickly and make complex things
-                        easier for others to understand.
+                        {about.paragraphs[1]}
                     </p>
 
                     <a download href={CV} className="button button--flex">
-                        Download CV
+                        {about.cv}
                         <svg
                             className="button__icon"
                             xmlns="http://www.w3.org/2000/svg"

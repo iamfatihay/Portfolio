@@ -1,10 +1,13 @@
 import React from 'react'
 import { BiDownArrowAlt } from "react-icons/bi";
+import { useCopy } from "../../i18n";
 
 const ScrollDown = () => {
+    const { hero } = useCopy();
+
     return (
         <div className="home__scroll">
-            <a href="#about" className="home__scroll-button button--flex" aria-label="Scroll to the about section">
+            <a href="#about" className="home__scroll-button button--flex" aria-label={hero.scrollAria}>
                 <svg
                     width="32px"
                     height="32px"
@@ -40,7 +43,7 @@ const ScrollDown = () => {
                         }}
                     ></path>
                 </svg>
-                <span className='home__scroll-name'>Scroll Down</span>
+                <span className='home__scroll-name'>{hero.scrollDown}</span>
                 <BiDownArrowAlt className="home__scroll-arrow" aria-hidden="true" focusable="false" />
             </a>
         </div>

@@ -1,7 +1,10 @@
 import React from 'react';
 import { BiCoffee, BiHeart } from "react-icons/bi";
+import { useCopy } from "../../i18n";
 
 const Sponsor = () => {
+    const { footer } = useCopy();
+
     return (
         <div className="footer__support">
             <a
@@ -11,7 +14,7 @@ const Sponsor = () => {
                 rel="noopener noreferrer"
             >
                 <BiHeart aria-hidden="true" focusable="false" />
-                Sponsor
+                {footer.sponsor}
             </a>
             <a
                 href="https://www.buymeacoffee.com/iamfatihay"
@@ -20,7 +23,7 @@ const Sponsor = () => {
                 rel="noopener noreferrer"
             >
                 <BiCoffee aria-hidden="true" focusable="false" />
-                Buy me a coffee
+                {footer.coffee}
             </a>
         </div>
     );

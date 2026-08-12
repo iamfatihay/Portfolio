@@ -30,6 +30,7 @@ import Header from "./components/header/Header";
 import ScrollUp from "./components/scrollup/ScrollUp";
 import ErrorBoundary from "./components/ErrorBoundary";
 import LoadingSpinner from "./components/LoadingSpinner";
+import { useCopy } from "./i18n";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -54,6 +55,8 @@ const Contact = lazy(() => import("./components/contact/Contact"));
 const Footer = lazy(() => import("./components/footer/Footer"));
 
 function App() {
+    const { common } = useCopy();
+
     useEffect(() => {
         const prefersReducedMotion = window.matchMedia(
             "(prefers-reduced-motion: reduce)"
@@ -69,9 +72,9 @@ function App() {
     }, []);
 
     return (
-        <ErrorBoundary>
+        <ErrorBoundary copy={common}>
             <a className="skip-link" href="#main-content">
-                Skip to main content
+                {common.skipLink}
             </a>
             <Header />
             <main className="main" id="main-content">
@@ -79,7 +82,7 @@ function App() {
                 {/* The fallback sits under the hero rather than replacing the
                     whole page, so the first screen is never a spinner */}
                 <Suspense
-                    fallback={<LoadingSpinner message="Loading portfolio..." />}
+                    fallback={<LoadingSpinner message={common.loading} />}
                 >
                     <About />
                     <Work />
@@ -89,7 +92,7 @@ function App() {
                     <Contact />
                 </Suspense>
             </main>
-            <Suspense fallback={<LoadingSpinner message="Loading footer..." />}>
+            <Suspense fallback={<LoadingSpinner message={common.loadingFooter} />}>
                 <Footer />
             </Suspense>
             <ScrollUp />

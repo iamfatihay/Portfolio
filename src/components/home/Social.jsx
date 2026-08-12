@@ -1,5 +1,6 @@
 import React from "react";
 import profileLinks from "../../data/profileLinks";
+import { useCopy } from "../../i18n";
 
 /*
  * Class names avoid the word "social": generic cosmetic filters in the common
@@ -8,6 +9,8 @@ import profileLinks from "../../data/profileLinks";
  * to explicit columns, so a blocked link can no longer reflow the hero.
  */
 const Social = () => {
+    const { hero } = useCopy();
+
     return (
         <div className="home__rail">
             {profileLinks.map(({ key, label, href, Icon }) => (
@@ -17,7 +20,7 @@ const Social = () => {
                     className="home__rail-link"
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label={`Fatih Ay on ${label}`}
+                    aria-label={hero.profileLink(label)}
                 >
                     <Icon aria-hidden="true" focusable="false" />
                 </a>

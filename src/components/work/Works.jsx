@@ -12,10 +12,15 @@ import {
     supportingProjects,
     featuredProjects,
     archiveProjects,
+    withCopy,
 } from "./Data";
+import { useCopy } from "../../i18n";
 
 const Works = () => {
+    const { work } = useCopy();
     const [showArchive, setShowArchive] = useState(false);
+    const lead = withCopy(leadProjects, work);
+    const supporting = withCopy(supportingProjects, work);
 
     return (
         <div className="works__root container">
@@ -26,7 +31,7 @@ const Works = () => {
              * not lesser for it.
              */}
             <div className="work__lead-grid">
-                {leadProjects.map((project, index) => (
+                {lead.map((project, index) => (
                     <ProjectCard
                         key={project.id}
                         project={project}
@@ -38,7 +43,7 @@ const Works = () => {
             </div>
 
             <div className="work__support-grid">
-                {supportingProjects.map((project, index) => (
+                {supporting.map((project, index) => (
                     <ProjectCard
                         key={project.id}
                         project={project}
@@ -52,7 +57,7 @@ const Works = () => {
             {/* ── Earlier projects ── */}
             <div className="work__personal-header">
                 <span className="work__personal-line" aria-hidden="true"></span>
-                <span className="work__personal-label">Earlier Projects</span>
+                <span className="work__personal-label">{work.earlier}</span>
                 <span className="work__personal-line" aria-hidden="true"></span>
             </div>
 
@@ -64,7 +69,7 @@ const Works = () => {
                             target="_blank"
                             rel="noopener noreferrer"
                             className="work__personal-img-wrap"
-                            aria-label={`View ${item.title}`}
+                            aria-label={work.view(item.title)}
                         >
                             <img
                                 src={item.image}
@@ -85,7 +90,7 @@ const Works = () => {
                                     href={item.link}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    aria-label={`${item.title} live demo`}
+                                    aria-label={work.demo(item.title)}
                                 >
                                     <BiLinkExternal aria-hidden="true" focusable="false" />
                                 </a>
@@ -93,7 +98,7 @@ const Works = () => {
                                     href={item.link2}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    aria-label={`${item.title} GitHub`}
+                                    aria-label={work.source(item.title)}
                                 >
                                     <BiLogoGithub aria-hidden="true" focusable="false" />
                                 </a>
@@ -110,7 +115,7 @@ const Works = () => {
                     onClick={() => setShowArchive(!showArchive)}
                     aria-expanded={showArchive}
                 >
-                    {showArchive ? "Hide Projects" : "More Projects"}
+                    {showArchive ? work.hideArchive : work.showArchive}
                     {showArchive ? (
                         <BiChevronUp className="work__more-icon" aria-hidden="true" focusable="false" />
                     ) : (
@@ -130,7 +135,7 @@ const Works = () => {
                                         href={item.link2}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        aria-label={`${item.title} source code`}
+                                        aria-label={work.source(item.title)}
                                     >
                                         <BiLogoGithub aria-hidden="true" focusable="false" />
                                     </a>
@@ -138,7 +143,7 @@ const Works = () => {
                                         href={item.link}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        aria-label={`${item.title} live demo`}
+                                        aria-label={work.demo(item.title)}
                                     >
                                         <BiLinkExternal aria-hidden="true" focusable="false" />
                                     </a>

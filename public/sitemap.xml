@@ -1,9 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <!--
+    Both language versions, each declaring the full set of alternates including
+    itself. A pair that only points one way is the usual reason Google ignores
+    the relationship and treats one of the two as a duplicate.
+  -->
   <url>
     <loc>https://portfolio-fay-react.netlify.app/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://portfolio-fay-react.netlify.app/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://portfolio-fay-react.netlify.app/de/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://portfolio-fay-react.netlify.app/"/>
     <lastmod>2026-08-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://portfolio-fay-react.netlify.app/de/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://portfolio-fay-react.netlify.app/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://portfolio-fay-react.netlify.app/de/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://portfolio-fay-react.netlify.app/"/>
+    <lastmod>2026-08-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
   </url>
 </urlset>
