@@ -183,7 +183,7 @@
     white-space: nowrap;
 }
 
-.pcard__status i { font-size: 0.9rem; }
+.pcard__status svg { font-size: 0.9rem; }
 
 /*
  * Icon and label are different fonts at different sizes, so each one's line box
@@ -265,7 +265,7 @@
     line-height: 1.5;
 }
 
-.pcard__proof i {
+.pcard__proof svg {
     flex-shrink: 0;
     margin-top: 0.1rem;
     color: var(--accent);
@@ -293,7 +293,7 @@
         color 0.25s ease, transform 0.18s ease;
 }
 
-.pcard__action i { font-size: 1rem; }
+.pcard__action svg { font-size: 1rem; }
 
 .pcard__action:hover {
     border-color: var(--accent);

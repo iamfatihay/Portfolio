@@ -1,4 +1,5 @@
 import React from 'react'
+import { BiDownArrowAlt } from "react-icons/bi";
 
 const ScrollDown = () => {
     return (
@@ -40,7 +41,7 @@ const ScrollDown = () => {
                     ></path>
                 </svg>
                 <span className='home__scroll-name'>Scroll Down</span>
-                <i className="uil uil-arrow-down home__scroll-arrow"></i>
+                <BiDownArrowAlt className="home__scroll-arrow" aria-hidden="true" focusable="false" />
             </a>
         </div>
     )

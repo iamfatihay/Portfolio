@@ -1,5 +1,12 @@
 import React, { useCallback, useEffect, useRef } from "react";
 import "./projectCard.css";
+import {
+    BiCheckShield,
+    BiCodeAlt,
+    BiGlobe,
+    BiLockAlt,
+    BiTrophy,
+} from "react-icons/bi";
 
 /*
  * Not every project has a URL to hand a visitor, and the ones that don't are
@@ -9,10 +16,10 @@ import "./projectCard.css";
  * tour on a real device, a jury result, a walkthrough on request.
  */
 export const STATUS = {
-    live: { label: "Live", icon: "bx-globe" },
-    building: { label: "In development", icon: "bx-code-alt" },
-    internal: { label: "Internal", icon: "bx-lock-alt" },
-    award: { label: "1st place", icon: "bx-trophy" },
+    live: { label: "Live", Icon: BiGlobe },
+    building: { label: "In development", Icon: BiCodeAlt },
+    internal: { label: "Internal", Icon: BiLockAlt },
+    award: { label: "1st place", Icon: BiTrophy },
 };
 
 /* Total sweep across the card, so a corner reaches half this either way */
@@ -83,7 +90,7 @@ const ProjectCard = ({ project, className = "", ...rest }) => {
                 <div className="pcard__body">
                     <header className="pcard__head">
                         <span className="pcard__status">
-                            <i className={`bx ${status.icon}`} aria-hidden="true"></i>
+                            <status.Icon aria-hidden="true" focusable="false" />
                             <span>{status.label}</span>
                         </span>
                         {project.period && (
@@ -104,7 +111,7 @@ const ProjectCard = ({ project, className = "", ...rest }) => {
                     <footer className="pcard__foot">
                         {project.proof && (
                             <p className="pcard__proof">
-                                <i className="bx bx-check-shield" aria-hidden="true"></i>
+                                <BiCheckShield aria-hidden="true" focusable="false" />
                                 {project.proof}
                             </p>
                         )}
@@ -124,7 +131,7 @@ const ProjectCard = ({ project, className = "", ...rest }) => {
                                         : {})}
                                 >
                                     <span>{action.label}</span>
-                                    <i className={`bx ${action.icon}`} aria-hidden="true"></i>
+                                    <action.Icon aria-hidden="true" focusable="false" />
                                 </a>
                             ))}
                         </div>

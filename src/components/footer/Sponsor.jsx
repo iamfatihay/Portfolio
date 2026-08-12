@@ -1,4 +1,5 @@
 import React from 'react';
+import { BiCoffee, BiHeart } from "react-icons/bi";
 
 const Sponsor = () => {
     return (
@@ -9,7 +10,7 @@ const Sponsor = () => {
                 target="_blank"
                 rel="noopener noreferrer"
             >
-                <i className="bx bx-heart" aria-hidden="true"></i>
+                <BiHeart aria-hidden="true" focusable="false" />
                 Sponsor
             </a>
             <a
@@ -18,7 +19,7 @@ const Sponsor = () => {
                 target="_blank"
                 rel="noopener noreferrer"
             >
-                <i className="bx bx-coffee" aria-hidden="true"></i>
+                <BiCoffee aria-hidden="true" focusable="false" />
                 Buy me a coffee
             </a>
         </div>

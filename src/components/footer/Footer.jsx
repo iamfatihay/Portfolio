@@ -1,31 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-import { LiaXing } from "react-icons/lia";
 import "./footer.css";
 import Sponsor from "./Sponsor";
+import profileLinks from "../../data/profileLinks";
 import logoSignature from "../../assets/logo-signature-animated.webp";
-
-const socialLinks = [
-    {
-        href: "https://www.linkedin.com/in/fatih-ay1661/",
-        label: "LinkedIn",
-        icon: <i className="uil uil-linkedin-alt" aria-hidden="true"></i>,
-    },
-    {
-        href: "https://github.com/iamfatihay",
-        label: "GitHub",
-        icon: <i className="uil uil-github" aria-hidden="true"></i>,
-    },
-    {
-        href: "https://twitter.com/Fatih__AY",
-        label: "X",
-        icon: <i className="uil uil-twitter-alt" aria-hidden="true"></i>,
-    },
-    {
-        href: "https://www.xing.com/profile/Fatih_AY033127/cv",
-        label: "Xing",
-        icon: <LiaXing aria-hidden="true" />,
-    },
-];
 
 const Footer = () => {
     const sealSlotRef = useRef(null);
@@ -91,17 +68,19 @@ const Footer = () => {
                 </div>
 
                 <div className="footer__meta">
-                    <ul className="footer__social">
-                        {socialLinks.map((link) => (
-                            <li key={link.label}>
+                    {/* See src/data/profileLinks.jsx for why these are not
+                        called "social" and use inline SVG */}
+                    <ul className="footer__profiles">
+                        {profileLinks.map(({ key, label, href, Icon }) => (
+                            <li key={key}>
                                 <a
-                                    href={link.href}
-                                    className="footer__social-link"
+                                    href={href}
+                                    className="footer__profiles-link"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    aria-label={`Fatih Ay on ${link.label}`}
+                                    aria-label={`Fatih Ay on ${label}`}
                                 >
-                                    {link.icon}
+                                    <Icon aria-hidden="true" focusable="false" />
                                 </a>
                             </li>
                         ))}

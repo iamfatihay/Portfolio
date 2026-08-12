@@ -43,6 +43,8 @@
 }
 
 .contact__card-icon {
+    display: block;
+    margin-inline: auto;
     font-size: 2rem;
     color: var(--title-color);
     margin-bottom: var(--mb-0-25);

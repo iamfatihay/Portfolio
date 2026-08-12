@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./scrollup.css";
+import { BiUpArrowAlt } from "react-icons/bi";
 
 const ScrollUp = () => {
     const [isVisible, setIsVisible] = useState(false);
@@ -17,7 +18,7 @@ const ScrollUp = () => {
             className={isVisible ? "scrollup show-scroll" : "scrollup"}
             aria-label="Back to top"
         >
-            <i className="uil uil-arrow-up scrollup__icon" aria-hidden="true"></i>
+            <BiUpArrowAlt className="scrollup__icon" aria-hidden="true" focusable="false" />
         </a>
     );
 };

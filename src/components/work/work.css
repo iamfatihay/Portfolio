@@ -51,8 +51,12 @@
     font-weight: var(--font-semi-bold);
     letter-spacing: 0.12em;
     text-transform: uppercase;
+    /*
+     * No opacity here: fading --text-color to 0.6 landed this label around
+     * 2.5:1 against the page, and it is 11px uppercase — the size that needs
+     * contrast most. Its small size and letter-spacing already keep it quiet.
+     */
     color: var(--text-color);
-    opacity: 0.6;
     white-space: nowrap;
 }
 
