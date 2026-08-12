@@ -46,6 +46,9 @@ const LOCALES = {
         siteDescription:
             "Selected production work, AI products and web projects by Fatih Ay.",
         imageAlt: "Fatih Ay, Lead Web Developer",
+        noscript: "You need JavaScript enabled to view this portfolio.",
+        appName: "Fatih Ay — Lead Web Developer Portfolio",
+        appShortName: "Fatih Ay",
     },
     de: {
         lang: "de",
@@ -62,6 +65,11 @@ const LOCALES = {
         siteDescription:
             "Ausgewählte Projekte aus dem Produktivbetrieb, KI-Produkte und Web-Projekte von Fatih Ay, Webentwickler in Stuttgart.",
         imageAlt: "Fatih Ay, Full-Stack-Entwickler",
+        noscript:
+            "Für dieses Portfolio muss JavaScript aktiviert sein.",
+        appName: "Fatih Ay — Portfolio als Full-Stack-Entwickler",
+        appShortName: "Fatih Ay",
+        manifest: "/de/manifest.json",
     },
 };
 
@@ -178,6 +186,29 @@ function render(html, locale) {
         `content="${locale.imageAlt}"`
     );
 
+    /*
+     * The <noscript> fallback is the one piece of body copy that cannot come
+     * from the dictionary: it is shown precisely when the bundle never runs.
+     */
+    out = replaceTag(
+        out,
+        /<noscript>[^<]*<\/noscript>/,
+        `<noscript>${locale.noscript}</noscript>`
+    );
+
+    /*
+     * Each language gets its own manifest. Sharing the root one meant a visitor
+     * who installed the site from /de/ got an English name and, worse, a
+     * start_url of "/" — the installed app opened the English page.
+     */
+    if (locale.manifest) {
+        out = replaceTag(
+            out,
+            /<link rel="manifest" href="[^"]*"\s*\/?>/,
+            `<link rel="manifest" href="${locale.manifest}" />`
+        );
+    }
+
     out = replaceTag(
         out,
         /<script type="application\/ld\+json">[\s\S]*?<\/script>/,
@@ -190,6 +221,36 @@ function render(html, locale) {
 
     return out;
 }
+
+/*
+ * Icon and start URLs are resolved against the manifest's own address, so a
+ * manifest served from /de/ has to name them from the root or it would look
+ * for /de/icon-192.png.
+ */
+function writeManifest(locale, dir) {
+    const base = JSON.parse(
+        fs.readFileSync(path.join(BUILD, "manifest.json"), "utf8")
+    );
+
+    const manifest = {
+        ...base,
+        name: locale.appName,
+        short_name: locale.appShortName,
+        description: locale.siteDescription,
+        start_url: new URL(locale.url).pathname,
+        lang: locale.lang,
+        icons: base.icons.map((icon) => ({
+            ...icon,
+            src: icon.src.startsWith("/") ? icon.src : `/${icon.src}`,
+        })),
+    };
+
+    fs.writeFileSync(
+        path.join(dir, "manifest.json"),
+        JSON.stringify(manifest, null, 2)
+    );
+}
+
 
 const source = fs.readFileSync(path.join(BUILD, "index.html"), "utf8");
 const graphMatch = source.match(
@@ -207,5 +268,8 @@ fs.writeFileSync(path.join(BUILD, "index.html"), render(source, LOCALES.en));
 const deDir = path.join(BUILD, "de");
 fs.mkdirSync(deDir, { recursive: true });
 fs.writeFileSync(path.join(deDir, "index.html"), render(source, LOCALES.de));
+writeManifest(LOCALES.de, deDir);
 
-console.log("build-locales: wrote build/index.html and build/de/index.html");
+console.log(
+    "build-locales: wrote build/index.html, build/de/index.html and build/de/manifest.json"
+);

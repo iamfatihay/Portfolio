@@ -166,7 +166,7 @@ const de = {
                 caption: "Gemeinsamer Erfolg mit dem Siegerteam",
             },
             {
-                alt: "Veranstaltungsort und Teilnehmende des Black Forest Hackathon",
+                alt: "Veranstaltungsort und Teilnehmende des Black Forest Hackathons",
                 title: "Veranstaltungsort",
                 caption: "Black Forest Hackathon — Liebherr-Mining-Challenge",
             },
