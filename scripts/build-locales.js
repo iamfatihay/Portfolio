@@ -25,7 +25,7 @@ const BUILD = path.join(__dirname, "..", "build");
  * that has to exist before React does, so it cannot come from there.
  *
  * The German wording is not a translation of the English line. It leads with
- * the terms someone hiring in Germany actually types ("Full Stack Entwickler",
+ * the terms someone hiring in Germany actually types ("Full-Stack-Entwickler",
  * "Webentwickler Stuttgart"), because the description is one of the few places
  * where the vocabulary of the search and the vocabulary of the page can be
  * made to meet.
@@ -51,17 +51,17 @@ const LOCALES = {
         lang: "de",
         ogLocale: "de_DE",
         url: `${ORIGIN}/de/`,
-        title: "Fatih Ay | Full Stack Entwickler in Stuttgart",
+        title: "Fatih Ay | Full-Stack-Entwickler in Stuttgart",
         description:
-            "Full Stack Entwickler in Stuttgart: B2B-Marktplätze, KI-Produkte und performante Websites mit Symfony, Sylius, React und Python — von der Architektur bis in den Produktivbetrieb.",
-        ogTitle: "Fatih Ay | Full Stack Entwickler in Stuttgart",
+            "Full-Stack-Entwickler in Stuttgart: B2B-Marktplätze, KI-Produkte und performante Websites mit Symfony, Sylius, React und Python — von der Architektur bis in den Produktivbetrieb.",
+        ogTitle: "Fatih Ay | Full-Stack-Entwickler in Stuttgart",
         ogDescription:
             "B2B-Marktplätze, KI-Produkte und performante Websites — von der Architektur bis in den Produktivbetrieb.",
         siteName: "Fatih Ay Portfolio",
-        pageName: "Fatih Ay | Full Stack Entwickler in Stuttgart",
+        pageName: "Fatih Ay | Full-Stack-Entwickler in Stuttgart",
         siteDescription:
-            "Ausgewählte Projekte aus dem Produktivbetrieb, KI-Produkte und Web-Projekte von Fatih Ay.",
-        imageAlt: "Fatih Ay, Full Stack Entwickler",
+            "Ausgewählte Projekte aus dem Produktivbetrieb, KI-Produkte und Web-Projekte von Fatih Ay, Webentwickler in Stuttgart.",
+        imageAlt: "Fatih Ay, Full-Stack-Entwickler",
     },
 };
 

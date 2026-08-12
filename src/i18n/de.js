@@ -4,7 +4,7 @@
  *
  * Translated rather than transliterated: the German page addresses employers
  * and clients in Germany, so it uses the terms they search for and read
- * ("Full Stack Entwickler", "B2B-Marktplatz") instead of a word-for-word
+ * ("Full-Stack-Entwickler", "B2B-Marktplatz") instead of a word-for-word
  * rendering of the English. Product names, technologies and the job titles
  * that the German market itself uses in English stay as they are.
  */
@@ -41,7 +41,7 @@ const de = {
         eyebrow: "Stuttgart, Deutschland · Lead Web Developer",
         greeting: "Hallo, ich bin",
         name: "Fatih Ay",
-        subtitle: "Full Stack Entwickler",
+        subtitle: "Full-Stack-Entwickler",
         description:
             "Ich entwickle belastbare Marktplätze, KI-gestützte Produkte und conversion-starke Websites — von der Architektur bis in den Produktivbetrieb.",
         primaryCta: "Projekte ansehen",
@@ -55,9 +55,9 @@ const de = {
     about: {
         title: "Über mich",
         subtitle: "Der Mensch hinter den Produkten",
-        imageAlt: "Fatih Ay, Full Stack Entwickler",
+        imageAlt: "Fatih Ay, Full-Stack-Entwickler",
         paragraphs: [
-            "Ich bin Full Stack Entwickler und übernehme gern den gesamten Weg: von der noch unklaren Idee bis zum verlässlichen Release im Produktivbetrieb. Bei Hyfindr arbeite ich an Frontend, Backend, Suche, Infrastruktur und Deployment für B2B- und KI-Produkte.",
+            "Ich bin Full-Stack-Entwickler und übernehme gern den gesamten Weg: von der noch unklaren Idee bis zum verlässlichen Release im Produktivbetrieb. Bei Hyfindr arbeite ich an Frontend, Backend, Suche, Infrastruktur und Deployment für B2B- und KI-Produkte.",
             "Neben der Softwareentwicklung prägt mich der Wing-Tsun-Unterricht: ruhig bleiben, schnell umdenken und Komplexes für andere verständlich machen.",
         ],
         cv: "Lebenslauf herunterladen",
