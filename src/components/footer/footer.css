@@ -75,13 +75,13 @@
     gap: 0.75rem 1.5rem;
 }
 
-.footer__social {
+.footer__profiles {
     display: flex;
     align-items: center;
     gap: 0.35rem;
 }
 
-.footer__social-link {
+.footer__profiles-link {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -93,7 +93,7 @@
     transition: var(--hover-transition);
 }
 
-.footer__social-link:hover {
+.footer__profiles-link:hover {
     color: var(--first-color);
     background: var(--hover-tint);
     box-shadow: 0 0 0 1px var(--hover-border);
@@ -121,7 +121,7 @@
     transition: color 0.25s ease;
 }
 
-.footer__support-link i {
+.footer__support-link svg {
     font-size: 1.1rem;
 }
 

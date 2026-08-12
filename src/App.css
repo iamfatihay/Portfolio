@@ -8,7 +8,13 @@
     --sat: 0%;
     --title-color: hsl(var(--hue), var(--sat), 20%);
     --title-color-dark: hsl(var(--hue), var(--sat), 0%);
-    --text-color: hsl(var(--hue), var(--sat), 46%);
+    /*
+     * 44%, not 46%: body copy sits on --body-color, and at 46% that pairing
+     * measures 4.41:1 — under the 4.5:1 WCAG AA needs for normal text. Two
+     * points of lightness is invisible next to the old grey and buys 4.74:1 on
+     * the page and 4.95:1 on the white cards.
+     */
+    --text-color: hsl(var(--hue), var(--sat), 44%);
     --body-color: hsl(var(--hue), var(--sat), 98%);
     --container-color: #fff;
     --border-color: rgba(15, 23, 42, 0.1);
@@ -82,6 +88,24 @@
     --section-space-bottom: 3.5rem;
     --hero-space-top: 6rem;
 
+    /*
+     * The container's breathing room, applied as padding rather than margins so
+     * one value holds at every width. Without it, viewports just above the
+     * 968px cap (small laptops, split-screen windows) ran the content flush
+     * into the viewport edges.
+     */
+    --container-gutter: 1.5rem;
+
+    /*========== Anchor scrolling ==========*/
+    /*
+     * The real height of the fixed bar, which is the nav box — not
+     * --header-height, which is only one ingredient of it. Anchor offsets must
+     * use this, or every jump lands a nav's worth of padding off.
+     */
+    --header-offset: calc(var(--header-height) + 1.5rem);
+    /* Air between the bottom of the header and the heading a jump lands on */
+    --scroll-gap: 2rem;
+
     /*========== Margenes Bottom ==========*/
     /*.5rem = 8px | 1rem = 16px ...*/
     --mb-0-25: 0.25rem;
@@ -118,6 +142,30 @@
         --section-space-top: 4rem;
         --section-space-bottom: 3.5rem;
         --hero-space-top: 2rem;
+        /* The header docks to the bottom here, so the top edge is free */
+        --header-offset: 0px;
+        --scroll-gap: 1.25rem;
+    }
+}
+
+/*
+ * Small laptops. Desktop widths get plenty of horizontal room from the 968px
+ * cap, but a 13–14" screen is short — the generous section rhythm means barely
+ * one section fits per screen. Trim it in two tiers by viewport height.
+ */
+@media screen and (min-width: 993px) and (max-height: 900px) {
+    :root {
+        --section-space-top: 5.5rem;
+        --section-space-bottom: 3rem;
+        --hero-space-top: 3.5rem;
+    }
+}
+
+@media screen and (min-width: 993px) and (max-height: 740px) {
+    :root {
+        --section-space-top: 4.5rem;
+        --section-space-bottom: 2.5rem;
+        --hero-space-top: 2rem;
     }
 }
 
@@ -131,7 +179,11 @@
 html {
     scroll-behavior: smooth;
     overflow-x: hidden;
-    scroll-padding-top: calc(var(--header-height) + 2rem);
+    /*
+     * Pushes any anchor jump clear of the fixed header. Sections then subtract
+     * their own top padding on top of this — see .section below.
+     */
+    scroll-padding-top: var(--header-offset);
 }
 
 body,
@@ -185,6 +237,17 @@ img {
     height: auto;
 }
 
+/*
+ * Icons are inline SVG (react-icons) rather than an icon font. An SVG sits on
+ * the text baseline by default, which drops it a few pixels lower than the
+ * glyph it replaced; centring it on the line puts it back where the eye
+ * expects. Icons still take their size from `font-size`, because react-icons
+ * renders at 1em.
+ */
+svg {
+    vertical-align: middle;
+}
+
 .skip-link {
     position: fixed;
     top: 0.75rem;
@@ -205,11 +268,28 @@ img {
 /*=============== REUSABLE CSS CLASSES ===============*/
 .section {
     padding-block: var(--section-space-top) var(--section-space-bottom);
-    scroll-margin-top: calc(var(--header-height) + 1rem);
+    /*
+     * scroll-padding-top above already clears the header, so this only has to
+     * cancel the section's own top padding and leave --scroll-gap behind. The
+     * two offsets add up, and the result is that the *title* — not the invisible
+     * top edge of a section padded by 7.5rem — lands --scroll-gap under the
+     * header, identically for every anchor and at every breakpoint.
+     *
+     * The value is normally negative, which is legal and is the point: the jump
+     * has to travel past the section's border-box top to trim that dead padding,
+     * otherwise the tail of the previous section stays on screen.
+     */
+    scroll-margin-top: calc(var(--scroll-gap) - var(--section-space-top));
 }
 
 .home.section {
     padding-top: var(--hero-space-top);
+    /*
+     * #home *is* the top of the page, so it takes no gap treatment: any positive
+     * landing point would crop the hero. This offset always resolves the jump
+     * below zero, where it clamps — which is what "back to top" should do.
+     */
+    scroll-margin-top: var(--header-offset);
 }
 
 .section__title {
@@ -247,7 +327,12 @@ img {
 
 /*=============== LAYOUT ===============*/
 .container {
-    max-width: 968px;
+    width: 100%;
+    /* The cap is the *content* width, so the gutters are added on top of it and
+       the layout is unchanged on wide screens */
+    max-width: calc(968px + 2 * var(--container-gutter));
+    padding-left: var(--container-gutter);
+    padding-right: var(--container-gutter);
     margin-left: auto;
     margin-right: auto;
 }
@@ -432,14 +517,39 @@ img {
     }
 }
 
+/*=============== TOASTS ===============*/
+/*
+ * react-toastify pins the container at `top: 1em`, which is squarely behind the
+ * fixed header — the toast came out clipped. Doubling the class raises the
+ * specificity above the library's own rules regardless of stylesheet order.
+ */
+.Toastify__toast-container {
+    /* Above --z-modal (1000); the library's own default is scoped to :root */
+    --toastify-z-index: 1100;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    box-sizing: border-box;
+}
+
+.Toastify__toast-container.Toastify__toast-container--top-center,
+.Toastify__toast-container.Toastify__toast-container--top-left,
+.Toastify__toast-container.Toastify__toast-container--top-right {
+    /* Clears the desktop nav, which is --header-height plus its 1.5rem of padding */
+    top: calc(var(--header-height) + 2.25rem);
+}
+
+/* The header docks to the bottom on phones, so the top edge is free again */
+@media screen and (max-width: 768px) {
+    .Toastify__toast-container.Toastify__toast-container--top-center,
+    .Toastify__toast-container.Toastify__toast-container--top-left,
+    .Toastify__toast-container.Toastify__toast-container--top-right {
+        top: calc(env(safe-area-inset-top, 0px) + 0.75rem);
+    }
+}
+
 /*=============== BREAKPOINTS ===============*/
 /* For large devices */
 @media screen and (max-width: 992px) {
-    .container {
-        margin-left: var(--mb-1-5);
-        margin-right: var(--mb-1-5);
-    }
-
     .button {
         padding: 1rem 1.75rem;
     }
@@ -468,10 +578,6 @@ img {
 @media screen and (max-width: 350px) {
     :root {
         --big-font-size: 2.25rem;
-    }
-
-    .container {
-        margin-left: var(--mb-1);
-        margin-right: var(--mb-1);
+        --container-gutter: 1rem;
     }
 }

@@ -1,23 +1,29 @@
 import React from "react";
-import { LiaXing } from "react-icons/lia";
+import profileLinks from "../../data/profileLinks";
 
+/*
+ * Class names avoid the word "social": generic cosmetic filters in the common
+ * blocker lists hide anything matching `[class*="social"]`, and losing this
+ * column used to take the hero layout with it. The grid also pins its children
+ * to explicit columns, so a blocked link can no longer reflow the hero.
+ */
 const Social = () => {
-  return (
-    <div className="home__social">
-      <a href="https://www.linkedin.com/in/fatih-ay1661/" className="home__social-icon" target="_blank" rel="noopener noreferrer" aria-label="Fatih Ay on LinkedIn">
-        <i className="uil uil-linkedin-alt" aria-hidden="true"></i>
-      </a>
-      <a href="https://github.com/iamfatihay" className="home__social-icon" target="_blank" rel="noopener noreferrer" aria-label="Fatih Ay on GitHub">
-        <i className="uil uil-github" aria-hidden="true"></i>
-      </a>
-      <a href="https://twitter.com/Fatih__AY" className="home__social-icon" target="_blank" rel="noopener noreferrer" aria-label="Fatih Ay on X">
-        <i className="uil uil-twitter-alt" aria-hidden="true"></i>
-      </a>
-      <a href="https://www.xing.com/profile/Fatih_AY033127/cv" className="home__social-icon" target="_blank" rel="noopener noreferrer" aria-label="Fatih Ay on Xing">
-        <LiaXing aria-hidden="true" />
-      </a>
-    </div>
-  );
+    return (
+        <div className="home__rail">
+            {profileLinks.map(({ key, label, href, Icon }) => (
+                <a
+                    key={key}
+                    href={href}
+                    className="home__rail-link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Fatih Ay on ${label}`}
+                >
+                    <Icon aria-hidden="true" focusable="false" />
+                </a>
+            ))}
+        </div>
+    );
 };
 
 export default Social;

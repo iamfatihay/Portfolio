@@ -1,7 +1,12 @@
 import React, { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
-import { Flip, ToastContainer } from "react-toastify";
 import "./contact.css";
+import {
+    BiLogoWhatsapp,
+    BiMailSend,
+    BiRightArrowAlt,
+    BiSend,
+} from "react-icons/bi";
 import BeamsCollision from "../beams/BeamsCollision";
 import { toastErrorNotify, toastSuccessNotify } from "../../helper/ToastNotify";
 
@@ -59,17 +64,17 @@ const Contact = () => {
 
                     <div className="contact__info">
                         <div className="contact__card">
-                            <i className="bx bx-mail-send contact__card-icon" aria-hidden="true"></i>
+                            <BiMailSend className="contact__card-icon" aria-hidden="true" focusable="false" />
                             <h3 className="contact__card-title">Email</h3>
                             <span className="contact__card-data">de.fatih.ay@gmail.com</span>
                             <a href="mailto:de.fatih.ay@gmail.com" className="contact__button">
                                 Write an email
-                                <i className="bx bx-right-arrow-alt contact__button-icon" aria-hidden="true"></i>
+                                <BiRightArrowAlt className="contact__button-icon" aria-hidden="true" focusable="false" />
                             </a>
                         </div>
 
                         <div className="contact__card">
-                            <i className="bx bxl-whatsapp contact__card-icon" aria-hidden="true"></i>
+                            <BiLogoWhatsapp className="contact__card-icon" aria-hidden="true" focusable="false" />
                             <h3 className="contact__card-title">WhatsApp</h3>
                             <span className="contact__card-data">+49 163 419 35 72</span>
                             <a
@@ -79,7 +84,7 @@ const Contact = () => {
                                 rel="noopener noreferrer"
                             >
                                 Start a chat
-                                <i className="bx bx-right-arrow-alt contact__button-icon" aria-hidden="true"></i>
+                                <BiRightArrowAlt className="contact__button-icon" aria-hidden="true" focusable="false" />
                             </a>
                         </div>
                     </div>
@@ -132,25 +137,15 @@ const Contact = () => {
                         <div className="form__button">
                             <button type="submit" className="button button--flex" disabled={isSending}>
                                 {isSending ? "Sending…" : "Send message"}
-                                <i className="bx bx-send button__icon" aria-hidden="true"></i>
+                                <BiSend className="button__icon" aria-hidden="true" focusable="false" />
                             </button>
                         </div>
                     </form>
                 </div>
             </div>
-            <ToastContainer
-                position="top-center"
-                autoClose={3500}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="dark"
-                transition={Flip}
-            />
+            {/* The ToastContainer lives in App, not here: this section sets
+                `isolation: isolate`, which trapped the fixed toast in the
+                section's stacking context and let the header paint over it */}
         </section>
     );
 };
