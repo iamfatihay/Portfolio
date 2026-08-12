@@ -8,42 +8,21 @@ import {
     BiPalette,
     BiServer,
 } from "react-icons/bi";
+import { useCopy } from "../../i18n";
 
+/*
+ * Icons and technology lists are language-independent; the group title and
+ * description come from the dictionary under the same key.
+ */
 const skillGroups = [
+    { key: "backend", Icon: BiServer, skills: ["PHP 8", "Symfony", "Sylius", "REST APIs", "Node.js", "Twig"] },
+    { key: "frontend", Icon: BiLayout, skills: ["React", "TypeScript", "JavaScript", "Redux", "HTML5", "CSS3"] },
+    { key: "design", Icon: BiPalette, skills: ["Figma", "Tailwind CSS", "Sass", "Bootstrap", "Material UI"] },
+    { key: "data", Icon: BiData, skills: ["MySQL", "Redis", "Elasticsearch", "SQLite", "Firebase", "Python", "Django"] },
+    { key: "infrastructure", Icon: BiGitBranch, skills: ["Docker", "Nginx", "Linux", "CI/CD", "Git", "Netlify"] },
     {
-        title: "Backend & commerce",
-        Icon: BiServer,
-        description: "Business logic, APIs and data-heavy commerce platforms.",
-        skills: ["PHP 8", "Symfony", "Sylius", "REST APIs", "Node.js", "Twig"],
-    },
-    {
-        title: "Frontend",
-        Icon: BiLayout,
-        description: "Responsive interfaces that stay clear and maintainable.",
-        skills: ["React", "TypeScript", "JavaScript", "Redux", "HTML5", "CSS3"],
-    },
-    {
-        title: "UI & design",
-        Icon: BiPalette,
-        description: "Design handoff through to component libraries that scale.",
-        skills: ["Figma", "Tailwind CSS", "Sass", "Bootstrap", "Material UI"],
-    },
-    {
-        title: "Data & search",
-        Icon: BiData,
-        description: "Reliable persistence, caching, discovery and integration.",
-        skills: ["MySQL", "Redis", "Elasticsearch", "SQLite", "Firebase", "Python", "Django"],
-    },
-    {
-        title: "Infrastructure & delivery",
-        Icon: BiGitBranch,
-        description: "Where the work runs, and how it gets to production.",
-        skills: ["Docker", "Nginx", "Linux", "CI/CD", "Git", "Netlify"],
-    },
-    {
-        title: "Collaboration & quality",
+        key: "quality",
         Icon: BiCheckShield,
-        description: "Keeping a team aligned and the work tested, fast and findable.",
         skills: [
             "Jira",
             "Confluence",
@@ -57,29 +36,38 @@ const skillGroups = [
 ];
 
 const Skills = () => {
+    const { skills } = useCopy();
+
     return (
         <section className="skills section" id="skills">
             <h2 className="section__title" data-aos="fade-up">
-                Technical Focus
+                {skills.title}
             </h2>
             <span className="section__subtitle" data-aos="fade-up" data-aos-delay="100">
-                The tools I use to ship
+                {skills.subtitle}
             </span>
 
             <div className="skills__container container grid">
                 {skillGroups.map((group, index) => (
                     <article
                         className="skills__content"
-                        key={group.title}
+                        key={group.key}
                         data-aos="fade-up"
                         data-aos-delay={150 + index * 60}
                     >
                         <span className="skills__icon" aria-hidden="true">
                             <group.Icon focusable="false" />
                         </span>
-                        <h3 className="skills__title">{group.title}</h3>
-                        <p className="skills__description">{group.description}</p>
-                        <ul className="skills__list" aria-label={`${group.title} technologies`}>
+                        <h3 className="skills__title">
+                            {skills.groups[group.key].title}
+                        </h3>
+                        <p className="skills__description">
+                            {skills.groups[group.key].description}
+                        </p>
+                        <ul
+                            className="skills__list"
+                            aria-label={skills.listLabel(skills.groups[group.key].title)}
+                        >
                             {group.skills.map((skill) => (
                                 <li key={skill}>{skill}</li>
                             ))}

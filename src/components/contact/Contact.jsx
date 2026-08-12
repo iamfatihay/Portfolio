@@ -8,6 +8,7 @@ import {
     BiSend,
 } from "react-icons/bi";
 import BeamsCollision from "../beams/BeamsCollision";
+import { useCopy } from "../../i18n";
 import { toastErrorNotify, toastSuccessNotify } from "../../helper/ToastNotify";
 
 const EMAILJS_PLACEHOLDERS = new Set([
@@ -17,6 +18,7 @@ const EMAILJS_PLACEHOLDERS = new Set([
 ]);
 
 const Contact = () => {
+    const { contact } = useCopy();
     const form = useRef(null);
     const [isSending, setIsSending] = useState(false);
 
@@ -29,9 +31,7 @@ const Contact = () => {
         const credentials = [serviceId, templateId, publicKey];
 
         if (credentials.some((value) => !value || EMAILJS_PLACEHOLDERS.has(value))) {
-            toastErrorNotify(
-                "The form is temporarily unavailable. Please use email or WhatsApp."
-            );
+            toastErrorNotify(contact.unavailableToast);
             return;
         }
 
@@ -39,13 +39,11 @@ const Contact = () => {
 
         try {
             await emailjs.sendForm(serviceId, templateId, form.current, publicKey);
-            toastSuccessNotify("Thanks—your message has been sent.");
+            toastSuccessNotify(contact.successToast);
             form.current?.reset();
         } catch (error) {
             console.error("EmailJS submission failed", error);
-            toastErrorNotify(
-                "The message could not be sent. Please email me directly instead."
-            );
+            toastErrorNotify(contact.errorToast);
         } finally {
             setIsSending(false);
         }
@@ -55,35 +53,35 @@ const Contact = () => {
         <section className="contact section" id="contact">
             <BeamsCollision />
 
-            <h2 className="section__title">Let&apos;s Work Together</h2>
-            <span className="section__subtitle">Tell me what you&apos;re building</span>
+            <h2 className="section__title">{contact.title}</h2>
+            <span className="section__subtitle">{contact.subtitle}</span>
 
             <div className="contact__container container grid">
                 <div className="contact__content">
-                    <h3 className="contact__title">Direct contact</h3>
+                    <h3 className="contact__title">{contact.directTitle}</h3>
 
                     <div className="contact__info">
                         <div className="contact__card">
                             <BiMailSend className="contact__card-icon" aria-hidden="true" focusable="false" />
-                            <h3 className="contact__card-title">Email</h3>
+                            <h3 className="contact__card-title">{contact.emailTitle}</h3>
                             <span className="contact__card-data">de.fatih.ay@gmail.com</span>
                             <a href="mailto:de.fatih.ay@gmail.com" className="contact__button">
-                                Write an email
+                                {contact.emailCta}
                                 <BiRightArrowAlt className="contact__button-icon" aria-hidden="true" focusable="false" />
                             </a>
                         </div>
 
                         <div className="contact__card">
                             <BiLogoWhatsapp className="contact__card-icon" aria-hidden="true" focusable="false" />
-                            <h3 className="contact__card-title">WhatsApp</h3>
+                            <h3 className="contact__card-title">{contact.whatsappTitle}</h3>
                             <span className="contact__card-data">+49 163 419 35 72</span>
                             <a
-                                href="https://api.whatsapp.com/send?phone=491634193572&text=Hi%20Fatih%2C%20I%27d%20like%20to%20talk%20about%20a%20project."
+                                href={`https://api.whatsapp.com/send?phone=491634193572&text=${encodeURIComponent(contact.whatsappText)}`}
                                 className="contact__button"
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
-                                Start a chat
+                                {contact.whatsappCta}
                                 <BiRightArrowAlt className="contact__button-icon" aria-hidden="true" focusable="false" />
                             </a>
                         </div>
@@ -91,17 +89,17 @@ const Contact = () => {
                 </div>
 
                 <div className="contact__content">
-                    <h3 className="contact__title">Send a project brief</h3>
+                    <h3 className="contact__title">{contact.formTitle}</h3>
 
                     <form ref={form} onSubmit={sendEmail} className="contact__form">
                         <div className="contact__form-div">
-                            <label className="contact__form-tag" htmlFor="contact-name">Name</label>
+                            <label className="contact__form-tag" htmlFor="contact-name">{contact.nameLabel}</label>
                             <input
                                 id="contact-name"
                                 type="text"
                                 name="name"
                                 className="contact__form-input"
-                                placeholder="Your name"
+                                placeholder={contact.namePlaceholder}
                                 autoComplete="name"
                                 minLength="2"
                                 required
@@ -109,26 +107,26 @@ const Contact = () => {
                         </div>
 
                         <div className="contact__form-div">
-                            <label className="contact__form-tag" htmlFor="contact-email">Email</label>
+                            <label className="contact__form-tag" htmlFor="contact-email">{contact.emailLabel}</label>
                             <input
                                 id="contact-email"
                                 type="email"
                                 name="email"
                                 className="contact__form-input"
-                                placeholder="you@example.com"
+                                placeholder={contact.emailPlaceholder}
                                 autoComplete="email"
                                 required
                             />
                         </div>
 
                         <div className="contact__form-div contact__form-area">
-                            <label className="contact__form-tag" htmlFor="contact-project">Project</label>
+                            <label className="contact__form-tag" htmlFor="contact-project">{contact.projectLabel}</label>
                             <textarea
                                 id="contact-project"
                                 name="project"
                                 rows="7"
                                 className="contact__form-input"
-                                placeholder="A short outline of your project"
+                                placeholder={contact.projectPlaceholder}
                                 minLength="10"
                                 required
                             ></textarea>
@@ -136,7 +134,7 @@ const Contact = () => {
 
                         <div className="form__button">
                             <button type="submit" className="button button--flex" disabled={isSending}>
-                                {isSending ? "Sending…" : "Send message"}
+                                {isSending ? contact.submitting : contact.submit}
                                 <BiSend className="button__icon" aria-hidden="true" focusable="false" />
                             </button>
                         </div>

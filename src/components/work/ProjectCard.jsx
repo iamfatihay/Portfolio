@@ -7,6 +7,7 @@ import {
     BiLockAlt,
     BiTrophy,
 } from "react-icons/bi";
+import { useCopy } from "../../i18n";
 
 /*
  * Not every project has a URL to hand a visitor, and the ones that don't are
@@ -15,11 +16,12 @@ import {
  * the strongest proof that exists for that kind: the site itself, a product
  * tour on a real device, a jury result, a walkthrough on request.
  */
-export const STATUS = {
-    live: { label: "Live", Icon: BiGlobe },
-    building: { label: "In development", Icon: BiCodeAlt },
-    internal: { label: "Internal", Icon: BiLockAlt },
-    award: { label: "1st place", Icon: BiTrophy },
+/* Icons only — the labels are translated, see work.statuses in src/i18n */
+export const STATUS_ICONS = {
+    live: BiGlobe,
+    building: BiCodeAlt,
+    internal: BiLockAlt,
+    award: BiTrophy,
 };
 
 /* Total sweep across the card, so a corner reaches half this either way */
@@ -28,7 +30,8 @@ const MAX_TILT = 18;
 const ProjectCard = ({ project, className = "", ...rest }) => {
     const cardRef = useRef(null);
     const frameRef = useRef(0);
-    const status = STATUS[project.status];
+    const { work } = useCopy();
+    const StatusIcon = STATUS_ICONS[project.status];
 
     const handleMove = useCallback((event) => {
         const card = cardRef.current;
@@ -90,8 +93,8 @@ const ProjectCard = ({ project, className = "", ...rest }) => {
                 <div className="pcard__body">
                     <header className="pcard__head">
                         <span className="pcard__status">
-                            <status.Icon aria-hidden="true" focusable="false" />
-                            <span>{status.label}</span>
+                            <StatusIcon aria-hidden="true" focusable="false" />
+                            <span>{work.statuses[project.status]}</span>
                         </span>
                         {project.period && (
                             <span className="pcard__period">{project.period}</span>
@@ -102,7 +105,7 @@ const ProjectCard = ({ project, className = "", ...rest }) => {
                     <p className="pcard__role">{project.role}</p>
                     <p className="pcard__desc">{project.description}</p>
 
-                    <ul className="pcard__tags" aria-label={`${project.title} stack`}>
+                    <ul className="pcard__tags" aria-label={work.stack(project.title)}>
                         {project.tags.map((tag) => (
                             <li key={tag}>{tag}</li>
                         ))}

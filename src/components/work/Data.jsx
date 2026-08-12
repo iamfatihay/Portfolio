@@ -14,22 +14,20 @@ import HiddenChampionsMark from "../../assets/hidden-champions-mark.svg";
  * Ordered by how much of it a visitor can verify: two live products, a mobile
  * app mid-build, an internal tool, then an awarded 48-hour build. Each carries
  * the strongest proof it has, so the ones without a public URL still stand up.
+ *
+ * What stays here is what does not change with the language: ids, status,
+ * images and links. Role, period, description, proof, tags and action labels
+ * live under work.projects[id] in src/i18n — withCopy() at the bottom of this
+ * file zips the two halves back together for whichever language is rendering.
  */
 export const leadProjects = [
     {
         id: "hyfindr",
         status: "live",
         title: "hyfindr.com",
-        role: "Lead Web Developer",
-        period: "Oct 2023 – Present",
-        description:
-            "A production B2B hydrogen marketplace serving a global industry. I lead full stack delivery across commerce, search, performance and release workflows.",
-        tags: ["Symfony", "Sylius", "PHP", "Elasticsearch", "Docker"],
-        proof: "In production and trading today.",
         actions: [
-            { label: "Visit site", href: "https://hyfindr.com", Icon: BiRightArrowAlt },
+            { href: "https://hyfindr.com", Icon: BiRightArrowAlt },
             {
-                label: "LinkedIn",
                 href: "https://www.linkedin.com/in/fatih-ay1661/",
                 Icon: BiLogoLinkedin,
             },
@@ -39,17 +37,10 @@ export const leadProjects = [
         id: "hidden-champions",
         status: "live",
         title: "hidden-champions.ai",
-        role: "Design & development",
-        period: "2026",
-        description:
-            "A conversion-focused German site for secure AI agents in the Mittelstand, built around interactive process comparisons and clear service storytelling.",
-        tags: ["JavaScript", "CSS", "Interaction Design", "SEO"],
         media: HiddenChampionsMark,
         mediaFit: "contain",
-        proof: "Live, and shipped end to end by me.",
         actions: [
             {
-                label: "Visit site",
                 href: "https://hidden-champions.ai",
                 Icon: BiRightArrowAlt,
             },
@@ -59,15 +50,8 @@ export const leadProjects = [
         id: "volo",
         status: "building",
         title: "Volo",
-        role: "Podcast recording & editing app",
-        period: "2026 · In build",
-        description:
-            "Two people in two places record a conversation and publish a finished episode from one app. Recording runs on the server with a track per speaker, so a dropped connection never costs the take.",
-        tags: ["React Native", "Expo", "FastAPI", "PostgreSQL", "100ms"],
-        proof: "Full flow recorded, edited and published on a real device.",
         actions: [
             {
-                label: "Request a product tour",
                 href: "#contact",
                 Icon: BiDownArrowAlt,
             },
@@ -80,15 +64,8 @@ export const supportingProjects = [
         id: "prototype",
         status: "internal",
         title: "prototype.hyfindr.ai",
-        role: "AI prototype · internal tool",
-        period: "2024",
-        description:
-            "An internal AI product joining a React interface and a Python AI/API layer to Hyfindr's main PHP application.",
-        tags: ["React", "Python", "AI/ML", "REST API"],
-        proof: "Login-restricted · walkthrough available on request.",
         actions: [
             {
-                label: "Request a walkthrough",
                 href: "#contact",
                 Icon: BiDownArrowAlt,
             },
@@ -99,21 +76,14 @@ export const supportingProjects = [
         status: "award",
         media: Hackathon,
         title: "Black Forest Hackathon",
-        role: "Liebherr Mining challenge · BadenCampus",
-        period: "May 2025 · Freiburg",
-        description:
-            "An AI-powered platform built for a real Liebherr Mining challenge in 48 hours, judged first place against competing teams.",
-        tags: ["Vite + React", "AI/ML", "48 hours"],
-        proof: "Judged first place — photos and the story below.",
         actions: [
-            { label: "See the result", href: "#achievements", Icon: BiDownArrowAlt },
+            { href: "#achievements", Icon: BiDownArrowAlt },
             {
                 /*
                  * The post itself, not the profile: this card trades a live URL
                  * for evidence, and a profile is a destination rather than
                  * evidence — it would leave the visitor hunting for a 2025 post.
                  */
-                label: "Read the post",
                 href: "https://www.linkedin.com/posts/fatih-ay1661_hackathon-hackathonwinner-liebherr-ugcPost-7327664859356028929-aasy/",
                 Icon: BiLogoLinkedin,
             },
@@ -200,3 +170,25 @@ export const archiveProjects = [
         link2: "https://github.com/iamfatihay/freelance-web-design",
     },
 ];
+
+/*
+ * A card is assembled from two sources: the entry above and its translation.
+ * Actions keep their order, which is how a label finds its link — the
+ * alternative was repeating every URL in both dictionaries.
+ */
+export const withCopy = (projects, copy) =>
+    projects.map((project) => {
+        const text = copy.projects[project.id];
+        return {
+            ...project,
+            role: text.role,
+            period: text.period,
+            description: text.description,
+            proof: text.proof,
+            tags: text.tags,
+            actions: project.actions.map((action, index) => ({
+                ...action,
+                label: text.actions[index],
+            })),
+        };
+    });

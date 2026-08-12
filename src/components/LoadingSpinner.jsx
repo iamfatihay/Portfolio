@@ -1,7 +1,7 @@
 // Loading component with better UX
 import React from "react";
 
-const LoadingSpinner = ({ message = "Loading..." }) => (
+const LoadingSpinner = ({ message }) => (
     <div className="loading-spinner">
         <div className="spinner"></div>
         <p>{message}</p>
