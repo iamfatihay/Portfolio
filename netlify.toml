@@ -5,6 +5,10 @@
 [build.environment]
   # EmailJS keys are public keys used in client-side code and are safe to expose
   SECRETS_SCAN_OMIT_KEYS = "REACT_APP_EMAILJS_PUBLIC_KEY,REACT_APP_EMAILJS_SERVICE_ID,REACT_APP_EMAILJS_TEMPLATE_ID,REVIEW_ID"
+  # CRA inlines the webpack runtime into index.html by default. Emitting it as a
+  # file instead is what lets the CSP below refuse inline scripts outright
+  # rather than weakening script-src with 'unsafe-inline'.
+  INLINE_RUNTIME_CHUNK = "false"
 
 [[headers]]
   for = "/*"
@@ -13,8 +17,31 @@
     X-Frame-Options = "SAMEORIGIN"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    Cross-Origin-Opener-Policy = "same-origin"
+    #
+    # Everything this page is allowed to talk to, and nothing else:
+    #   style-src   Google Fonts' stylesheet, plus 'unsafe-inline' for the
+    #               style attributes React and AOS write on elements
+    #   font-src    the Poppins files that stylesheet points at
+    #   connect-src the contact form's EmailJS endpoint
+    # Inline <script> is not allowed at all (see INLINE_RUNTIME_CHUNK above);
+    # the JSON-LD block is a data block, not executed, so it is unaffected.
+    Content-Security-Policy = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://api.emailjs.com; form-action 'self'; frame-ancestors 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests"
 
 [[headers]]
   for = "/static/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+
+# Icons, the OG card and the CV live at the site root with unhashed names, so
+# they get a revalidated week rather than the immutable year above.
+[[headers]]
+  for = "/*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "/*.jpg"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
