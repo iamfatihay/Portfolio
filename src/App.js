@@ -1,4 +1,26 @@
 import React, { Suspense, lazy, useEffect } from "react";
+/*
+ * Poppins ships with the site rather than coming from Google's CDN. Two
+ * reasons, and the first is the deciding one: requesting fonts from
+ * fonts.gstatic.com hands every visitor's IP address to a third party before
+ * they have agreed to anything, which German courts have held to be a GDPR
+ * breach — and this site is aimed squarely at readers in Germany. Serving the
+ * files ourselves also removes the last two third-party origins from the
+ * critical path, where the browser previously had to fetch a stylesheet from
+ * one host before it could even discover the font files on another.
+ *
+ * Latin and Latin Extended only, split by weight. Each @font-face carries a
+ * unicode-range, so a visitor downloads a subset only if the page actually
+ * uses a character from it.
+ */
+import "@fontsource/poppins/latin-400.css";
+import "@fontsource/poppins/latin-500.css";
+import "@fontsource/poppins/latin-600.css";
+import "@fontsource/poppins/latin-700.css";
+import "@fontsource/poppins/latin-ext-400.css";
+import "@fontsource/poppins/latin-ext-500.css";
+import "@fontsource/poppins/latin-ext-600.css";
+import "@fontsource/poppins/latin-ext-700.css";
 import { Flip, ToastContainer } from "react-toastify";
 /* Imported ahead of App.css so the toast overrides there win. Contact loads
    lazily, and a lazy chunk's stylesheet is injected after the main one. */

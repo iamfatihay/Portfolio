@@ -20,14 +20,13 @@
     Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
     Cross-Origin-Opener-Policy = "same-origin"
     #
-    # Everything this page is allowed to talk to, and nothing else:
-    #   style-src   Google Fonts' stylesheet, plus 'unsafe-inline' for the
-    #               style attributes React and AOS write on elements
-    #   font-src    the Poppins files that stylesheet points at
-    #   connect-src the contact form's EmailJS endpoint
+    # Everything this page is allowed to talk to, and nothing else. With the
+    # fonts self-hosted, the contact form's EmailJS endpoint is the only
+    # off-site destination left; 'unsafe-inline' stays on style-src alone,
+    # for the style attributes React and AOS write on elements.
     # Inline <script> is not allowed at all (see INLINE_RUNTIME_CHUNK above);
     # the JSON-LD block is a data block, not executed, so it is unaffected.
-    Content-Security-Policy = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://api.emailjs.com; form-action 'self'; frame-ancestors 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests"
+    Content-Security-Policy = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self' https://api.emailjs.com; form-action 'self'; frame-ancestors 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests"
 
 [[headers]]
   for = "/static/*"
