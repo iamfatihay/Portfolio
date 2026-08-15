@@ -76,11 +76,6 @@
 }
 
 @media screen and (max-width: 768px) {
-    .qualification__container {
-        margin-left: var(--mb-1-5);
-        margin-right: var(--mb-1-5);
-    }
-
     .qualification__item {
         grid-template-columns: 22px minmax(0, 1fr);
         gap: 0.75rem;
