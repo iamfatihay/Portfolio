@@ -38,7 +38,10 @@
 /* Scroll-driven, so it costs no scroll listener where supported */
 @supports (animation-timeline: scroll()) {
     .header__progress {
-        animation: scrollProgress linear both;
+        animation-name: scrollProgress;
+        animation-duration: 1ms;
+        animation-timing-function: linear;
+        animation-fill-mode: both;
         animation-timeline: scroll(root block);
     }
 }
@@ -77,6 +80,57 @@
     column-gap: 2rem;
 }
 
+.nav__menu {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+/* One tap takes the visitor directly to the only other available language. */
+.language-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.35rem 0.7rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-pill);
+    color: var(--text-color);
+    font-size: var(--smaller-font-size);
+    font-weight: var(--font-semi-bold);
+    transition: var(--hover-transition), transform 0.2s var(--ease-spring);
+}
+
+.language-toggle svg {
+    color: var(--first-color);
+    font-size: 1.05rem;
+}
+
+.language-toggle__text {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    letter-spacing: 0.05em;
+}
+
+.language-toggle__target {
+    color: var(--text-color);
+    opacity: 0.7;
+}
+
+.language-toggle__current {
+    color: var(--first-color);
+}
+
+.language-toggle:hover {
+    border-color: var(--hover-border);
+    background: var(--hover-tint);
+    box-shadow: var(--hover-glow);
+}
+
+.language-toggle:active {
+    transform: scale(0.96);
+}
+
 .nav__link {
     display: flex;
     flex-direction: column;
@@ -92,33 +146,6 @@
 .nav__close,
 .nav__toggle {
     display: none;
-}
-
-/*
- * The language switcher. A small, quiet pill rather than a labelled control:
- * the two-letter code is understood everywhere, and the accessible name on the
- * link spells the target language out *in* that language, so a screen reader
- * announces "Sprache: Deutsch" rather than "D E".
- */
-.nav__lang {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 2.4rem;
-    padding: 0.3rem 0.6rem;
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-pill);
-    color: var(--text-color);
-    font-size: var(--smaller-font-size);
-    font-weight: var(--font-semi-bold);
-    letter-spacing: 0.06em;
-    transition: var(--hover-transition);
-}
-
-.nav__lang:hover {
-    border-color: var(--hover-border);
-    background: var(--hover-tint);
-    color: var(--first-color);
 }
 
 /* Active link */
@@ -207,6 +234,7 @@
      * closing slide instead of cutting out at the start.
      */
     .nav__menu {
+        display: block;
         visibility: hidden;
         position: fixed;
         bottom: 0;
@@ -232,6 +260,22 @@
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 2rem;
+    }
+
+    .language-toggle {
+        width: max-content;
+        align-self: center;
+        justify-content: center;
+        margin: 1.25rem auto 0;
+        padding: 0.5rem 0.8rem;
+        border-color: rgba(var(--first-color-rgb), 0.22);
+        background: rgba(var(--first-color-rgb), 0.06);
+        box-shadow: none;
+    }
+
+    .language-toggle__text {
+        gap: 0.5rem;
+        font-size: var(--small-font-size);
     }
 
     .nav__icon {

@@ -4,6 +4,7 @@ import { localePath, useCopy, useLocale } from "../../i18n";
 import {
     BiEnvelope,
     BiFile,
+    BiGlobe,
     BiGridAlt,
     BiHomeAlt,
     BiImageAlt,
@@ -24,7 +25,6 @@ const navItems = [
 const Header = () => {
     const { nav, common } = useCopy();
     const locale = useLocale();
-    const otherLocale = locale === "de" ? "en" : "de";
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [activeNav, setActiveNav] = useState("#home");
     const headerRef = useRef(null);
@@ -80,6 +80,8 @@ const Header = () => {
         setIsMenuOpen(false);
     };
 
+    const targetLocale = locale === "en" ? "de" : "en";
+
     return (
         <header className="header" ref={headerRef}>
             <nav className="nav container" aria-label={nav.label}>
@@ -116,21 +118,21 @@ const Header = () => {
                     >
                         <BiX aria-hidden="true" focusable="false" />
                     </button>
+                    <a
+                        className="language-toggle"
+                        href={localePath[targetLocale]}
+                        hrefLang={targetLocale}
+                        lang={targetLocale}
+                        aria-label={common.languageSwitch}
+                        onClick={() => setIsMenuOpen(false)}
+                    >
+                        <BiGlobe aria-hidden="true" focusable="false" />
+                        <span className="language-toggle__text">
+                            <span className="language-toggle__current">{locale.toUpperCase()}</span>
+                            <span className="language-toggle__target">{targetLocale.toUpperCase()}</span>
+                        </span>
+                    </a>
                 </div>
-                {/*
-                  * A link rather than a button, and it carries hreflang: each
-                  * language is its own document at its own address, so this has
-                  * to be a real navigation for both a visitor and a crawler.
-                  */}
-                <a
-                    className="nav__lang"
-                    href={localePath[otherLocale]}
-                    hrefLang={otherLocale}
-                    lang={otherLocale}
-                    aria-label={common.languageSwitch}
-                >
-                    {otherLocale.toUpperCase()}
-                </a>
 
                 <button
                     type="button"
