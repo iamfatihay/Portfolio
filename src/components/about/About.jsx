@@ -1,7 +1,7 @@
 import React from "react";
 import "./about.css";
 import AboutImg from "../../assets/about-700.webp";
-import CV from "../../assets/CV.pdf";
+// import CV from "../../assets/CV.pdf";
 import Info from "./Info";
 import { useCopy } from "../../i18n";
 
@@ -51,7 +51,7 @@ const About = () => {
                         {about.paragraphs[1]}
                     </p>
 
-                    <a download href={CV} className="button button--flex">
+                    {/* <a download href={CV} className="button button--flex">
                         {about.cv}
                         <svg
                             className="button__icon"
@@ -79,7 +79,7 @@ const About = () => {
                                 fill="var(--container-color)"
                             ></path>
                         </svg>
-                    </a>
+                    </a> */}
                 </div>
             </div>
         </section>
