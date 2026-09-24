@@ -85,6 +85,21 @@ const de = {
             award: "1. Platz",
         },
         projects: {
+            "hyfindr-map": {
+                role: "Lead Full-Stack Engineer · vom Design bis zum Deployment",
+                period: "Sep. 2026 · Neu gelauncht",
+                description:
+                    "Eine interaktive Weltkarte der Wasserstoff-Anbieter im Hyfindr-Marktplatz. Ich habe sie vom ersten Entwurf bis in die Produktion verantwortet: UX & UI, Frontend, Backend und Deployment.",
+                highlights: [
+                    "Wasserstoff-Anbieter weltweit, gebündelt auf einer Karte",
+                    "Filter für Komponenten, Ausrüstung, Systeme, Services und Materialien",
+                    "Firmenprofile mit Produkten und direktem Kontakt zum Anbieter",
+                    "Erreichbar über die Hauptnavigation und ein neues Banner auf der Startseite",
+                ],
+                proof: "Termingerecht geliefert und live in Produktion.",
+                tags: ["UX & UI Design", "Frontend", "Backend", "Deployment"],
+                actions: ["Karte öffnen"],
+            },
             hyfindr: {
                 role: "Lead Web Developer",
                 period: "Okt. 2023 – heute",

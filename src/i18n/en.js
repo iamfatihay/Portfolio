@@ -84,6 +84,21 @@ const en = {
             award: "1st place",
         },
         projects: {
+            "hyfindr-map": {
+                role: "Lead Full-Stack Engineer · design to deployment",
+                period: "Sep 2026 · Just launched",
+                description:
+                    "An interactive world map of hydrogen suppliers inside the Hyfindr marketplace. I led it from the first design to production, owning UX & UI, frontend, backend and deployment.",
+                highlights: [
+                    "Hydrogen suppliers worldwide, pinned in one place",
+                    "Filters for components, equipment, systems, services and materials",
+                    "Company profiles with products and direct supplier contact",
+                    "Reachable from the main navigation and a new homepage banner",
+                ],
+                proof: "Shipped on schedule and live in production.",
+                tags: ["UX & UI Design", "Frontend", "Backend", "Deployment"],
+                actions: ["Open the map"],
+            },
             hyfindr: {
                 role: "Lead Web Developer",
                 period: "Oct 2023 – Present",

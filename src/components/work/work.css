@@ -15,6 +15,11 @@
     grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+/* The newest launch leads the section across the full row */
+.work__lead-grid > .pcard--spotlight {
+    grid-column: 1 / -1;
+}
+
 .work__support-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     margin-bottom: 3.5rem;

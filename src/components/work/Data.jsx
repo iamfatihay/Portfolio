@@ -9,9 +9,14 @@ import Work3 from "../../assets/movieapp-preview.webp";
 import Work4 from "../../assets/youtube-preview.webp";
 import Hackathon from "../../assets/hackathon1.webp";
 import HiddenChampionsMark from "../../assets/hidden-champions-mark.svg";
+import HyfindrMapMark from "../../assets/hyfindr-map-mark.svg";
+
+const HYFINDR_MAP_URL = "https://hyfindr.com/en/map";
 
 /*
- * Ordered by how much of it a visitor can verify: two live products, a mobile
+ * Led by the newest shipped work: the Hyfindr Interactive Map spans the full
+ * row as a spotlight, since it is live and was owned from design to deploy.
+ * After it, ordered by how much of it a visitor can verify: two live products, a mobile
  * app mid-build, an internal tool, then an awarded 48-hour build. Each carries
  * the strongest proof it has, so the ones without a public URL still stand up.
  *
@@ -21,6 +26,15 @@ import HiddenChampionsMark from "../../assets/hidden-champions-mark.svg";
  * file zips the two halves back together for whichever language is rendering.
  */
 export const leadProjects = [
+    {
+        id: "hyfindr-map",
+        status: "live",
+        spotlight: true,
+        title: "Hyfindr Interactive Map",
+        media: HyfindrMapMark,
+        mediaFit: "contain",
+        actions: [{ href: HYFINDR_MAP_URL, Icon: BiRightArrowAlt }],
+    },
     {
         id: "hyfindr",
         status: "live",
@@ -185,6 +199,7 @@ export const withCopy = (projects, copy) =>
             period: text.period,
             description: text.description,
             proof: text.proof,
+            highlights: text.highlights,
             tags: text.tags,
             actions: project.actions.map((action, index) => ({
                 ...action,
