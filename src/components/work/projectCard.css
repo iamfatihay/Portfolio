@@ -320,6 +320,94 @@
     outline-offset: 3px;
 }
 
+/*=============== SPOTLIGHT ===============*/
+/*
+ * Regular cards keep one column, so their two wrappers step out of the way and
+ * the body's flex column (with the foot pinned to the bottom) is unchanged.
+ */
+.pcard__main,
+.pcard__side {
+    display: contents;
+}
+
+.pcard__highlights {
+    display: grid;
+    gap: 0.6rem;
+    margin-bottom: 1.2rem;
+}
+
+.pcard__highlights li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.55rem;
+    color: rgba(223, 233, 247, 0.88);
+    font-size: var(--small-font-size);
+    line-height: 1.5;
+}
+
+.pcard__highlights svg {
+    flex-shrink: 0;
+    margin-top: 0.15rem;
+    padding: 0.12rem;
+    border-radius: 50%;
+    background: rgba(78, 205, 196, 0.14);
+    color: var(--accent);
+    font-size: 1.05rem;
+}
+
+/*
+ * The newest shipped work spans the full row. Wide enough for two columns:
+ * the story on the left, what it does and how to reach it on the right.
+ */
+.pcard--spotlight .pcard__inner {
+    border-color: rgba(78, 205, 196, 0.28);
+}
+
+.pcard--spotlight .pcard__media {
+    top: -30%;
+    right: -6%;
+    width: 46%;
+    height: 160%;
+}
+
+.pcard--spotlight .pcard__title {
+    font-size: 1.5rem;
+}
+
+@media screen and (min-width: 993px) {
+    .pcard--spotlight .pcard__body {
+        display: grid;
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+        column-gap: 2.5rem;
+        padding: 2rem 2.25rem 1.8rem;
+    }
+
+    .pcard--spotlight .pcard__head {
+        grid-column: 1 / -1;
+    }
+
+    .pcard--spotlight .pcard__main,
+    .pcard--spotlight .pcard__side {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .pcard--spotlight .pcard__side {
+        padding-left: 2.5rem;
+        border-left: 1px solid rgba(148, 176, 220, 0.14);
+    }
+
+    .pcard--spotlight .pcard__tags {
+        margin-bottom: 0;
+    }
+
+    /* The divider already separates the proof, so it needs no rule of its own */
+    .pcard--spotlight .pcard__proof {
+        padding-top: 0;
+        border-top: 0;
+    }
+}
+
 /*=============== BREAKPOINTS & PREFERENCES ===============*/
 /* Tilting a card you are touching just fights the scroll */
 @media (hover: none) {
@@ -347,5 +435,16 @@
 @media screen and (max-width: 576px) {
     .pcard__body {
         padding: 1.35rem 1.2rem 1.2rem;
+    }
+
+    .pcard--spotlight .pcard__title {
+        font-size: 1.3rem;
+    }
+
+    .pcard--spotlight .pcard__media {
+        width: 70%;
+        height: 70%;
+        top: -10%;
+        right: -14%;
     }
 }

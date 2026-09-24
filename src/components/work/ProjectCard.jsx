@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef } from "react";
 import "./projectCard.css";
 import {
+    BiCheck,
     BiCheckShield,
     BiCodeAlt,
     BiGlobe,
@@ -68,7 +69,9 @@ const ProjectCard = ({ project, className = "", ...rest }) => {
 
     return (
         <article
-            className={`pcard pcard--${project.status} ${className}`}
+            className={`pcard pcard--${project.status}${
+                project.spotlight ? " pcard--spotlight" : ""
+            } ${className}`}
             ref={cardRef}
             onPointerMove={handleMove}
             onPointerLeave={handleLeave}
@@ -101,44 +104,60 @@ const ProjectCard = ({ project, className = "", ...rest }) => {
                         )}
                     </header>
 
-                    <h3 className="pcard__title">{project.title}</h3>
-                    <p className="pcard__role">{project.role}</p>
-                    <p className="pcard__desc">{project.description}</p>
+                    {/* Flattened with display: contents unless the card is a spotlight */}
+                    <div className="pcard__main">
+                        <h3 className="pcard__title">{project.title}</h3>
+                        <p className="pcard__role">{project.role}</p>
+                        <p className="pcard__desc">{project.description}</p>
 
-                    <ul className="pcard__tags" aria-label={work.stack(project.title)}>
-                        {project.tags.map((tag) => (
-                            <li key={tag}>{tag}</li>
-                        ))}
-                    </ul>
+                        <ul className="pcard__tags" aria-label={work.stack(project.title)}>
+                            {project.tags.map((tag) => (
+                                <li key={tag}>{tag}</li>
+                            ))}
+                        </ul>
+                    </div>
 
-                    <footer className="pcard__foot">
-                        {project.proof && (
-                            <p className="pcard__proof">
-                                <BiCheckShield aria-hidden="true" focusable="false" />
-                                {project.proof}
-                            </p>
+                    <div className="pcard__side">
+                        {project.highlights && (
+                            <ul className="pcard__highlights">
+                                {project.highlights.map((item) => (
+                                    <li key={item}>
+                                        <BiCheck aria-hidden="true" focusable="false" />
+                                        <span>{item}</span>
+                                    </li>
+                                ))}
+                            </ul>
                         )}
 
-                        <div className="pcard__actions">
-                            {project.actions.map((action, index) => (
-                                <a
-                                    key={action.label}
-                                    href={action.href}
-                                    className={`pcard__action${
-                                        index === 0 ? " pcard__action--primary" : ""
-                                    }`}
-                                    {...// Only real navigations open a tab; an in-page
-                                    // anchor or a mailto: would strand an empty one.
-                                    (action.href.startsWith("http")
-                                        ? { target: "_blank", rel: "noopener noreferrer" }
-                                        : {})}
-                                >
-                                    <span>{action.label}</span>
-                                    <action.Icon aria-hidden="true" focusable="false" />
-                                </a>
-                            ))}
-                        </div>
-                    </footer>
+                        <footer className="pcard__foot">
+                            {project.proof && (
+                                <p className="pcard__proof">
+                                    <BiCheckShield aria-hidden="true" focusable="false" />
+                                    {project.proof}
+                                </p>
+                            )}
+
+                            <div className="pcard__actions">
+                                {project.actions.map((action, index) => (
+                                    <a
+                                        key={action.label}
+                                        href={action.href}
+                                        className={`pcard__action${
+                                            index === 0 ? " pcard__action--primary" : ""
+                                        }`}
+                                        {...// Only real navigations open a tab; an in-page
+                                        // anchor or a mailto: would strand an empty one.
+                                        (action.href.startsWith("http")
+                                            ? { target: "_blank", rel: "noopener noreferrer" }
+                                            : {})}
+                                    >
+                                        <span>{action.label}</span>
+                                        <action.Icon aria-hidden="true" focusable="false" />
+                                    </a>
+                                ))}
+                            </div>
+                        </footer>
+                    </div>
                 </div>
             </div>
         </article>
