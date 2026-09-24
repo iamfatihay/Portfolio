@@ -98,7 +98,7 @@ const de = {
                 ],
                 proof: "Termingerecht geliefert und live in Produktion.",
                 tags: ["UX & UI Design", "Frontend", "Backend", "Deployment"],
-                actions: ["Auf hyfindr.com entdecken"],
+                actions: ["Karte öffnen"],
             },
             hyfindr: {
                 role: "Lead Web Developer",

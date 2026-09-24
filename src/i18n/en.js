@@ -97,7 +97,7 @@ const en = {
                 ],
                 proof: "Shipped on schedule and live in production.",
                 tags: ["UX & UI Design", "Frontend", "Backend", "Deployment"],
-                actions: ["Explore on hyfindr.com"],
+                actions: ["Open the map"],
             },
             hyfindr: {
                 role: "Lead Web Developer",

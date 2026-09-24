@@ -11,11 +11,7 @@ import Hackathon from "../../assets/hackathon1.webp";
 import HiddenChampionsMark from "../../assets/hidden-champions-mark.svg";
 import HyfindrMapMark from "../../assets/hyfindr-map-mark.svg";
 
-/*
- * The map lives inside the marketplace and is linked from its main navigation
- * and a homepage banner, so the homepage is always a working way in.
- */
-const HYFINDR_MAP_URL = "https://hyfindr.com/en/";
+const HYFINDR_MAP_URL = "https://hyfindr.com/en/map";
 
 /*
  * Led by the newest shipped work: the Hyfindr Interactive Map spans the full
