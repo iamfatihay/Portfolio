@@ -295,6 +295,14 @@
 
 .pcard__action svg { font-size: 1rem; }
 
+/* The tour opens a dialog rather than navigating, so it is a button */
+button.pcard__action {
+    background: transparent;
+    font-family: inherit;
+    line-height: inherit;
+    cursor: pointer;
+}
+
 .pcard__action:hover {
     border-color: var(--accent);
     background: rgba(255, 255, 255, 0.08);

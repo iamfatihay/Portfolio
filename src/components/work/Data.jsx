@@ -10,6 +10,8 @@ import Work4 from "../../assets/youtube-preview.webp";
 import Hackathon from "../../assets/hackathon1.webp";
 import HiddenChampionsMark from "../../assets/hidden-champions-mark.svg";
 import HyfindrMapMark from "../../assets/hyfindr-map-mark.svg";
+import HyfindrMapTour from "../../assets/hyfindr-map-tour.mp4";
+import HyfindrMapTourPoster from "../../assets/hyfindr-map-tour-poster.webp";
 
 const HYFINDR_MAP_URL = "https://hyfindr.com/en/map";
 
@@ -34,6 +36,8 @@ export const leadProjects = [
         media: HyfindrMapMark,
         mediaFit: "contain",
         actions: [{ href: HYFINDR_MAP_URL, Icon: BiRightArrowAlt }],
+        // Opened on request in a dialog, never autoplayed in the card
+        video: { src: HyfindrMapTour, poster: HyfindrMapTourPoster },
     },
     {
         id: "hyfindr",
@@ -200,6 +204,7 @@ export const withCopy = (projects, copy) =>
             description: text.description,
             proof: text.proof,
             highlights: text.highlights,
+            videoLabel: text.video,
             tags: text.tags,
             actions: project.actions.map((action, index) => ({
                 ...action,

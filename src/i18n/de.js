@@ -78,6 +78,7 @@ const de = {
         view: (project) => `${project} ansehen`,
         demo: (project) => `${project} live ansehen`,
         source: (project) => `Quellcode von ${project}`,
+        closeVideo: "Video schließen",
         statuses: {
             live: "Live",
             building: "In Entwicklung",
@@ -99,6 +100,7 @@ const de = {
                 proof: "Termingerecht geliefert und live in Produktion.",
                 tags: ["UX & UI Design", "Frontend", "Backend", "Deployment"],
                 actions: ["Karte öffnen"],
+                video: "30-Sek.-Tour ansehen",
             },
             hyfindr: {
                 role: "Lead Web Developer",
