@@ -1,0 +1,89 @@
+/*=============== VIDEO DIALOG ===============*/
+.vdialog {
+    /* The global reset zeroes margins, which is what centres a modal dialog */
+    margin: auto;
+    width: min(960px, calc(100vw - 2rem));
+    max-width: none;
+    max-height: calc(100vh - 2rem);
+    padding: 0;
+    border: 0;
+    background: transparent;
+    overflow: visible;
+}
+
+.vdialog::backdrop {
+    background: rgba(6, 10, 18, 0.82);
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+}
+
+.vdialog[open] {
+    animation: vdialog-in 0.28s var(--ease-out-expo);
+}
+
+.vdialog__frame {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(148, 176, 220, 0.2);
+    border-radius: var(--radius-lg);
+    background: #0a0f1a;
+    box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.8);
+}
+
+.vdialog__video {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    background: #0a0f1a;
+}
+
+.vdialog__close {
+    position: absolute;
+    top: 0.6rem;
+    right: 0.6rem;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    background: rgba(10, 15, 26, 0.72);
+    color: #f4f7fc;
+    font-size: 1.35rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.vdialog__close:hover {
+    background: rgba(10, 15, 26, 0.92);
+}
+
+.vdialog__close:focus-visible {
+    outline: 2px solid #4ecdc4;
+    outline-offset: 2px;
+}
+
+@keyframes vdialog-in {
+    from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.98);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .vdialog[open] {
+        animation: none;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .vdialog {
+        width: calc(100vw - 1rem);
+    }
+
+    .vdialog__frame {
+        border-radius: var(--radius-md);
+    }
+}

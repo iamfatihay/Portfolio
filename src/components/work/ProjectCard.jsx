@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import "./projectCard.css";
 import {
     BiCheck,
@@ -6,9 +6,11 @@ import {
     BiCodeAlt,
     BiGlobe,
     BiLockAlt,
+    BiPlayCircle,
     BiTrophy,
 } from "react-icons/bi";
 import { useCopy } from "../../i18n";
+import VideoDialog from "./VideoDialog";
 
 /*
  * Not every project has a URL to hand a visitor, and the ones that don't are
@@ -31,6 +33,7 @@ const MAX_TILT = 18;
 const ProjectCard = ({ project, className = "", ...rest }) => {
     const cardRef = useRef(null);
     const frameRef = useRef(0);
+    const [videoOpen, setVideoOpen] = useState(false);
     const { work } = useCopy();
     const StatusIcon = STATUS_ICONS[project.status];
 
@@ -155,11 +158,33 @@ const ProjectCard = ({ project, className = "", ...rest }) => {
                                         <action.Icon aria-hidden="true" focusable="false" />
                                     </a>
                                 ))}
+                                {project.video && (
+                                    <button
+                                        type="button"
+                                        className="pcard__action"
+                                        onClick={() => setVideoOpen(true)}
+                                        aria-haspopup="dialog"
+                                    >
+                                        <BiPlayCircle aria-hidden="true" focusable="false" />
+                                        <span>{project.videoLabel}</span>
+                                    </button>
+                                )}
                             </div>
                         </footer>
                     </div>
                 </div>
             </div>
+
+            {project.video && (
+                <VideoDialog
+                    open={videoOpen}
+                    onClose={() => setVideoOpen(false)}
+                    src={project.video.src}
+                    poster={project.video.poster}
+                    title={project.videoLabel}
+                    closeLabel={work.closeVideo}
+                />
+            )}
         </article>
     );
 };
